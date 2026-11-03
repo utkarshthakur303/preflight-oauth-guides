@@ -422,6 +422,8 @@ export type FetchedPage = {
   title: string;
   text: string;
   fetchedAt: string;
+  /** How the text was obtained. "renderer" means a JS-rendering proxy. */
+  via: "markdown" | "html" | "renderer";
 };
 
 /** Strip an HTML document down to readable text. */
@@ -473,6 +475,52 @@ function decodeEntities(s: string): string {
  * navigation chrome in the text, and roughly a third of the tokens — which is
  * most of why this pipeline is cheap enough to run on a free tier.
  */
+/**
+ * Last-resort read through a JavaScript-rendering proxy.
+ *
+ * A large share of major providers serve documentation that only exists after
+ * the page runs: Apple returns 269 characters saying "This page requires
+ * JavaScript", Groq 2,813 characters of navigation chrome, and DocuSign,
+ * Workday and Salesforce behave the same way. Without this, every one of them
+ * came back as five unknowns — the pipeline looked broken when it was simply
+ * reading an empty shell.
+ *
+ * r.jina.ai renders the page and returns markdown. It is free and needs no
+ * key, which keeps the project's "no paid dependencies" property. It is a
+ * fallback rather than the default: a direct fetch is faster, is not rate
+ * limited, and does not route a third party's URL through anyone else. Pages
+ * read this way are marked `via: "renderer"` so provenance stays honest.
+ */
+async function fetchViaRenderer(url: string, maxChars: number): Promise<FetchedPage | null> {
+  try {
+    const res = await fetch(`https://r.jina.ai/${url}`, {
+      headers: { "User-Agent": UA, Accept: "text/plain" },
+      signal: AbortSignal.timeout(45_000),
+    });
+    if (!res.ok) return null;
+
+    const raw = await res.text();
+    if (raw.length < 400) return null;
+
+    // The proxy prefixes "Title: …", "URL Source: …" then the body.
+    const title = raw.match(/^Title:\s*(.+)$/m)?.[1]?.trim() ?? "";
+    const body = raw.replace(/^(Title|URL Source|Final URL|Published Time|Markdown Content):.*$/gm, "").trim();
+
+    if (body.length < 300) return null;
+
+    return {
+      url,
+      readFrom: `r.jina.ai/${url}`,
+      title: title || url,
+      text: body.slice(0, maxChars),
+      fetchedAt: new Date().toISOString(),
+      via: "renderer",
+    };
+  } catch {
+    return null;
+  }
+}
+
 export async function fetchDocPage(
   url: string,
   maxChars = 24_000,
@@ -514,13 +562,16 @@ export async function fetchDocPage(
         title: title || clean,
         text: text.slice(0, maxChars),
         fetchedAt: new Date().toISOString(),
+        via: candidate.endsWith(".md") ? "markdown" : "html",
       };
     } catch {
       /* try the next candidate */
     }
   }
 
-  return null;
+  // Nothing readable came back directly; the page is probably rendered client
+  // side, so try again through the renderer before giving up on it.
+  return fetchViaRenderer(clean, maxChars);
 }
 
 

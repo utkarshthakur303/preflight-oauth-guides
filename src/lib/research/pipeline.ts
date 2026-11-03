@@ -1049,7 +1049,7 @@ export async function runPipeline(opts: RunOptions): Promise<Guide> {
       type: "source",
       url: page.url,
       verdict: "read",
-      why: `${topicOf(page.url)} · ${v.topic || "relevant"} · read as ${page.readFrom.endsWith(".md") ? "markdown" : "html"}`,
+      why: `${topicOf(page.url)} · ${v.topic || "relevant"} · read as ${page.via === "renderer" ? "rendered page" : page.via}`,
     });
 
     try {

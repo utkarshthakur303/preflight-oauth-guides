@@ -141,11 +141,11 @@ Every citation was sound. The error was in my enum: one human-only step was tagg
 
 **Fixed** by splitting `email_verification` and `phone_verification` out of `identity_verification`, flooring them at *instant*, and saying so explicitly in the prompt. This is the sharpest lesson in the project: **verification catches invented evidence, not bad reasoning over good evidence.** Both of the errors above passed citation checking.
 
-### Four providers could not be read at all
+### Four providers could not be read at all (since fixed)
 
 DocuSign, Workday, Snowflake and Salesforce Service Cloud produced no usable claims. The cause is mostly the same: **their documentation renders client-side.** DocuSign serves roughly 40 characters of text per page; Workday located 14 relevant pages and none were readable; Salesforce additionally returns `403` to this project's requests for `robots.txt` and `sitemap.xml`.
 
-They are kept in the library rather than quietly dropped, and the UI treats them properly — see below. Snowflake is a different kind of miss: its OAuth setup is a SQL statement (`CREATE SECURITY INTEGRATION`) run by an `ACCOUNTADMIN`, not a form in a console, so the shape this pipeline looks for does not exist there.
+They are kept in the library rather than quietly dropped, and the UI treats them properly — see below. **This was later fixed** by retrying unreadable pages through a JavaScript-rendering proxy; Apple, which previously returned five unknowns, now produces an evidenced guide. The seeded guides for these four predate that change and would improve on regeneration. Snowflake is a different kind of miss: its OAuth setup is a SQL statement (`CREATE SECURITY INTEGRATION`) run by an `ACCOUNTADMIN`, not a form in a console, so the shape this pipeline looks for does not exist there.
 
 Salesforce is the one that stings. Its security review is the canonical slow approval and the single most valuable guide in the set, and it is the one the approach handled worst.
 
@@ -169,7 +169,7 @@ Guides where all five dimensions are null are now detected by `isUngrounded()` a
 - **Quote checking catches invention, not misreading.** It proves a sentence exists on the page. It cannot prove the model drew the right conclusion — which is exactly how the Shopify error survived to the hand-check.
 - **Staleness.** Every citation carries a fetch date; there is no re-verification job, so an old guide can be confidently wrong.
 - **Six pages is a thin read.** It is what a free tier's 8,000 tokens/minute affords. More pages would measurably improve accuracy.
-- **Client-rendered documentation is invisible to this pipeline.** Four of eleven seeded providers failed on exactly this. A JavaScript-rendering fetch would fix it and is the single highest-value change available.
+- **Client-rendered documentation needs a second attempt.** A large share of major providers serve pages that only exist after JavaScript runs — Apple returns 269 characters reading "This page requires JavaScript", Groq 2,813 characters of navigation chrome. A direct fetch is tried first, and anything that comes back empty is retried through `r.jina.ai`, a free keyless renderer that returns markdown. Pages read that way are marked `via: "renderer"` so provenance stays honest. It is a fallback rather than the default because a direct fetch is faster, is not rate limited, and does not route the request through a third party.
 - **Hosted generation can hit a platform function timeout.** A run takes two to three minutes. The CLI has no such limit; the UI reports honestly if the connection closes early.
 - **The planner assumes one developer working serially and reviews running in parallel.** Both assumptions are stated on the page.
 

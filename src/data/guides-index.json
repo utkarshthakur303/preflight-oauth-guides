@@ -1,6 +1,282 @@
 [
   {
     "schemaVersion": 1,
+    "slug": "apple",
+    "appName": "Apple",
+    "composioToolkitSlug": null,
+    "composioManagedOAuth": null,
+    "providerName": "Apple",
+    "oauthSupported": {
+      "value": true,
+      "evidence": "inferred",
+      "citations": [],
+      "reasoning": "Apple offers \"Sign in with Apple\", which is an OAuth 2.0 flow that requires developers to register a Services ID in the Apple Developer portal. Although the fetched Mini Apps Partner pages do not mention OAuth, the existence of this widely documented feature indicates that OAuth app registration is supported."
+    },
+    "developerConsoleUrl": {
+      "value": null,
+      "evidence": "unknown",
+      "citations": [],
+      "reasoning": "The provided hint points to https://developer.apple.com/account/resources/identifiers/list, but the fetched documents do not explicitly confirm that this is the console used to register OAuth Services IDs for Sign in with Apple."
+    },
+    "docsRootUrl": "https://apple.com",
+    "summary": "Apple requires developers to be an Account Holder in the Apple Developer Program and to submit a request form to join the Mini Apps Partner Program. After testing, the app binary and a generic mini‑app In‑App Purchase Product ID must be submitted via App Store Connect, and the app must have access to the Advanced Commerce API (which may require an additional request). While the fetched pages do not describe an OAuth registration flow, Apple does provide OAuth through its Sign in with Apple service, which developers register via the Apple Developer portal.",
+    "rubric": {
+      "selfServeMinutes": {
+        "value": 15,
+        "evidence": "inferred",
+        "citations": [],
+        "reasoning": "Filling the request form, providing app details, and submitting the binary in App Store Connect can be done manually in roughly a quarter of an hour."
+      },
+      "reviewWaitBusinessDays": {
+        "value": null,
+        "evidence": "unknown",
+        "citations": [],
+        "reasoning": "The fetched documents do not state how long Apple reviews the Mini Apps Partner Program request or the Advanced Commerce API access request."
+      },
+      "humanOnlyBlockers": {
+        "value": [
+          {
+            "reason": "account_ownership",
+            "detail": "Only an Account Holder in the Apple Developer Program can submit the Mini Apps Partner request."
+          },
+          {
+            "reason": "identity_verification",
+            "detail": "Joining the Apple Developer Program typically requires verification of personal or business identity."
+          }
+        ],
+        "evidence": "cited",
+        "citations": [
+          {
+            "url": "https://developer.apple.com/programs/mini-apps-partner",
+            "quote": "you’ll need to be an Account Holder in the Apple Developer Program.",
+            "title": "Mini Apps Partner Program prerequisites",
+            "fetchedAt": "2026-11-03T17:19:57.779Z"
+          }
+        ]
+      },
+      "costUsd": {
+        "value": {
+          "amount": 99,
+          "recurrence": "annual",
+          "what": "Apple Developer Program annual membership fee"
+        },
+        "evidence": "inferred",
+        "citations": [],
+        "reasoning": "Joining the Apple Developer Program requires paying the standard $99/year fee."
+      },
+      "prerequisiteArtifacts": {
+        "value": [
+          "business_entity"
+        ],
+        "evidence": "inferred",
+        "citations": [],
+        "reasoning": "Being an Account Holder implies the developer must have a registered business or individual Apple ID, which is a business entity prerequisite."
+      }
+    },
+    "tier": "weeks",
+    "confidence": "low",
+    "tierRationale": [
+      "human-only step (identity verification): Joining the Apple Developer Program typically requires verification of personal or business identity.",
+      "requires business entity",
+      "tier is blind to 1 unestablished dimension: review wait"
+    ],
+    "steps": [
+      {
+        "title": "Confirm you are an Account Holder in the Apple Developer Program",
+        "detail": "You must be an Account Holder in the Apple Developer Program before you can register an OAuth client.",
+        "actor": "either",
+        "where": "Apple Developer Program portal",
+        "estimatedMinutes": 5,
+        "startsReviewWait": false,
+        "evidence": "cited",
+        "citations": [
+          {
+            "url": "https://developer.apple.com/programs/mini-apps-partner",
+            "quote": "you’ll need to be an Account Holder in the Apple Developer Program.",
+            "title": "Mini Apps Partner Program prerequisites",
+            "fetchedAt": "2026-11-03T17:19:57.779Z"
+          }
+        ]
+      },
+      {
+        "title": "Submit a request to join the Mini Apps Partner Program",
+        "detail": "Navigate to the Mini Apps Partner Program page and fill out the request form to gain program access.",
+        "actor": "either",
+        "where": "https://developer.apple.com/programs/mini-apps-partner",
+        "estimatedMinutes": 10,
+        "startsReviewWait": true,
+        "evidence": "cited",
+        "citations": [
+          {
+            "url": "https://developer.apple.com/programs/mini-apps-partner",
+            "quote": "If you’d like to participate in the Mini Apps Partner Program, submit a request form.",
+            "title": "Mini Apps Partner Program enrollment",
+            "fetchedAt": "2026-11-03T17:19:57.779Z"
+          }
+        ]
+      },
+      {
+        "title": "Create a Services ID (OAuth client) in App Store Connect",
+        "detail": "Log into App Store Connect, go to **Identifiers → Services IDs**, click the “+” button, and create a new Services ID for your app.",
+        "actor": "either",
+        "where": "App Store Connect > Identifiers > Services IDs",
+        "estimatedMinutes": 15,
+        "startsReviewWait": false,
+        "evidence": "inferred",
+        "citations": []
+      },
+      {
+        "title": "Configure the Services ID for Sign in with Apple",
+        "detail": "Give the Services ID a name, enable **Sign in with Apple**, and add your app’s redirect URI(s) under the **Web Authentication Configuration** section.",
+        "actor": "either",
+        "where": "App Store Connect > Identifiers > Services IDs > <your Services ID>",
+        "estimatedMinutes": 10,
+        "startsReviewWait": false,
+        "evidence": "inferred",
+        "citations": []
+      },
+      {
+        "title": "Submit your app binary and Mini App In‑App Purchase product ID",
+        "detail": "After testing, upload your app binary and the generic Mini App In‑App Purchase Product ID through App Store Connect.",
+        "actor": "either",
+        "where": "App Store Connect > My Apps > <your app>",
+        "estimatedMinutes": 20,
+        "startsReviewWait": false,
+        "evidence": "cited",
+        "citations": [
+          {
+            "url": "https://developer.apple.com/programs/mini-apps-partner",
+            "quote": "Submit your app binary and generic mini app In‑App Purchase Product ID in App Store Connect.",
+            "title": "Mini Apps Partner Program – submission step",
+            "fetchedAt": "2026-11-03T17:19:57.779Z"
+          }
+        ]
+      }
+    ],
+    "nuances": [
+      {
+        "title": "Advanced Commerce API access may be required",
+        "detail": "Your app must have access to the Advanced Commerce API; if you don’t, you need to request it before the OAuth client can be used for Mini Apps.",
+        "severity": "gotcha",
+        "evidence": "cited",
+        "citations": [
+          {
+            "url": "https://developer.apple.com/programs/mini-apps-partner",
+            "quote": "be sure your app has access to the Advanced Commerce API ( submit a request if needed)",
+            "title": "Advanced Commerce API requirement",
+            "fetchedAt": "2026-11-03T17:19:57.779Z"
+          }
+        ]
+      },
+      {
+        "title": "Redirect URI restrictions",
+        "detail": "Apple only accepts HTTPS redirect URIs that exactly match the values entered in the Services ID configuration; wildcards or non‑HTTPS schemes are rejected during token exchange.",
+        "severity": "note",
+        "evidence": "inferred",
+        "citations": []
+      },
+      {
+        "title": "Sandbox vs. Production credentials",
+        "detail": "Credentials generated in the sandbox environment (used for testing) are separate from production credentials; you must switch to production after your app passes review.",
+        "severity": "note",
+        "evidence": "inferred",
+        "citations": []
+      }
+    ],
+    "whenBlocked": [
+      {
+        "situation": "You are not an Account Holder in the Apple Developer Program",
+        "action": "Enroll in the Apple Developer Program as the Account Holder or request the current Account Holder to add you as an admin.",
+        "contact": "https://developer.apple.com/programs/enroll/"
+      },
+      {
+        "situation": "Your request to join the Mini Apps Partner Program is denied",
+        "action": "Contact Apple Developer Support to clarify the reason and provide any required documentation.",
+        "contact": "https://developer.apple.com/contact/"
+      },
+      {
+        "situation": "Unable to create a Services ID because the Advanced Commerce API is not enabled",
+        "action": "Submit an access request for the Advanced Commerce API via the Mini Apps Partner Program page.",
+        "contact": "https://developer.apple.com/programs/mini-apps-partner"
+      }
+    ],
+    "conflicts": [],
+    "openQuestions": [
+      {
+        "question": "What is the exact review time (in business days) for the Mini Apps Partner Program request and for Advanced Commerce API access?",
+        "whyItMatters": "Knowing the review duration is needed to estimate total time to obtain working OAuth credentials.",
+        "howToResolve": "Locate official Apple documentation or support pages that state the expected review timelines for these requests."
+      },
+      {
+        "question": "What is the precise URL in the Apple Developer portal where a developer registers a Services ID for Sign in with Apple (OAuth client)?",
+        "whyItMatters": "The developer console URL is required for automating the registration step.",
+        "howToResolve": "Check Apple’s Sign in with Apple documentation or the identifiers section of the Apple Developer portal for the exact registration page."
+      },
+      {
+        "question": "Does the Mini Apps Partner Program require any additional OAuth‑specific scopes or verification beyond the standard Sign in with Apple flow?",
+        "whyItMatters": "Additional verification could introduce extra human‑only blockers or review steps.",
+        "howToResolve": "Review the Mini Apps Partner Program technical guide or contact Apple support for details on OAuth scope requirements."
+      }
+    ],
+    "sources": [
+      {
+        "url": "https://developer.apple.com/programs/mini-apps-partner",
+        "quote": "you’ll need to be an Account Holder in the Apple Developer Program.",
+        "title": "Mini Apps Partner Program prerequisites",
+        "fetchedAt": "2026-11-03T17:19:57.779Z"
+      },
+      {
+        "url": "https://developer.apple.com/programs/mini-apps-partner",
+        "quote": "If you’d like to participate in the Mini Apps Partner Program, submit a request form.",
+        "title": "Mini Apps Partner Program enrollment",
+        "fetchedAt": "2026-11-03T17:19:57.779Z"
+      },
+      {
+        "url": "https://developer.apple.com/programs/mini-apps-partner",
+        "quote": "Submit your app binary and generic mini app In‑App Purchase Product ID in App Store Connect.",
+        "title": "Mini Apps Partner Program submission steps",
+        "fetchedAt": "2026-11-03T17:19:57.779Z"
+      },
+      {
+        "url": "https://developer.apple.com/programs/mini-apps-partner",
+        "quote": "be sure your app has access to the Advanced Commerce API ( submit a request if needed)",
+        "title": "Advanced Commerce API access requirement",
+        "fetchedAt": "2026-11-03T17:19:57.779Z"
+      }
+    ],
+    "generation": {
+      "generatedAt": "2026-11-03T17:20:50.211Z",
+      "origin": "seeded",
+      "models": [
+        {
+          "model": "openai/gpt-oss-120b",
+          "role": "adjudicate",
+          "calls": 3,
+          "inputTokens": 3358,
+          "outputTokens": 4376
+        },
+        {
+          "model": "openai/gpt-oss-120b",
+          "role": "triage",
+          "calls": 1,
+          "inputTokens": 1652,
+          "outputTokens": 259
+        },
+        {
+          "model": "openai/gpt-oss-120b",
+          "role": "extract",
+          "calls": 3,
+          "inputTokens": 4678,
+          "outputTokens": 634
+        }
+      ],
+      "docPagesDiscovered": 6782,
+      "docPagesRead": 3,
+      "durationMs": 86866
+    }
+  },
+  {
+    "schemaVersion": 1,
     "slug": "docusign",
     "appName": "DocuSign",
     "composioToolkitSlug": "DOCUSIGN",
