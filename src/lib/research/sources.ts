@@ -1,4 +1,4 @@
-import { MODELS, TokenLedger, chatJson } from "../groq";
+import { MODELS, SMART_FALLBACKS, TokenLedger, chatJsonWithFallback } from "../groq";
 import { relevantYield } from "./relevance";
 
 /**
@@ -86,7 +86,8 @@ export async function hypothesiseProvider(
     /* it was a plain name */
   }
 
-  const result = await chatJson<ProviderHypothesis>({
+  const result = await chatJsonWithFallback<ProviderHypothesis>({
+    fallbacks: SMART_FALLBACKS,
     model: MODELS.smart,
     role: "adjudicate",
     ledger,
@@ -601,9 +602,10 @@ export async function alternateInterpretations(
     }
   });
 
-  const result = await chatJson<{
+  const result = await chatJsonWithFallback<{
     candidates: { providerName: string; docsRoots: string[]; developerConsoleUrl: string | null }[];
   }>({
+    fallbacks: SMART_FALLBACKS,
     model: MODELS.smart,
     role: "adjudicate",
     ledger,

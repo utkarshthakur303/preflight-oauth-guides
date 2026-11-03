@@ -32,8 +32,16 @@ export const MODELS = {
   smart: "openai/gpt-oss-120b",
 } as const;
 
-/** Fallbacks, tried in order when a model's daily budget is spent. */
+/**
+ * Fallbacks, tried in order when a model's daily budget is spent.
+ *
+ * Groq meters tokens per day per model, so an exhausted model is recovered
+ * from by using a different one — the budgets are independent. Each tier falls
+ * back towards the other tier first, since a bigger or smaller model doing the
+ * job imperfectly beats no guide at all.
+ */
 export const CHEAP_FALLBACKS = ["openai/gpt-oss-120b", "qwen/qwen3.8-27b"];
+export const SMART_FALLBACKS = ["openai/gpt-oss-20b", "qwen/qwen3.8-27b"];
 
 /**
  * Why gpt-oss-20b and not a model with an untouched daily budget: the
@@ -419,8 +427,19 @@ export async function chatJsonWithFallback<T = unknown>(
     } catch (err) {
       lastErr = err;
       const spent = err instanceof GroqError && err.dailyBudgetSpent;
-      if (!spent || i === chain.length - 1) throw err;
-      opts.onFallback?.(chain[i], chain[i + 1]);
+      if (!spent) throw err;
+      if (i < chain.length - 1) {
+        opts.onFallback?.(chain[i], chain[i + 1]);
+        continue;
+      }
+
+      // Every model in the chain is out of daily budget. The cap is a rolling
+      // window rather than a midnight reset, so a little capacity frees up
+      // continuously — one short wait and a retry on the original model
+      // recovers the common case instead of abandoning the run.
+      opts.onFallback?.(chain[i], `${chain[0]} (after a short wait)`);
+      await new Promise((r) => setTimeout(r, 20_000));
+      return await chatJson<T>({ ...opts, model: chain[0] });
     }
   }
 

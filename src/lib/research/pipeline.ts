@@ -1,4 +1,10 @@
-import { CHEAP_FALLBACKS, MODELS, TokenLedger, chatJson, chatJsonWithFallback } from "../groq";
+import {
+  CHEAP_FALLBACKS,
+  MODELS,
+  SMART_FALLBACKS,
+  TokenLedger,
+  chatJsonWithFallback,
+} from "../groq";
 import {
   Guide,
   GuideDraft,
@@ -226,11 +232,13 @@ async function extractFromPage(
   appName: string,
   ledger: TokenLedger,
   signal?: AbortSignal,
+  onFallbackNotice?: (from: string, to: string) => void,
 ): Promise<Finding[]> {
   const res = await chatJsonWithFallback<{
     findings: { claim: string; quote: string; field: string }[];
   }>({
     fallbacks: CHEAP_FALLBACKS,
+    onFallback: (from, to) => onFallbackNotice?.(from, to),
     model: MODELS.cheap,
     role: "extract",
     ledger,
@@ -402,7 +410,8 @@ type AdjudicateCtx = {
 async function adjudicateAssessment(ctx: AdjudicateCtx) {
   const { appName, providerName, docsRoot, consoleGuess, findings, ledger, signal } = ctx;
 
-  return chatJson<Record<string, unknown>>({
+  return chatJsonWithFallback<Record<string, unknown>>({
+    fallbacks: SMART_FALLBACKS,
     model: MODELS.smart,
     role: "adjudicate",
     ledger,
@@ -486,7 +495,8 @@ async function adjudicateProcedure(ctx: AdjudicateCtx) {
     ),
   );
 
-  return chatJson<Record<string, unknown>>({
+  return chatJsonWithFallback<Record<string, unknown>>({
+    fallbacks: SMART_FALLBACKS,
     model: MODELS.smart,
     role: "adjudicate",
     ledger,
@@ -1053,7 +1063,9 @@ export async function runPipeline(opts: RunOptions): Promise<Guide> {
     });
 
     try {
-      const f = await extractFromPage(page, resolvedName, ledger, signal);
+      const f = await extractFromPage(page, resolvedName, ledger, signal, (from, to) =>
+        emit({ type: "log", message: `${from} daily budget spent — switching to ${to}` }),
+      );
       findings.push(...f);
       emit({ type: "log", message: `${f.length} claims extracted from ${page.title || page.url}` });
     } catch (err) {

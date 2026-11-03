@@ -177,6 +177,14 @@ Guides where all five dimensions are null are now detected by `isUngrounded()` a
 
 Composio exposes `composio_managed_auth_schemes` on `GET /api/v3.1/toolkits/{slug}`, which would give the same managed/bring-your-own split live. I parse the public directory page instead and commit the raw markdown under `data/sources/`, so the catalog is reproducible by anyone who clones this repo and the demo cannot break because of an expired credential. The API path is the better choice for a production version, where staleness matters more than reproducibility.
 
+### When a model runs out for the day
+
+Groq meters tokens **per day, per model** — 200,000 on the free tier — and answers an exhausted budget with a 429 saying *"try again in 4m29s"*. Two things follow from that, and both took a production incident to learn.
+
+First, a daily cap cannot be waited out inside a request. The retry loop originally honoured the server's suggestion, so a guide sat in "triage" for six minutes looking hung. Daily exhaustion is now detected from the error body and surfaced immediately; retries sleep at most 20 seconds whatever the server asks for.
+
+Second, because budgets are **per model**, the recovery is simply to use a different one. Every model call — locating docs, disambiguating a name, triage, extraction, both adjudication passes — runs through a fallback chain and announces the switch in the investigation log. If every model in the chain is spent, the run waits briefly and retries the first: the cap is a rolling window rather than a midnight reset, so capacity returns continuously.
+
 ### Running inside a free tier
 
 Both models are free on Groq, capped at **8,000 tokens per minute each** — and `max_completion_tokens` is reserved against that budget before generation starts, so a request that merely *asks* for a large response can fail on its own. That single limit shaped the architecture:
