@@ -1,0 +1,252 @@
+{
+  "schemaVersion": 1,
+  "slug": "gemini",
+  "appName": "Gemini",
+  "composioToolkitSlug": null,
+  "composioManagedOAuth": null,
+  "providerName": "Gemini",
+  "developerConsoleUrl": {
+    "value": "https://exchange.gemini.com/settings/api",
+    "evidence": "inferred",
+    "citations": [],
+    "reasoning": "(Citation removed during verification: the quoted sentence was not present in the fetched source.)"
+  },
+  "docsRootUrl": "https://docs.gemini.com",
+  "summary": "Developers create a Gemini OAuth application in the API Settings console (https://exchange.gemini.com/settings/api), choosing a permanent client type (confidential or public) and receiving a client_id. Registration is instant in Gemini's sandbox environment for testing, but for production the app must be reviewed by Gemini before it is activated, after which the credentials can be used to obtain user authorisation.",
+  "rubric": {
+    "selfServeMinutes": {
+      "value": 10,
+      "evidence": "inferred",
+      "citations": [],
+      "reasoning": "The steps to create an app are performed via a web form; typical form completion takes a few minutes, so 10 minutes is a reasonable estimate."
+    },
+    "reviewWaitBusinessDays": {
+      "value": null,
+      "evidence": "unknown",
+      "citations": [
+        {
+          "url": "https://developer.gemini.com/authentication/oauth",
+          "quote": "Gemini reviews your registered application before activating it in production.",
+          "title": "Gemini OAuth Documentation",
+          "fetchedAt": "2026-11-03T17:07:51.643Z"
+        }
+      ]
+    },
+    "humanOnlyBlockers": {
+      "value": null,
+      "evidence": "unknown",
+      "citations": []
+    },
+    "costUsd": {
+      "value": null,
+      "evidence": "unknown",
+      "citations": []
+    },
+    "prerequisiteArtifacts": {
+      "value": null,
+      "evidence": "unknown",
+      "citations": []
+    }
+  },
+  "tier": "instant",
+  "confidence": "low",
+  "tierRationale": [
+    "10 min of hands-on setup",
+    "tier is blind to 4 unestablished dimensions: review wait, human-only steps, cost, prerequisites"
+  ],
+  "steps": [
+    {
+      "title": "Open Gemini API Settings console",
+      "detail": "Navigate to the API Settings page at https://exchange.gemini.com/settings/api in a browser.",
+      "actor": "agent",
+      "where": "https://exchange.gemini.com/settings/api",
+      "estimatedMinutes": 2,
+      "startsReviewWait": false,
+      "evidence": "inferred",
+      "citations": []
+    },
+    {
+      "title": "Create a new OAuth application",
+      "detail": "In the API Settings console, click the “Create OAuth application” button to start a new app registration.",
+      "actor": "agent",
+      "estimatedMinutes": 3,
+      "startsReviewWait": false,
+      "evidence": "cited",
+      "citations": [
+        {
+          "url": "https://docs.gemini.com/authentication/oauth",
+          "quote": "To get started, create an OAuth application in API Settings.",
+          "fetchedAt": "2026-11-03T17:07:54.242Z"
+        }
+      ]
+    },
+    {
+      "title": "Select client type",
+      "detail": "Choose either a “confidential” or “public” client type for the app; this choice is permanent and cannot be changed later.",
+      "actor": "agent",
+      "estimatedMinutes": 2,
+      "startsReviewWait": false,
+      "evidence": "cited",
+      "citations": [
+        {
+          "url": "https://docs.gemini.com/authentication/oauth",
+          "quote": "When you create an app you choose its client type, and that choice is permanent",
+          "fetchedAt": "2026-11-03T17:07:54.242Z"
+        }
+      ]
+    },
+    {
+      "title": "Save the application and retrieve the client ID",
+      "detail": "Enter the required fields (e.g., application name, redirect URIs) and save the app. The unique client_id is displayed in the API Settings page.",
+      "actor": "agent",
+      "estimatedMinutes": 4,
+      "startsReviewWait": false,
+      "evidence": "cited",
+      "citations": [
+        {
+          "url": "https://developer.gemini.com/rest-api/common/oauth/authorization-token-request",
+          "quote": "Unique ID of your application. This is provided in your API settings.",
+          "fetchedAt": "2026-11-03T17:07:58.593Z"
+        }
+      ]
+    },
+    {
+      "title": "Submit for production review (if needed)",
+      "detail": "If the app will be used in Gemini’s production environment, submit it for Gemini’s review. The app will be activated only after the review is approved.",
+      "actor": "agent",
+      "estimatedMinutes": 5,
+      "startsReviewWait": true,
+      "evidence": "cited",
+      "citations": [
+        {
+          "url": "https://docs.gemini.com/authentication/oauth",
+          "quote": "Gemini reviews your registered application before activating it in production.",
+          "fetchedAt": "2026-11-03T17:07:54.242Z"
+        }
+      ]
+    }
+  ],
+  "nuances": [
+    {
+      "title": "Sandbox registration is instant",
+      "detail": "Applications created in Gemini’s Sandbox Environment are activated immediately and do not require a review.",
+      "severity": "note",
+      "evidence": "cited",
+      "citations": [
+        {
+          "url": "https://developer.gemini.com/authentication/oauth",
+          "quote": "You can register applications immediately in the Sandbox Environment for testing.",
+          "fetchedAt": "2026-11-03T17:07:51.643Z"
+        }
+      ]
+    },
+    {
+      "title": "Client type cannot be changed after creation",
+      "detail": "The choice between confidential and public client types is permanent; to change it you must create a new application.",
+      "severity": "gotcha",
+      "evidence": "cited",
+      "citations": [
+        {
+          "url": "https://developer.gemini.com/authentication/oauth",
+          "quote": "You cannot change a client type after creation.",
+          "fetchedAt": "2026-11-03T17:07:51.643Z"
+        }
+      ]
+    },
+    {
+      "title": "Production apps require Gemini review",
+      "detail": "Before an OAuth app can be used in the live (production) environment, Gemini manually reviews the registration and activates the app only after approval.",
+      "severity": "blocker",
+      "evidence": "cited",
+      "citations": [
+        {
+          "url": "https://docs.gemini.com/authentication/oauth",
+          "quote": "Gemini reviews your registered application before activating it in production.",
+          "fetchedAt": "2026-11-03T17:07:54.242Z"
+        }
+      ]
+    },
+    {
+      "title": "Public clients must not send a client secret",
+      "detail": "If the app is registered as a public client, including a client_secret in token requests will cause the request to fail.",
+      "severity": "gotcha",
+      "evidence": "cited",
+      "citations": [
+        {
+          "url": "https://developer.gemini.com/rest-api/common/oauth/authorization-token-request",
+          "quote": "Public clients must not send this, and a request that includes it will fail.",
+          "fetchedAt": "2026-11-03T17:07:58.593Z"
+        }
+      ]
+    }
+  ],
+  "whenBlocked": [
+    {
+      "situation": "Gemini review rejects the application",
+      "action": "Update the application details to address the reviewer’s feedback and resubmit the app for review.",
+      "contact": "Contact Gemini Support via the help center or email support@gemini.com."
+    },
+    {
+      "situation": "Need to change client type after creation",
+      "action": "Create a new OAuth application with the correct client type; the original app cannot be altered.",
+      "contact": "Gemini Support (support@gemini.com) can confirm the need for a new app if clarification is required."
+    }
+  ],
+  "conflicts": [],
+  "openQuestions": [
+    {
+      "question": "How long does Gemini's review of a production OAuth application typically take?",
+      "whyItMatters": "The review wait time directly impacts how quickly a developer can obtain working credentials for their users.",
+      "howToResolve": "Consult Gemini's developer support or official onboarding guide for any stated SLA or typical turnaround time for app reviews."
+    },
+    {
+      "question": "Is there any cost associated with registering a production OAuth application on Gemini?",
+      "whyItMatters": "Cost affects the feasibility for developers, especially those building free or low‑budget agents.",
+      "howToResolve": "Check Gemini's pricing or developer FAQ pages for any mention of fees for OAuth app registration."
+    }
+  ],
+  "sources": [
+    {
+      "url": "https://developer.gemini.com/authentication/oauth",
+      "quote": "Gemini reviews your registered application before activating it in production.",
+      "title": "Gemini OAuth Documentation",
+      "fetchedAt": "2026-11-03T17:07:51.643Z"
+    },
+    {
+      "url": "https://developer.gemini.com/authentication/oauth",
+      "quote": "You can register applications immediately in the Sandbox Environment for testing.",
+      "title": "Gemini OAuth Documentation",
+      "fetchedAt": "2026-11-03T17:07:51.643Z"
+    }
+  ],
+  "generation": {
+    "generatedAt": "2026-11-03T17:08:42.949Z",
+    "origin": "live",
+    "models": [
+      {
+        "model": "openai/gpt-oss-120b",
+        "role": "adjudicate",
+        "calls": 4,
+        "inputTokens": 4175,
+        "outputTokens": 4480
+      },
+      {
+        "model": "openai/gpt-oss-20b",
+        "role": "triage",
+        "calls": 2,
+        "inputTokens": 2250,
+        "outputTokens": 270
+      },
+      {
+        "model": "openai/gpt-oss-120b",
+        "role": "extract",
+        "calls": 4,
+        "inputTokens": 6302,
+        "outputTokens": 1052
+      }
+    ],
+    "docPagesDiscovered": 555,
+    "docPagesRead": 4,
+    "durationMs": 177661
+  }
+}

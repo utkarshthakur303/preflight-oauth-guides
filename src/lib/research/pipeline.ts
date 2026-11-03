@@ -7,6 +7,7 @@ import {
 } from "../schema";
 import { confidenceFor, deriveTier } from "../rubric";
 import {
+  alternateInterpretations,
   discoverDocUrls,
   fetchDocPage,
   hypothesiseProvider,
@@ -896,8 +897,10 @@ export async function runPipeline(opts: RunOptions): Promise<Guide> {
 
   // --- discover -----------------------------------------------------------
   emit({ type: "stage", key: "discover", label: "Enumerating published docs", status: "running" });
-  const discovered = await discoverDocUrls(hypothesis.docsRoots);
-  const allUrls = discovered?.urls ?? [];
+  let discovered = await discoverDocUrls(hypothesis.docsRoots);
+  let resolvedName = hypothesis.providerName;
+
+  let allUrls = discovered?.urls ?? [];
   emit({
     type: "stage",
     key: "discover",
@@ -908,14 +911,14 @@ export async function runPipeline(opts: RunOptions): Promise<Guide> {
       : "no llms.txt, sitemap or crawlable index",
   });
 
-  const shortlisted = shortlist(allUrls);
+  let shortlisted = shortlist(allUrls);
 
   // --- triage -------------------------------------------------------------
   emit({ type: "stage", key: "triage", label: "Triaging pages with gpt-oss-20b", status: "running" });
-  const verdicts = shortlisted.length
+  let verdicts = shortlisted.length
     ? await triage(
         shortlisted,
-        hypothesis.providerName,
+        resolvedName,
         ledger,
         emit,
         maxPagesToRead,
@@ -930,6 +933,53 @@ export async function runPipeline(opts: RunOptions): Promise<Guide> {
     status: "done",
     detail: `${verdicts.length} of ${shortlisted.length} shortlisted pages look relevant`,
   });
+  // A provider whose docs we can enumerate but where nothing discusses OAuth
+  // registration is usually the wrong provider. Asked for "Gemini" the locate
+  // step proposes Google's AI docs and finds 2,017 pages, none of them about
+  // registering an app — while docs.gemini.com, the exchange, publishes a
+  // readable index. Zero relevant pages is the signal to reconsider the name,
+  // and it is a better signal than zero pages found.
+  if (!verdicts.length && !catalogEntry && !signal?.aborted) {
+    emit({
+      type: "log",
+      message: `nothing under ${resolvedName} discusses OAuth registration — checking whether "${appNameOrUrl}" means a different company`,
+    });
+    try {
+      const alts = await alternateInterpretations(
+        appNameOrUrl,
+        [...hypothesis.docsRoots, ...(discovered ? [discovered.docsRoot] : [])],
+        ledger,
+      );
+      for (const alt of alts) {
+        if (signal?.aborted) break;
+        const found = await discoverDocUrls(alt.docsRoots);
+        if (!found?.urls.length) continue;
+
+        const altShortlist = shortlist(found.urls);
+        const altVerdicts = altShortlist.length
+          ? await triage(altShortlist, alt.providerName, ledger, emit, maxPagesToRead, signal)
+          : [];
+
+        if (altVerdicts.length) {
+          emit({
+            type: "log",
+            message: `resolved to ${alt.providerName} (${found.docsRoot}) — ${altVerdicts.length} relevant pages`,
+          });
+          discovered = found;
+          allUrls = found.urls;
+          shortlisted = altShortlist;
+          verdicts = altVerdicts;
+          resolvedName = alt.providerName;
+          hypothesis.developerConsoleUrl ??= alt.developerConsoleUrl;
+          break;
+        }
+      }
+    } catch {
+      /* the original dead end stands */
+    }
+    pushUsage();
+  }
+
   emit({
     type: "counts",
     discovered: allUrls.length,
@@ -975,7 +1025,7 @@ export async function runPipeline(opts: RunOptions): Promise<Guide> {
     });
 
     try {
-      const f = await extractFromPage(page, hypothesis.providerName, ledger, signal);
+      const f = await extractFromPage(page, resolvedName, ledger, signal);
       findings.push(...f);
       emit({ type: "log", message: `${f.length} claims extracted from ${page.title || page.url}` });
     } catch (err) {
@@ -1018,17 +1068,20 @@ export async function runPipeline(opts: RunOptions): Promise<Guide> {
   // --- adjudicate ---------------------------------------------------------
   emit({ type: "stage", key: "adjudicate", label: "Writing the guide with gpt-oss-120b", status: "running" });
   const draftRaw = await adjudicate({
-    appName: catalogEntry?.name ?? hypothesis.providerName,
-    providerName: hypothesis.providerName,
+    appName: catalogEntry?.name ?? resolvedName,
+    providerName: resolvedName,
     docsRoot: discovered?.docsRoot ?? null,
     consoleGuess: hypothesis.developerConsoleUrl,
     findings,
     ledger,
     signal,
-    readFailure:
-      !pages.length && unreadable > 0
-        ? `${unreadable} relevant pages were found but none served readable text — the provider's docs render client-side`
-        : null,
+    readFailure: pages.length
+      ? null
+      : unreadable > 0
+        ? `${unreadable} relevant pages were located but none served readable text`
+        : allUrls.length === 0
+          ? "no documentation index could be found for this provider at all"
+          : `${allUrls.length} pages were published but none looked relevant to OAuth app registration`,
   });
   pushUsage();
   emit({ type: "stage", key: "adjudicate", label: "Writing the guide with gpt-oss-120b", status: "done" });

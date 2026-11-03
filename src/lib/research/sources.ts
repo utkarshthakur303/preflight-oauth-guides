@@ -522,3 +522,67 @@ export async function fetchDocPage(
 
   return null;
 }
+
+
+/**
+ * Second opinion on an ambiguous product name.
+ *
+ * Asked for "Gemini", the locate step confidently proposes Google's AI
+ * documentation, finds nothing about registering an OAuth app, and reports
+ * that nothing could be established — while docs.gemini.com, the crypto
+ * exchange, publishes a perfectly readable llms.txt. The first interpretation
+ * of a name is not always the one the user meant, and a dead end is the signal
+ * to ask for alternatives rather than to give up.
+ *
+ * Only called when discovery has already come back empty, so it costs nothing
+ * on the common path.
+ */
+export async function alternateInterpretations(
+  appNameOrUrl: string,
+  alreadyTried: string[],
+  ledger: TokenLedger,
+): Promise<ProviderHypothesis[]> {
+  const tried = alreadyTried.map((r) => {
+    try {
+      return new URL(r).hostname;
+    } catch {
+      return r;
+    }
+  });
+
+  const result = await chatJson<{
+    candidates: { providerName: string; docsRoots: string[]; developerConsoleUrl: string | null }[];
+  }>({
+    model: MODELS.smart,
+    role: "adjudicate",
+    ledger,
+    maxTokens: 900,
+    system: [
+      "A product name was ambiguous and the first interpretation led nowhere.",
+      "Name OTHER distinct companies or products that go by this name — different organisations,",
+      "not other pages of the same one.",
+      "",
+      'Return JSON only: {"candidates": [{"providerName": string, "docsRoots": string[], "developerConsoleUrl": string|null}]}',
+      "",
+      "At most 3 candidates, most likely first. Prefer ones that plainly have a developer API.",
+      "Return an empty array if the name is not actually ambiguous.",
+    ].join("\n"),
+    user: `Name: ${appNameOrUrl}\nAlready tried, do not repeat: ${tried.join(", ") || "none"}`,
+  });
+
+  return (result.candidates ?? [])
+    .map((c) => ({
+      providerName: c.providerName || appNameOrUrl,
+      docsRoots: (c.docsRoots ?? [])
+        .map((r) => (r.startsWith("http") ? r : `https://${r}`))
+        .filter((r) => {
+          try {
+            return !tried.includes(new URL(r).hostname);
+          } catch {
+            return false;
+          }
+        }),
+      developerConsoleUrl: c.developerConsoleUrl ?? null,
+    }))
+    .filter((c) => c.docsRoots.length);
+}

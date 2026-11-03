@@ -36,5 +36,9 @@
   "github": {
     "checkedOn": "2026-11-03",
     "note": "Corrected after review. The guide was rated Weeks, driven entirely by one human-only step classified as 'identity verification' whose detail read 'account email must be verified'. Confirming an email is a click, not an identity check, but the rubric floors identity verification at weeks because it is meant for government ID and business registration documents. The enum now distinguishes email_verification and phone_verification from identity_verification, and the adjudication prompt says so explicitly. This is the clearest example in the project of a taxonomy error producing a confidently wrong answer while every individual citation was sound."
+  },
+  "gemini": {
+    "checkedOn": "2026-11-03",
+    "note": "Kept as the worked example of name disambiguation. Asked for \"Gemini\", the pipeline first proposes Google's AI documentation, enumerates about 2,000 pages and finds none of them about registering an OAuth app. That \u2014 pages found, nothing relevant \u2014 is the signal that the name was read as the wrong company, so it asks for alternatives and resolves to Gemini the cryptocurrency exchange at docs.gemini.com, which publishes a readable llms.txt. Before this existed the guide reported all five dimensions as unestablished, which was honest and useless. Note the guide covers the exchange, not Google's Gemini models; Google API access is a Google Cloud OAuth client and a different setup entirely."
   }
 }

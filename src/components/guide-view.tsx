@@ -189,11 +189,33 @@ export function GuideView({ g, showBackLink = true }: { g: Guide; showBackLink?:
             tier would be a fabrication. The investigation is recorded below so
             you can see what was attempted and pick up where it stopped.
           </p>
+          {/* Report what the run actually recorded. An earlier version asserted
+              "the usual cause is client-rendered documentation" on every
+              ungrounded guide, including ones where the real problem was
+              looking at the wrong company — asserting an unverified cause on a
+              page about not asserting unverified things. */}
           <p className="mt-2 text-[12.5px] leading-relaxed text-muted">
-            The usual cause is documentation rendered in the browser: the pages
-            exist and were located, but the server returns a shell with no prose
-            in it. Reading those needs a JavaScript-rendering fetch, which this
-            project does not do.
+            {g.generation.docPagesDiscovered === 0 ? (
+              <>
+                No documentation index was found for this provider at all — no{" "}
+                <span className="mono">llms.txt</span>, no sitemap, nothing
+                crawlable. If the name is ambiguous, try the company&rsquo;s
+                website instead.
+              </>
+            ) : g.generation.docPagesRead === 0 ? (
+              <>
+                {g.generation.docPagesDiscovered.toLocaleString()} pages were
+                published and candidates were located, but none served readable
+                text. That usually means documentation rendered in the browser,
+                which needs a JavaScript-rendering fetch this project does not do.
+              </>
+            ) : (
+              <>
+                {g.generation.docPagesRead} page
+                {g.generation.docPagesRead === 1 ? " was" : "s were"} read, but
+                nothing in them stated any of the five dimensions.
+              </>
+            )}
           </p>
         </section>
       ) : (
