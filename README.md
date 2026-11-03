@@ -94,6 +94,21 @@ This is load-bearing. `{min: 0, max: 0}` asserts that **nobody reviews your app*
 
 ---
 
+## Design
+
+The interface is built to Composio's own surface rather than to a generic template, because a take-home for an integrations team should look like it belongs next to their product.
+
+Tokens were read out of their compiled stylesheet (`composio.dev/_next/static/css/*.css`) rather than eyeballed: brand `#0007cd` on `#f6f6f6` in light, `#51a2ff` on `#0f0f0f` in dark, borders `#e4e3e0`, ink `#1d1c1d`, muted `#696969`. Their typefaces are **Geist Sans and Geist Mono**, both open. They also license Roobert and Flecha for display type, which are not free and are not used here.
+
+The details that actually carry the resemblance are behavioural, not chromatic:
+
+- **Actions are uppercase monospace in hard-edged boxes**, used consistently from the nav down to empty-state buttons — the same control language as "GET STARTED FOR FREE" and "READ THE DOCS".
+- **A brand-blue announcement strip** across the top, carrying the one number the whole project rests on.
+- **A dark hero band with the headline's real claim set in a solid blue block.** That mark is the most recognisable thing about their typography, and it doubles as a way to put the actual question — *next quarter?* — in the reader's eye first.
+- **Launch plan is a button, not a nav word.** As plain text between two other links it read as a minor section, when it is the page that answers what a developer actually came to find out.
+
+Dark mode is a full second token set, not an inversion.
+
 ## The launch planner
 
 Nobody integrates one app. `/plan` takes the apps your agent needs and works out a date on the model that **provider reviews overlap but your own keyboard work does not**, then names the single approval setting the date. It reports the weakest confidence in the stack alongside the number, because a date inherited from a guide with an unknown review wait is a guess wearing a suit.
