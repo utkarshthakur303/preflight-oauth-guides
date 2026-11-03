@@ -133,7 +133,11 @@ async function triage(
           "",
           "Score 8-10: creating an OAuth app, client ID/secret, redirect URIs, requesting scopes,",
           "            app review/verification/approval, publishing or listing requirements.",
-          "Score 4-7:  authentication overviews, developer-account setup, rate limits, security policy.",
+          "Score 6-8:  how developers authenticate at all — API keys, bearer tokens, personal",
+          "            access tokens, 'authentication' overviews. Establishing that a provider",
+          "            uses API keys INSTEAD of OAuth is a valuable answer, not an irrelevant",
+          "            page: it tells the developer there is nothing to register.",
+          "Score 4-5:  developer-account setup, rate limits, security policy.",
           "Score 0-3:  end-user help, API endpoint reference, SDK usage, anything unrelated.",
           "",
           "Include only entries scoring 4 or above. Judge from the URL path alone. Be selective.",
@@ -204,6 +208,7 @@ type Finding = {
 };
 
 const FIELD_TAGS = [
+  "authMethod",
   "selfServeMinutes",
   "reviewWait",
   "cost",
@@ -232,7 +237,13 @@ async function extractFromPage(
     signal,
     maxTokens: 900,
     system: [
-      "You extract facts about registering a third-party OAuth app with a provider.",
+      "You extract facts about how a third-party developer authenticates with a provider,",
+      "and about registering an OAuth app where one exists.",
+      "",
+      "IMPORTANT: a provider that uses API keys and has no OAuth app is a normal, useful",
+      "answer, not a blank. If the page shows developers authenticating with an API key,",
+      'a bearer token or a personal access token, record an "authMethod" finding with the',
+      "quote that shows it. That single fact tells a developer there is nothing to register.",
       "",
       'Return JSON only: {"findings": [{"claim": "...", "quote": "...", "field": "..."}]}',
       "",
@@ -245,12 +256,15 @@ async function extractFromPage(
       "  step             - a concrete setup action, in order",
       "  nuance           - a trap, limitation or surprising requirement",
       "  console          - the URL or name of the place you register the app",
+      "  authMethod       - how developers authenticate: API key, bearer token, OAuth, etc.",
       "  blocked          - what to do when stuck, support routes, contact paths",
       "",
       "CRITICAL RULES:",
       "- `quote` MUST be copied verbatim from the page, character for character.",
       "- Never write a quote that is not literally present in the text given to you.",
       "- If the page does not state something, do not produce a finding for it.",
+      "- But do not return an empty array just because the page is not about OAuth. If it",
+      "  shows how authentication works at all, that is a finding worth recording.",
       "- Extract at most 5 findings. Prefer specific, numeric, actionable facts.",
       "- Keep each quote under 180 characters. Trim to the sentence that carries the fact.",
       "- An empty findings array is a correct answer for an irrelevant page.",
@@ -319,6 +333,7 @@ Return JSON only, exactly this shape:
 {
   "appName": string,
   "providerName": string,
+  "oauthSupported": { "value": true|false|null, "evidence": E, "citations": [C], "reasoning": string? },
   "developerConsoleUrl": { "value": string|null, "evidence": E, "citations": [C], "reasoning": string? },
   "summary": string,
   "rubric": {
@@ -416,6 +431,14 @@ async function adjudicateAssessment(ctx: AdjudicateCtx) {
       "  thresholds) are not prerequisites for registering an app. Leave them out of the rubric.",
       "",
       "JUDGEMENT:",
+      "- oauthSupported FIRST. Many APIs have no OAuth app at all: they authenticate with a",
+      "  bearer API key you generate in a dashboard, with no consent screen, no client ID and",
+      "  nothing to review. Inference, database and infrastructure APIs are usually like this.",
+      "  If the findings describe API-key or bearer authentication and show no sign of an OAuth",
+      '  app registration, set oauthSupported false. That is a FINDING, not a failure: say so in',
+      "  the summary, set the rubric to zero effort where that follows, and do not report the",
+      "  dimensions as unknown. Set it true when there is clearly an OAuth app to register, and",
+      "  null only when you genuinely cannot tell.",
       "- selfServeMinutes is keyboard time only. Never fold waiting into it.",
       "- reviewWaitBusinessDays is how long the PROVIDER takes to come back to you. A deadline",
       "  imposed on the developer -- \"you have 30 days to respond\", \"respond within 7 days or the",
@@ -458,7 +481,9 @@ async function adjudicateProcedure(ctx: AdjudicateCtx) {
   const { appName, providerName, consoleGuess, ledger, signal } = ctx;
 
   const relevant = ctx.findings.filter((f) =>
-    ["step", "console", "nuance", "blocked", "humanOnly", "prerequisites"].includes(f.field),
+    ["step", "console", "nuance", "blocked", "humanOnly", "prerequisites", "authMethod"].includes(
+      f.field,
+    ),
   );
 
   return chatJson<Record<string, unknown>>({
@@ -653,6 +678,9 @@ function normalizeDraft(raw: unknown): GuideDraft {
   return {
     appName: String(d.appName ?? ""),
     providerName: String(d.providerName ?? d.appName ?? ""),
+    oauthSupported: node(d.oauthSupported, (x) =>
+      typeof x === "boolean" ? x : null,
+    ) as GuideDraft["oauthSupported"],
     developerConsoleUrl: node(d.developerConsoleUrl, (x) =>
       typeof x === "string" && x.trim() ? x.trim() : null,
     ) as GuideDraft["developerConsoleUrl"],

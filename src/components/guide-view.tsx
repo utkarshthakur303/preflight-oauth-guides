@@ -12,6 +12,7 @@ import {
   ConfidenceBadge,
   EvidenceBadge,
   ManagedAuthBadge,
+  NoOAuthBadge,
   TierBadge,
   UngroundedBadge,
 } from "@/components/badges";
@@ -93,7 +94,10 @@ function Dimension({
 
 export function GuideView({ g, showBackLink = true }: { g: Guide; showBackLink?: boolean }) {
   const r = g.rubric;
-  const ungrounded = isUngrounded(r);
+  // "No OAuth here" is an answer, not an absence of one, so it takes priority
+  // over the ungrounded treatment even though the rubric is empty either way.
+  const noOAuth = g.oauthSupported?.value === false;
+  const ungrounded = !noOAuth && isUngrounded(r);
   const w = r.reviewWaitBusinessDays.value;
   const cost = r.costUsd.value;
   const prereqs = r.prerequisiteArtifacts.value;
@@ -131,7 +135,13 @@ export function GuideView({ g, showBackLink = true }: { g: Guide; showBackLink?:
 
       <header>
         <div className="flex flex-wrap items-center gap-2">
-          {ungrounded ? <UngroundedBadge size="lg" /> : <TierBadge tier={g.tier} size="lg" />}
+          {noOAuth ? (
+            <NoOAuthBadge size="lg" />
+          ) : ungrounded ? (
+            <UngroundedBadge size="lg" />
+          ) : (
+            <TierBadge tier={g.tier} size="lg" />
+          )}
           <ConfidenceBadge confidence={g.confidence} />
           <ManagedAuthBadge managed={g.composioManagedOAuth} />
           {g.generation.origin === "live" && (
@@ -172,7 +182,36 @@ export function GuideView({ g, showBackLink = true }: { g: Guide; showBackLink?:
       </header>
 
       {/* Why this tier — the arithmetic, shown. */}
-      {ungrounded ? (
+      {noOAuth ? (
+        <section
+          className="mt-7 rounded-xl border p-4"
+          style={{
+            borderColor: "color-mix(in oklab, var(--tier-0) 40%, transparent)",
+            background: "color-mix(in oklab, var(--tier-0) 7%, transparent)",
+          }}
+        >
+          <h2 className="text-[13px] font-semibold" style={{ color: "var(--tier-0)" }}>
+            There is no OAuth app to register here
+          </h2>
+          <p className="mt-1.5 text-[13px] leading-relaxed">
+            {g.providerName} does not use OAuth for third-party access. There is
+            no consent screen, no client ID and secret to obtain, and nothing to
+            submit for review — so none of the five timeline questions apply.
+          </p>
+          <p className="mt-2 text-[12.5px] leading-relaxed text-muted">
+            Authentication is by API key or bearer token, which a developer
+            generates in the provider&rsquo;s dashboard and supplies directly.
+            In Composio that is a custom auth config using the API-key scheme
+            rather than an OAuth one. Your setup work for this provider is
+            effectively zero.
+          </p>
+          {g.oauthSupported?.reasoning && (
+            <p className="mt-2 text-[12px] leading-relaxed text-muted">
+              {g.oauthSupported.reasoning}
+            </p>
+          )}
+        </section>
+      ) : ungrounded ? (
         <section
           className="mt-7 rounded-xl border p-4"
           style={{

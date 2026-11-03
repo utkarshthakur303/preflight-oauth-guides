@@ -40,8 +40,13 @@ export function Planner({ guides: allGuides }: { guides: Guide[] }) {
   // A guide with nothing established cannot contribute to a date. Including it
   // would silently add a zero to every total and make the plan look better than
   // the evidence supports, so it is listed as unavailable instead.
-  const guides = allGuides.filter((g) => !isUngrounded(g.rubric));
-  const unplannable = allGuides.filter((g) => isUngrounded(g.rubric));
+  //
+  // A provider with no OAuth app is the opposite case: its zeros are real, not
+  // missing, so it belongs in the plan as the free item it is.
+  const plannable = (g: Guide) =>
+    g.oauthSupported?.value === false || !isUngrounded(g.rubric);
+  const guides = allGuides.filter(plannable);
+  const unplannable = allGuides.filter((g) => !plannable(g));
   // Default to the best-evidenced guides, hardest first. Taking whatever came
   // first put three guides with no sources on screen and produced a confident
   // "0 business days" — technically what the data said, and a terrible opening

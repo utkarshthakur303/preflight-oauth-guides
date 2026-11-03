@@ -9,6 +9,7 @@ import {
   ManagedAuthBadge,
   TierBadge,
   TierLadder,
+  NoOAuthBadge,
   UngroundedBadge,
 } from "./badges";
 
@@ -38,7 +39,8 @@ function setupLabel(g: Guide): string {
 }
 
 export function GuideCard({ guide }: { guide: Guide }) {
-  const ungrounded = isUngrounded(guide.rubric);
+  const noOAuth = guide.oauthSupported?.value === false;
+  const ungrounded = !noOAuth && isUngrounded(guide.rubric);
   const humanSteps = guide.steps.filter((s) => s.actor === "human").length;
   const agentSteps = guide.steps.filter((s) => s.actor !== "human").length;
   const cost = guide.rubric.costUsd.value;
@@ -58,7 +60,13 @@ export function GuideCard({ guide }: { guide: Guide }) {
             {guide.composioToolkitSlug ?? guide.slug}
           </p>
         </div>
-        {ungrounded ? <UngroundedBadge size="sm" /> : <TierBadge tier={guide.tier} size="sm" />}
+        {noOAuth ? (
+          <NoOAuthBadge size="sm" />
+        ) : ungrounded ? (
+          <UngroundedBadge size="sm" />
+        ) : (
+          <TierBadge tier={guide.tier} size="sm" />
+        )}
       </div>
 
       <p className="line-clamp-2 text-[13px] leading-relaxed text-muted">

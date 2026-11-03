@@ -40,6 +40,29 @@ export function UngroundedBadge({ size = "md" }: { size?: "sm" | "md" | "lg" }) 
   );
 }
 
+/**
+ * For a provider with no OAuth app to register. Distinct from
+ * `UngroundedBadge`: that one means we failed to find out, this one means
+ * there is genuinely nothing to do, which is good news rather than a gap.
+ */
+export function NoOAuthBadge({ size = "md" }: { size?: "sm" | "md" | "lg" }) {
+  const pad =
+    size === "lg" ? "px-3 py-1.5 text-sm" : size === "sm" ? "px-2 py-0.5 text-[11px]" : "px-2.5 py-1 text-xs";
+  return (
+    <span
+      className={`mono inline-flex items-center gap-1.5 rounded-full font-medium ${pad}`}
+      style={{
+        color: "var(--tier-0)",
+        background: "color-mix(in oklab, var(--tier-0) 12%, transparent)",
+      }}
+      title="This provider has no OAuth app to register — it authenticates with an API key."
+    >
+      <span aria-hidden>⌁</span>
+      No OAuth needed
+    </span>
+  );
+}
+
 export function TierBadge({
   tier,
   size = "md",

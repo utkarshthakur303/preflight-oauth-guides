@@ -250,6 +250,21 @@ export const Guide = z.object({
   composioManagedOAuth: z.boolean().nullable(),
 
   providerName: z.string(),
+
+  /**
+   * Whether this provider has an OAuth app to register at all.
+   *
+   * Not every API does. Groq, like many inference and infrastructure APIs,
+   * authenticates with a bearer API key: there is no consent screen, no client
+   * ID and nothing to submit for review. Before this field existed such a
+   * provider came out as five "unknown"s, which reads as a failed
+   * investigation when it is actually a complete and useful answer — the
+   * developer's work here is zero.
+   *
+   * null means undetermined, which is the failure case.
+   */
+  oauthSupported: Evidenced(z.boolean().nullable()),
+
   /** Where you actually register the app. Null when we could not establish it. */
   developerConsoleUrl: Evidenced(z.string().nullable()),
   docsRootUrl: z.string().nullable(),
