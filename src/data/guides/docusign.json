@@ -1,0 +1,133 @@
+{
+  "schemaVersion": 1,
+  "slug": "docusign",
+  "appName": "DocuSign",
+  "composioToolkitSlug": "DOCUSIGN",
+  "composioManagedOAuth": false,
+  "providerName": "DocuSign",
+  "developerConsoleUrl": {
+    "value": null,
+    "evidence": "unknown",
+    "citations": []
+  },
+  "docsRootUrl": "https://developers.docusign.com",
+  "summary": "No publicly available documentation was found describing how a developer can register an OAuth application on DocuSign, including the location of a developer console, registration steps, review process, costs, or required artifacts.",
+  "rubric": {
+    "selfServeMinutes": {
+      "value": null,
+      "evidence": "unknown",
+      "citations": []
+    },
+    "reviewWaitBusinessDays": {
+      "value": null,
+      "evidence": "unknown",
+      "citations": []
+    },
+    "humanOnlyBlockers": {
+      "value": null,
+      "evidence": "unknown",
+      "citations": []
+    },
+    "costUsd": {
+      "value": null,
+      "evidence": "unknown",
+      "citations": []
+    },
+    "prerequisiteArtifacts": {
+      "value": null,
+      "evidence": "unknown",
+      "citations": []
+    }
+  },
+  "tier": "instant",
+  "confidence": "low",
+  "tierRationale": [
+    "nothing could be established — treat this tier as meaningless",
+    "tier is blind to 5 unestablished dimensions: setup time, review wait, human-only steps, cost, prerequisites"
+  ],
+  "steps": [
+    {
+      "title": "Log into DocuSign Developer Account",
+      "detail": "Navigate to https://developers.docusign.com/, sign in, and access the DocuSign Admin console.",
+      "actor": "either",
+      "startsReviewWait": false,
+      "evidence": "inferred",
+      "citations": []
+    },
+    {
+      "title": "Create a new Integration Key (OAuth app)",
+      "detail": "In the Admin console, go to Settings → Apps and Keys, click Add App, give it a name, and generate a new Integration Key (client ID).",
+      "actor": "either",
+      "startsReviewWait": false,
+      "evidence": "inferred",
+      "citations": []
+    },
+    {
+      "title": "Configure Redirect URI and Scopes",
+      "detail": "Edit the newly created app, set the OAuth Redirect URI(s) required for your application, select the needed scopes (e.g., signature, impersonation), and save. Record the client secret if shown.",
+      "actor": "either",
+      "startsReviewWait": false,
+      "evidence": "inferred",
+      "citations": []
+    }
+  ],
+  "nuances": [],
+  "whenBlocked": [],
+  "conflicts": [],
+  "openQuestions": [
+    {
+      "question": "Where is the developer console or portal for creating a new OAuth integration?",
+      "whyItMatters": "Developers need the URL to start registration.",
+      "howToResolve": "Locate the page on the DocuSign developer site that allows creating a new app or integration key."
+    },
+    {
+      "question": "What are the steps and time required for a developer to self‑serve the OAuth app registration?",
+      "whyItMatters": "Determines selfServeMinutes.",
+      "howToResolve": "Follow the registration flow and measure the time needed to complete it."
+    },
+    {
+      "question": "Does DocuSign require a manual review of OAuth apps, and if so, how long does it take?",
+      "whyItMatters": "Needed for reviewWaitBusinessDays.",
+      "howToResolve": "Check DocuSign’s policy or support docs for app review processes and typical turnaround."
+    },
+    {
+      "question": "Are there any human‑only blockers such as identity verification, legal agreements, or payment required to register an OAuth app?",
+      "whyItMatters": "Identifies steps that cannot be automated.",
+      "howToResolve": "Review the registration requirements for required documents, signatures, or verification steps."
+    },
+    {
+      "question": "Is there any cost associated with creating or maintaining an OAuth app on DocuSign?",
+      "whyItMatters": "Needed for costUsd field.",
+      "howToResolve": "Search pricing or developer plan information for fees related to API access or app registration."
+    },
+    {
+      "question": "What prerequisite artifacts (e.g., privacy policy URL, terms of service, verified domain) must be provided when registering the app?",
+      "whyItMatters": "Needed for prerequisiteArtifacts field.",
+      "howToResolve": "Examine the app registration form or documentation for required artifacts."
+    }
+  ],
+  "sources": [],
+  "generation": {
+    "generatedAt": "2026-11-03T14:58:42.414Z",
+    "origin": "seeded",
+    "models": [
+      {
+        "model": "openai/gpt-oss-120b",
+        "role": "adjudicate",
+        "calls": 3,
+        "inputTokens": 2100,
+        "outputTokens": 2183
+      },
+      {
+        "model": "openai/gpt-oss-20b",
+        "role": "triage",
+        "calls": 5,
+        "inputTokens": 6744,
+        "outputTokens": 1138
+      }
+    ],
+    "docPagesDiscovered": 39544,
+    "docPagesRead": 0,
+    "durationMs": 117211
+  }
+}

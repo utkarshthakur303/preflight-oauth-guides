@@ -1,0 +1,2725 @@
+{
+  "generatedAt": "2026-11-03T14:16:06.969Z",
+  "source": {
+    "url": "https://docs.composio.dev/toolkits/managed-auth",
+    "fetchedAt": "2026-11-03T14:15:16Z",
+    "file": "data/sources/composio-managed-auth.md"
+  },
+  "counts": {
+    "total": 387,
+    "managedOAuth": 125,
+    "bringYourOwn": 262,
+    "bringYourOwnExcludingMcp": 150
+  },
+  "toolkits": [
+    {
+      "slug": "ADOBE_MARKETING_AGENT_MCP",
+      "name": "Adobe Marketing Agent MCP",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/adobe_marketing_agent_mcp",
+      "managedOAuth": false,
+      "isMcpToolkit": true
+    },
+    {
+      "slug": "ADROLL",
+      "name": "AdRoll",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/adroll",
+      "managedOAuth": false,
+      "isMcpToolkit": false
+    },
+    {
+      "slug": "AHA",
+      "name": "Aha!",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/aha",
+      "managedOAuth": false,
+      "isMcpToolkit": false
+    },
+    {
+      "slug": "AHREFS",
+      "name": "Ahrefs",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/ahrefs",
+      "managedOAuth": false,
+      "isMcpToolkit": false
+    },
+    {
+      "slug": "AHREFS_MCP",
+      "name": "Ahrefs MCP",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/ahrefs_mcp",
+      "managedOAuth": false,
+      "isMcpToolkit": true
+    },
+    {
+      "slug": "AIRCALL",
+      "name": "Aircall",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/aircall",
+      "managedOAuth": true,
+      "isMcpToolkit": false
+    },
+    {
+      "slug": "AIROPS_MCP",
+      "name": "AirOps MCP",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/airops_mcp",
+      "managedOAuth": false,
+      "isMcpToolkit": true
+    },
+    {
+      "slug": "AIRTABLE",
+      "name": "Airtable",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/airtable",
+      "managedOAuth": true,
+      "isMcpToolkit": false
+    },
+    {
+      "slug": "ALPACA",
+      "name": "Alpaca",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/alpaca",
+      "managedOAuth": false,
+      "isMcpToolkit": false
+    },
+    {
+      "slug": "AMPLITUDE_MCP",
+      "name": "Amplitude MCP",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/amplitude_mcp",
+      "managedOAuth": false,
+      "isMcpToolkit": true
+    },
+    {
+      "slug": "APALEO",
+      "name": "Apaleo",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/apaleo",
+      "managedOAuth": true,
+      "isMcpToolkit": false
+    },
+    {
+      "slug": "APIFY_MCP",
+      "name": "Apify MCP",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/apify_mcp",
+      "managedOAuth": false,
+      "isMcpToolkit": true
+    },
+    {
+      "slug": "ASANA",
+      "name": "Asana",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/asana",
+      "managedOAuth": true,
+      "isMcpToolkit": false
+    },
+    {
+      "slug": "ATLASSIAN_MCP",
+      "name": "Atlassian MCP",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/atlassian_mcp",
+      "managedOAuth": false,
+      "isMcpToolkit": true
+    },
+    {
+      "slug": "ATTIO",
+      "name": "Attio",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/attio",
+      "managedOAuth": true,
+      "isMcpToolkit": false
+    },
+    {
+      "slug": "AUDIOSCRAPE_MCP",
+      "name": "Audioscrape MCP",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/audioscrape_mcp",
+      "managedOAuth": false,
+      "isMcpToolkit": true
+    },
+    {
+      "slug": "AWEBER",
+      "name": "AWeber",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/aweber",
+      "managedOAuth": false,
+      "isMcpToolkit": false
+    },
+    {
+      "slug": "AZURE_MONITOR_ACTIVITY_LOG",
+      "name": "Azure Monitor Activity Log",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/azure_monitor_activity_log",
+      "managedOAuth": false,
+      "isMcpToolkit": false
+    },
+    {
+      "slug": "BAMBOOHR",
+      "name": "BambooHR",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/bamboohr",
+      "managedOAuth": false,
+      "isMcpToolkit": false
+    },
+    {
+      "slug": "BASECAMP",
+      "name": "Basecamp",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/basecamp",
+      "managedOAuth": true,
+      "isMcpToolkit": false
+    },
+    {
+      "slug": "BEEMINDER",
+      "name": "Beeminder",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/beeminder",
+      "managedOAuth": false,
+      "isMcpToolkit": false
+    },
+    {
+      "slug": "BETTER_STACK_MCP",
+      "name": "Better Stack MCP",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/better_stack_mcp",
+      "managedOAuth": false,
+      "isMcpToolkit": true
+    },
+    {
+      "slug": "BEXIO",
+      "name": "bexio",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/bexio",
+      "managedOAuth": false,
+      "isMcpToolkit": false
+    },
+    {
+      "slug": "BITBUCKET",
+      "name": "Bitbucket",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/bitbucket",
+      "managedOAuth": true,
+      "isMcpToolkit": false
+    },
+    {
+      "slug": "BITLY",
+      "name": "Bitly",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/bitly",
+      "managedOAuth": false,
+      "isMcpToolkit": false
+    },
+    {
+      "slug": "BITWARDEN",
+      "name": "Bitwarden",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/bitwarden",
+      "managedOAuth": false,
+      "isMcpToolkit": false
+    },
+    {
+      "slug": "BLACKBAUD",
+      "name": "Blackbaud",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/blackbaud",
+      "managedOAuth": true,
+      "isMcpToolkit": false
+    },
+    {
+      "slug": "BLACKBOARD",
+      "name": "Blackboard",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/blackboard",
+      "managedOAuth": false,
+      "isMcpToolkit": false
+    },
+    {
+      "slug": "BOLDSIGN",
+      "name": "Boldsign",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/boldsign",
+      "managedOAuth": true,
+      "isMcpToolkit": false
+    },
+    {
+      "slug": "BORNEO",
+      "name": "Borneo",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/borneo",
+      "managedOAuth": false,
+      "isMcpToolkit": false
+    },
+    {
+      "slug": "BOX",
+      "name": "Box",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/box",
+      "managedOAuth": true,
+      "isMcpToolkit": false
+    },
+    {
+      "slug": "BOX_MCP",
+      "name": "Box MCP",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/box_mcp",
+      "managedOAuth": false,
+      "isMcpToolkit": true
+    },
+    {
+      "slug": "BREVO",
+      "name": "Brevo",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/brevo",
+      "managedOAuth": false,
+      "isMcpToolkit": false
+    },
+    {
+      "slug": "BREX",
+      "name": "Brex",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/brex",
+      "managedOAuth": false,
+      "isMcpToolkit": false
+    },
+    {
+      "slug": "BUFFER",
+      "name": "Buffer",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/buffer",
+      "managedOAuth": false,
+      "isMcpToolkit": false
+    },
+    {
+      "slug": "CAL",
+      "name": "Cal",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/cal",
+      "managedOAuth": true,
+      "isMcpToolkit": false
+    },
+    {
+      "slug": "CALENDLY",
+      "name": "Calendly",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/calendly",
+      "managedOAuth": true,
+      "isMcpToolkit": false
+    },
+    {
+      "slug": "CALENDLY_MCP",
+      "name": "Calendly MCP",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/calendly_mcp",
+      "managedOAuth": false,
+      "isMcpToolkit": true
+    },
+    {
+      "slug": "CANDID_MCP",
+      "name": "Candid MCP",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/candid_mcp",
+      "managedOAuth": false,
+      "isMcpToolkit": true
+    },
+    {
+      "slug": "CANVA",
+      "name": "Canva",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/canva",
+      "managedOAuth": true,
+      "isMcpToolkit": false
+    },
+    {
+      "slug": "CANVA_MCP",
+      "name": "Canva MCP",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/canva_mcp",
+      "managedOAuth": false,
+      "isMcpToolkit": true
+    },
+    {
+      "slug": "CANVAS",
+      "name": "Canvas",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/canvas",
+      "managedOAuth": false,
+      "isMcpToolkit": false
+    },
+    {
+      "slug": "CAPSULE_CRM",
+      "name": "Capsule CRM",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/capsule_crm",
+      "managedOAuth": true,
+      "isMcpToolkit": false
+    },
+    {
+      "slug": "CARBON_VOICE_MCP",
+      "name": "Carbon Voice MCP",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/carbon_voice_mcp",
+      "managedOAuth": false,
+      "isMcpToolkit": true
+    },
+    {
+      "slug": "CASHFREE_PAYMENTS_MCP",
+      "name": "Cashfree MCP",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/cashfree_payments_mcp",
+      "managedOAuth": false,
+      "isMcpToolkit": true
+    },
+    {
+      "slug": "CIRCLEBACK_MCP",
+      "name": "Circleback MCP",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/circleback_mcp",
+      "managedOAuth": false,
+      "isMcpToolkit": true
+    },
+    {
+      "slug": "CLARIFY_MCP",
+      "name": "Clarify MCP",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/clarify_mcp",
+      "managedOAuth": false,
+      "isMcpToolkit": true
+    },
+    {
+      "slug": "CLAY_MCP",
+      "name": "Clay MCP",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/clay_mcp",
+      "managedOAuth": false,
+      "isMcpToolkit": true
+    },
+    {
+      "slug": "CLEVERREACH",
+      "name": "CleverReach",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/cleverreach",
+      "managedOAuth": false,
+      "isMcpToolkit": false
+    },
+    {
+      "slug": "CLICKFUNNELS",
+      "name": "ClickFunnels 2.0",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/clickfunnels",
+      "managedOAuth": false,
+      "isMcpToolkit": false
+    },
+    {
+      "slug": "CLICKHOUSE_MCP",
+      "name": "ClickHouse MCP",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/clickhouse_mcp",
+      "managedOAuth": false,
+      "isMcpToolkit": true
+    },
+    {
+      "slug": "CLICKUP",
+      "name": "ClickUp",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/clickup",
+      "managedOAuth": true,
+      "isMcpToolkit": false
+    },
+    {
+      "slug": "CLICKUP_MCP",
+      "name": "ClickUp MCP",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/clickup_mcp",
+      "managedOAuth": false,
+      "isMcpToolkit": true
+    },
+    {
+      "slug": "CLIO_MANAGE",
+      "name": "Clio Manage",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/clio_manage",
+      "managedOAuth": false,
+      "isMcpToolkit": false
+    },
+    {
+      "slug": "CLOCKIFY",
+      "name": "Clockify",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/clockify",
+      "managedOAuth": false,
+      "isMcpToolkit": false
+    },
+    {
+      "slug": "CLOSE_MCP",
+      "name": "Close MCP",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/close_mcp",
+      "managedOAuth": false,
+      "isMcpToolkit": true
+    },
+    {
+      "slug": "CLOUDFLARE_MCP",
+      "name": "Cloudflare MCP",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/cloudflare_mcp",
+      "managedOAuth": false,
+      "isMcpToolkit": true
+    },
+    {
+      "slug": "CLOVER",
+      "name": "Clover",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/clover",
+      "managedOAuth": false,
+      "isMcpToolkit": false
+    },
+    {
+      "slug": "CLUESO_MCP",
+      "name": "Clueso MCP",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/clueso_mcp",
+      "managedOAuth": false,
+      "isMcpToolkit": true
+    },
+    {
+      "slug": "COINBASE_AGENTS_MCP",
+      "name": "Coinbase Agents MCP",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/coinbase_agents_mcp",
+      "managedOAuth": false,
+      "isMcpToolkit": true
+    },
+    {
+      "slug": "COINBASE_WALLET_MCP",
+      "name": "Coinbase Wallet MCP",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/coinbase_wallet_mcp",
+      "managedOAuth": false,
+      "isMcpToolkit": true
+    },
+    {
+      "slug": "COMMERCE_LAYER",
+      "name": "Commerce Layer",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/commerce_layer",
+      "managedOAuth": false,
+      "isMcpToolkit": false
+    },
+    {
+      "slug": "COMMON_ROOM_MCP",
+      "name": "Common Room MCP",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/common_room_mcp",
+      "managedOAuth": false,
+      "isMcpToolkit": true
+    },
+    {
+      "slug": "CONFLUENCE",
+      "name": "Confluence",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/confluence",
+      "managedOAuth": true,
+      "isMcpToolkit": false
+    },
+    {
+      "slug": "CONSENSUS_MCP",
+      "name": "Consensus MCP",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/consensus_mcp",
+      "managedOAuth": false,
+      "isMcpToolkit": true
+    },
+    {
+      "slug": "CONSTANT_CONTACT",
+      "name": "Constant Contact",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/constant_contact",
+      "managedOAuth": false,
+      "isMcpToolkit": false
+    },
+    {
+      "slug": "CONTACTS_PLUS",
+      "name": "Contacts+",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/contacts_plus",
+      "managedOAuth": false,
+      "isMcpToolkit": false
+    },
+    {
+      "slug": "CONTENTFUL",
+      "name": "Contentful",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/contentful",
+      "managedOAuth": true,
+      "isMcpToolkit": false
+    },
+    {
+      "slug": "CONTENTSQUARE_MCP",
+      "name": "Contentsquare MCP",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/contentsquare_mcp",
+      "managedOAuth": false,
+      "isMcpToolkit": true
+    },
+    {
+      "slug": "COUPA",
+      "name": "Coupa",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/coupa",
+      "managedOAuth": false,
+      "isMcpToolkit": false
+    },
+    {
+      "slug": "CRADL_AI",
+      "name": "Cradl AI",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/cradl_ai",
+      "managedOAuth": false,
+      "isMcpToolkit": false
+    },
+    {
+      "slug": "CRAFT_MCP",
+      "name": "Craft MCP",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/craft_mcp",
+      "managedOAuth": false,
+      "isMcpToolkit": true
+    },
+    {
+      "slug": "CROWDIN",
+      "name": "Crowdin",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/crowdin",
+      "managedOAuth": true,
+      "isMcpToolkit": false
+    },
+    {
+      "slug": "CUSTOMERIO_MCP",
+      "name": "Customer.io MCP",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/customerio_mcp",
+      "managedOAuth": false,
+      "isMcpToolkit": true
+    },
+    {
+      "slug": "D2LBRIGHTSPACE",
+      "name": "D2L Brightspace",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/d2lbrightspace",
+      "managedOAuth": false,
+      "isMcpToolkit": false
+    },
+    {
+      "slug": "DART",
+      "name": "Dart",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/dart",
+      "managedOAuth": true,
+      "isMcpToolkit": false
+    },
+    {
+      "slug": "DATABRICKS",
+      "name": "Databricks",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/databricks",
+      "managedOAuth": false,
+      "isMcpToolkit": false
+    },
+    {
+      "slug": "DATADOG",
+      "name": "Datadog",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/datadog",
+      "managedOAuth": false,
+      "isMcpToolkit": false
+    },
+    {
+      "slug": "DATADOG_MCP",
+      "name": "Datadog MCP",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/datadog_mcp",
+      "managedOAuth": false,
+      "isMcpToolkit": true
+    },
+    {
+      "slug": "DAYTONA",
+      "name": "Daytona",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/daytona",
+      "managedOAuth": true,
+      "isMcpToolkit": false
+    },
+    {
+      "slug": "DBT_CLOUD",
+      "name": "dbt Cloud",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/dbt_cloud",
+      "managedOAuth": false,
+      "isMcpToolkit": false
+    },
+    {
+      "slug": "DEEL",
+      "name": "Deel",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/deel",
+      "managedOAuth": false,
+      "isMcpToolkit": false
+    },
+    {
+      "slug": "DEEPL_MCP",
+      "name": "DeepL MCP",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/deepl_mcp",
+      "managedOAuth": false,
+      "isMcpToolkit": true
+    },
+    {
+      "slug": "DEPUTY",
+      "name": "Deputy",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/deputy",
+      "managedOAuth": false,
+      "isMcpToolkit": false
+    },
+    {
+      "slug": "DESCRIPT_MCP",
+      "name": "Descript MCP",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/descript_mcp",
+      "managedOAuth": false,
+      "isMcpToolkit": true
+    },
+    {
+      "slug": "DEV_CYCLE",
+      "name": "DevCycle",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/dev_cycle",
+      "managedOAuth": false,
+      "isMcpToolkit": false
+    },
+    {
+      "slug": "DIALPAD",
+      "name": "Dialpad",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/dialpad",
+      "managedOAuth": true,
+      "isMcpToolkit": false
+    },
+    {
+      "slug": "DIGITAL_OCEAN",
+      "name": "DigitalOcean",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/digital_ocean",
+      "managedOAuth": false,
+      "isMcpToolkit": false
+    },
+    {
+      "slug": "DISCORD",
+      "name": "Discord",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/discord",
+      "managedOAuth": true,
+      "isMcpToolkit": false
+    },
+    {
+      "slug": "DISCORDBOT",
+      "name": "Discord Bot",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/discordbot",
+      "managedOAuth": true,
+      "isMcpToolkit": false
+    },
+    {
+      "slug": "DISQUS",
+      "name": "Disqus",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/disqus",
+      "managedOAuth": false,
+      "isMcpToolkit": false
+    },
+    {
+      "slug": "DOCUSIGN",
+      "name": "DocuSign",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/docusign",
+      "managedOAuth": false,
+      "isMcpToolkit": false
+    },
+    {
+      "slug": "DRIBBBLE",
+      "name": "Dribbble",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/dribbble",
+      "managedOAuth": false,
+      "isMcpToolkit": false
+    },
+    {
+      "slug": "DROPBOX",
+      "name": "Dropbox",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/dropbox",
+      "managedOAuth": true,
+      "isMcpToolkit": false
+    },
+    {
+      "slug": "DROPBOX_SIGN",
+      "name": "Dropbox Sign",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/dropbox_sign",
+      "managedOAuth": false,
+      "isMcpToolkit": false
+    },
+    {
+      "slug": "DUB",
+      "name": "Dub",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/dub",
+      "managedOAuth": true,
+      "isMcpToolkit": false
+    },
+    {
+      "slug": "DYNAMICS365",
+      "name": "Dynamics 365",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/dynamics365",
+      "managedOAuth": true,
+      "isMcpToolkit": false
+    },
+    {
+      "slug": "DYNATRACE",
+      "name": "Dynatrace",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/dynatrace",
+      "managedOAuth": false,
+      "isMcpToolkit": false
+    },
+    {
+      "slug": "EBAY",
+      "name": "eBay",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/ebay",
+      "managedOAuth": false,
+      "isMcpToolkit": false
+    },
+    {
+      "slug": "EGNYTE",
+      "name": "Egnyte",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/egnyte",
+      "managedOAuth": false,
+      "isMcpToolkit": false
+    },
+    {
+      "slug": "EPIC_GAMES",
+      "name": "Epic Games",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/epic_games",
+      "managedOAuth": false,
+      "isMcpToolkit": false
+    },
+    {
+      "slug": "ERA_CONTEXT_MCP",
+      "name": "Era Context MCP",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/era_context_mcp",
+      "managedOAuth": false,
+      "isMcpToolkit": true
+    },
+    {
+      "slug": "ERASER_MCP",
+      "name": "Eraser MCP",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/eraser_mcp",
+      "managedOAuth": false,
+      "isMcpToolkit": true
+    },
+    {
+      "slug": "EVENTBRITE",
+      "name": "Eventbrite",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/eventbrite",
+      "managedOAuth": true,
+      "isMcpToolkit": false
+    },
+    {
+      "slug": "EXCEL",
+      "name": "Excel",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/excel",
+      "managedOAuth": true,
+      "isMcpToolkit": false
+    },
+    {
+      "slug": "EXIST",
+      "name": "Exist",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/exist",
+      "managedOAuth": true,
+      "isMcpToolkit": false
+    },
+    {
+      "slug": "FACEBOOK",
+      "name": "Facebook",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/facebook",
+      "managedOAuth": true,
+      "isMcpToolkit": false
+    },
+    {
+      "slug": "FATHOM",
+      "name": "Fathom",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/fathom",
+      "managedOAuth": true,
+      "isMcpToolkit": false
+    },
+    {
+      "slug": "FELLOW_AI_MCP",
+      "name": "Fellow.ai MCP",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/fellow_ai_mcp",
+      "managedOAuth": false,
+      "isMcpToolkit": true
+    },
+    {
+      "slug": "FIGMA",
+      "name": "Figma",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/figma",
+      "managedOAuth": true,
+      "isMcpToolkit": false
+    },
+    {
+      "slug": "FINANCIAL_DATASETS_AI_MCP",
+      "name": "Financial Datasets AI MCP",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/financial_datasets_ai_mcp",
+      "managedOAuth": false,
+      "isMcpToolkit": true
+    },
+    {
+      "slug": "FOLLOW_UP_BOSS",
+      "name": "Follow Up Boss",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/follow_up_boss",
+      "managedOAuth": false,
+      "isMcpToolkit": false
+    },
+    {
+      "slug": "FREEAGENT",
+      "name": "Freeagent",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/freeagent",
+      "managedOAuth": true,
+      "isMcpToolkit": false
+    },
+    {
+      "slug": "FREEE",
+      "name": "freee",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/freee",
+      "managedOAuth": false,
+      "isMcpToolkit": false
+    },
+    {
+      "slug": "FRESHBOOKS",
+      "name": "FreshBooks",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/freshbooks",
+      "managedOAuth": true,
+      "isMcpToolkit": false
+    },
+    {
+      "slug": "FRESHSALES",
+      "name": "Freshsales",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/freshsales",
+      "managedOAuth": false,
+      "isMcpToolkit": false
+    },
+    {
+      "slug": "FRONT",
+      "name": "Front",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/front",
+      "managedOAuth": false,
+      "isMcpToolkit": false
+    },
+    {
+      "slug": "FUSEAI_MCP",
+      "name": "FuseAI MCP",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/fuseai_mcp",
+      "managedOAuth": false,
+      "isMcpToolkit": true
+    },
+    {
+      "slug": "GAGELIST",
+      "name": "Gagelist",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/gagelist",
+      "managedOAuth": false,
+      "isMcpToolkit": false
+    },
+    {
+      "slug": "GETRESPONSE",
+      "name": "GetResponse",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/getresponse",
+      "managedOAuth": false,
+      "isMcpToolkit": false
+    },
+    {
+      "slug": "GITHUB",
+      "name": "GitHub",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/github",
+      "managedOAuth": true,
+      "isMcpToolkit": false
+    },
+    {
+      "slug": "GITLAB",
+      "name": "GitLab",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/gitlab",
+      "managedOAuth": true,
+      "isMcpToolkit": false
+    },
+    {
+      "slug": "GLEN_MCP",
+      "name": "Glen MCP",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/glen_mcp",
+      "managedOAuth": false,
+      "isMcpToolkit": true
+    },
+    {
+      "slug": "GLIDE_MCP",
+      "name": "Glide MCP",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/glide_mcp",
+      "managedOAuth": false,
+      "isMcpToolkit": true
+    },
+    {
+      "slug": "GMAIL",
+      "name": "Gmail",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/gmail",
+      "managedOAuth": true,
+      "isMcpToolkit": false
+    },
+    {
+      "slug": "GOCARDLESS_MCP",
+      "name": "GoCardless MCP",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/gocardless_mcp",
+      "managedOAuth": false,
+      "isMcpToolkit": true
+    },
+    {
+      "slug": "GONG",
+      "name": "Gong",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/gong",
+      "managedOAuth": true,
+      "isMcpToolkit": false
+    },
+    {
+      "slug": "GOOGLE_ADMIN",
+      "name": "Google Admin",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/google_admin",
+      "managedOAuth": false,
+      "isMcpToolkit": false
+    },
+    {
+      "slug": "GOOGLEADS",
+      "name": "Google Ads",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/googleads",
+      "managedOAuth": true,
+      "isMcpToolkit": false
+    },
+    {
+      "slug": "GOOGLE_ADSENSE",
+      "name": "Google AdSense",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/google_adsense",
+      "managedOAuth": false,
+      "isMcpToolkit": false
+    },
+    {
+      "slug": "GOOGLE_ANALYTICS",
+      "name": "Google Analytics",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/google_analytics",
+      "managedOAuth": true,
+      "isMcpToolkit": false
+    },
+    {
+      "slug": "GOOGLEBIGQUERY",
+      "name": "Google BigQuery",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/googlebigquery",
+      "managedOAuth": true,
+      "isMcpToolkit": false
+    },
+    {
+      "slug": "GOOGLECALENDAR",
+      "name": "Google Calendar",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/googlecalendar",
+      "managedOAuth": true,
+      "isMcpToolkit": false
+    },
+    {
+      "slug": "GOOGLE_CHAT",
+      "name": "Google Chat",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/google_chat",
+      "managedOAuth": false,
+      "isMcpToolkit": false
+    },
+    {
+      "slug": "GOOGLE_CLASSROOM",
+      "name": "Google Classroom",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/google_classroom",
+      "managedOAuth": true,
+      "isMcpToolkit": false
+    },
+    {
+      "slug": "GOOGLE_DATA_STUDIO",
+      "name": "Google Data Studio",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/google_data_studio",
+      "managedOAuth": false,
+      "isMcpToolkit": false
+    },
+    {
+      "slug": "GOOGLEDOCS",
+      "name": "Google Docs",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/googledocs",
+      "managedOAuth": true,
+      "isMcpToolkit": false
+    },
+    {
+      "slug": "GOOGLEDRIVE",
+      "name": "Google Drive",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/googledrive",
+      "managedOAuth": true,
+      "isMcpToolkit": false
+    },
+    {
+      "slug": "GOOGLE_MAPS",
+      "name": "Google Maps",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/google_maps",
+      "managedOAuth": true,
+      "isMcpToolkit": false
+    },
+    {
+      "slug": "GOOGLEMEET",
+      "name": "Google Meet",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/googlemeet",
+      "managedOAuth": true,
+      "isMcpToolkit": false
+    },
+    {
+      "slug": "GOOGLE_MERCHANT",
+      "name": "Google Merchant Center",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/google_merchant",
+      "managedOAuth": false,
+      "isMcpToolkit": false
+    },
+    {
+      "slug": "GOOGLEPHOTOS",
+      "name": "Google Photos",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/googlephotos",
+      "managedOAuth": true,
+      "isMcpToolkit": false
+    },
+    {
+      "slug": "GOOGLE_SEARCH_CONSOLE",
+      "name": "Google Search Console",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/google_search_console",
+      "managedOAuth": true,
+      "isMcpToolkit": false
+    },
+    {
+      "slug": "GOOGLESHEETS",
+      "name": "Google Sheets",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/googlesheets",
+      "managedOAuth": true,
+      "isMcpToolkit": false
+    },
+    {
+      "slug": "GOOGLESLIDES",
+      "name": "Google Slides",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/googleslides",
+      "managedOAuth": true,
+      "isMcpToolkit": false
+    },
+    {
+      "slug": "GOOGLESUPER",
+      "name": "Google Super",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/googlesuper",
+      "managedOAuth": true,
+      "isMcpToolkit": false
+    },
+    {
+      "slug": "GOOGLETASKS",
+      "name": "Google Tasks",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/googletasks",
+      "managedOAuth": true,
+      "isMcpToolkit": false
+    },
+    {
+      "slug": "GOOGLECONTACTS",
+      "name": "Googlecontacts",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/googlecontacts",
+      "managedOAuth": false,
+      "isMcpToolkit": false
+    },
+    {
+      "slug": "GOOGLEFORMS",
+      "name": "Googleforms",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/googleforms",
+      "managedOAuth": false,
+      "isMcpToolkit": false
+    },
+    {
+      "slug": "GORGIAS",
+      "name": "Gorgias",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/gorgias",
+      "managedOAuth": true,
+      "isMcpToolkit": false
+    },
+    {
+      "slug": "GO_TO_TRAINING",
+      "name": "GoTo Training",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/go_to_training",
+      "managedOAuth": false,
+      "isMcpToolkit": false
+    },
+    {
+      "slug": "GRAFANA_CLOUD_MCP",
+      "name": "Grafana Cloud MCP",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/grafana_cloud_mcp",
+      "managedOAuth": false,
+      "isMcpToolkit": true
+    },
+    {
+      "slug": "GRANOLA_MCP",
+      "name": "Granola MCP",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/granola_mcp",
+      "managedOAuth": false,
+      "isMcpToolkit": true
+    },
+    {
+      "slug": "GREENHOUSE",
+      "name": "Greenhouse",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/greenhouse",
+      "managedOAuth": true,
+      "isMcpToolkit": false
+    },
+    {
+      "slug": "GREPTILE_MCP",
+      "name": "Greptile MCP",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/greptile_mcp",
+      "managedOAuth": false,
+      "isMcpToolkit": true
+    },
+    {
+      "slug": "GUMROAD",
+      "name": "Gumroad",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/gumroad",
+      "managedOAuth": true,
+      "isMcpToolkit": false
+    },
+    {
+      "slug": "GUSTO",
+      "name": "Gusto",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/gusto",
+      "managedOAuth": false,
+      "isMcpToolkit": false
+    },
+    {
+      "slug": "HALOPSA",
+      "name": "HaloPSA",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/halopsa",
+      "managedOAuth": false,
+      "isMcpToolkit": false
+    },
+    {
+      "slug": "HARVEST",
+      "name": "Harvest",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/harvest",
+      "managedOAuth": true,
+      "isMcpToolkit": false
+    },
+    {
+      "slug": "HELP_SCOUT",
+      "name": "Help Scout",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/help_scout",
+      "managedOAuth": false,
+      "isMcpToolkit": false
+    },
+    {
+      "slug": "HIGGSFIELD_MCP",
+      "name": "Higgsfield MCP",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/higgsfield_mcp",
+      "managedOAuth": false,
+      "isMcpToolkit": true
+    },
+    {
+      "slug": "HIGHLEVEL_AGENCY",
+      "name": "HighLevel Agency",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/highlevel_agency",
+      "managedOAuth": false,
+      "isMcpToolkit": false
+    },
+    {
+      "slug": "HIGHLEVEL_LOCATION",
+      "name": "HighLevel Location",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/highlevel_location",
+      "managedOAuth": false,
+      "isMcpToolkit": false
+    },
+    {
+      "slug": "HONEYCOMB_MCP",
+      "name": "Honeycomb MCP",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/honeycomb_mcp",
+      "managedOAuth": false,
+      "isMcpToolkit": true
+    },
+    {
+      "slug": "HUBSPOT",
+      "name": "HubSpot",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/hubspot",
+      "managedOAuth": true,
+      "isMcpToolkit": false
+    },
+    {
+      "slug": "HUGGING_FACE",
+      "name": "Hugging Face",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/hugging_face",
+      "managedOAuth": true,
+      "isMcpToolkit": false
+    },
+    {
+      "slug": "IGNAV_FLIGHTS_MCP",
+      "name": "Ignav Flights MCP",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/ignav_flights_mcp",
+      "managedOAuth": false,
+      "isMcpToolkit": true
+    },
+    {
+      "slug": "IMPLY_POLARIS",
+      "name": "Imply Polaris",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/imply_polaris",
+      "managedOAuth": false,
+      "isMcpToolkit": false
+    },
+    {
+      "slug": "INFISICAL",
+      "name": "Infisical",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/infisical",
+      "managedOAuth": false,
+      "isMcpToolkit": false
+    },
+    {
+      "slug": "INSTAGRAM",
+      "name": "Instagram",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/instagram",
+      "managedOAuth": true,
+      "isMcpToolkit": false
+    },
+    {
+      "slug": "INTERCOM",
+      "name": "Intercom",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/intercom",
+      "managedOAuth": true,
+      "isMcpToolkit": false
+    },
+    {
+      "slug": "JENTIC_MCP",
+      "name": "Jentic MCP",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/jentic_mcp",
+      "managedOAuth": false,
+      "isMcpToolkit": true
+    },
+    {
+      "slug": "JIBBLE",
+      "name": "Jibble",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/jibble",
+      "managedOAuth": false,
+      "isMcpToolkit": false
+    },
+    {
+      "slug": "JIRA",
+      "name": "Jira",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/jira",
+      "managedOAuth": true,
+      "isMcpToolkit": false
+    },
+    {
+      "slug": "JOBBER",
+      "name": "Jobber",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/jobber",
+      "managedOAuth": false,
+      "isMcpToolkit": false
+    },
+    {
+      "slug": "JUDGE_ME",
+      "name": "Judge.me",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/judge_me",
+      "managedOAuth": false,
+      "isMcpToolkit": false
+    },
+    {
+      "slug": "KERNEL_MCP",
+      "name": "Kernel MCP",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/kernel_mcp",
+      "managedOAuth": false,
+      "isMcpToolkit": true
+    },
+    {
+      "slug": "KICK",
+      "name": "Kick",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/kick",
+      "managedOAuth": false,
+      "isMcpToolkit": false
+    },
+    {
+      "slug": "KINTONE_REST",
+      "name": "Kintone REST",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/kintone_rest",
+      "managedOAuth": false,
+      "isMcpToolkit": false
+    },
+    {
+      "slug": "KIT",
+      "name": "Kit",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/kit",
+      "managedOAuth": true,
+      "isMcpToolkit": false
+    },
+    {
+      "slug": "KLAVIYO",
+      "name": "Klaviyo",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/klaviyo",
+      "managedOAuth": false,
+      "isMcpToolkit": false
+    },
+    {
+      "slug": "KOMMO",
+      "name": "Kommo",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/kommo",
+      "managedOAuth": false,
+      "isMcpToolkit": false
+    },
+    {
+      "slug": "LAUNCH_DARKLY",
+      "name": "LaunchDarkly",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/launch_darkly",
+      "managedOAuth": false,
+      "isMcpToolkit": false
+    },
+    {
+      "slug": "LEGAL_DATA_HUNTER_MCP",
+      "name": "Legal Data Hunter MCP",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/legal_data_hunter_mcp",
+      "managedOAuth": false,
+      "isMcpToolkit": true
+    },
+    {
+      "slug": "LEVER",
+      "name": "Lever",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/lever",
+      "managedOAuth": false,
+      "isMcpToolkit": false
+    },
+    {
+      "slug": "LIGHTSPEED",
+      "name": "Lightspeed Retail X-Series",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/lightspeed",
+      "managedOAuth": false,
+      "isMcpToolkit": false
+    },
+    {
+      "slug": "LILT_MCP",
+      "name": "LILT MCP",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/lilt_mcp",
+      "managedOAuth": false,
+      "isMcpToolkit": true
+    },
+    {
+      "slug": "LINEAR",
+      "name": "Linear",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/linear",
+      "managedOAuth": true,
+      "isMcpToolkit": false
+    },
+    {
+      "slug": "LINEAR_MCP",
+      "name": "Linear MCP",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/linear_mcp",
+      "managedOAuth": false,
+      "isMcpToolkit": true
+    },
+    {
+      "slug": "LINKEDIN",
+      "name": "LinkedIn",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/linkedin",
+      "managedOAuth": true,
+      "isMcpToolkit": false
+    },
+    {
+      "slug": "LINKEDIN_ADS",
+      "name": "Linkedin Ads",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/linkedin_ads",
+      "managedOAuth": false,
+      "isMcpToolkit": false
+    },
+    {
+      "slug": "LINKHUT",
+      "name": "Linkhut",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/linkhut",
+      "managedOAuth": true,
+      "isMcpToolkit": false
+    },
+    {
+      "slug": "LIVECHAT",
+      "name": "LiveChat",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/livechat",
+      "managedOAuth": false,
+      "isMcpToolkit": false
+    },
+    {
+      "slug": "LODGIFY",
+      "name": "Lodgify",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/lodgify",
+      "managedOAuth": false,
+      "isMcpToolkit": false
+    },
+    {
+      "slug": "LONGBRIDGE_MCP",
+      "name": "Longbridge MCP",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/longbridge_mcp",
+      "managedOAuth": false,
+      "isMcpToolkit": true
+    },
+    {
+      "slug": "LUCID_MCP",
+      "name": "Lucid MCP",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/lucid_mcp",
+      "managedOAuth": false,
+      "isMcpToolkit": true
+    },
+    {
+      "slug": "MAGIC_PATTERNS_MCP",
+      "name": "Magic Patterns MCP",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/magic_patterns_mcp",
+      "managedOAuth": false,
+      "isMcpToolkit": true
+    },
+    {
+      "slug": "MAILCHIMP",
+      "name": "Mailchimp",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/mailchimp",
+      "managedOAuth": true,
+      "isMcpToolkit": false
+    },
+    {
+      "slug": "MAIL_UP",
+      "name": "MailUp",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/mail_up",
+      "managedOAuth": false,
+      "isMcpToolkit": false
+    },
+    {
+      "slug": "MARCOPOLO_MCP",
+      "name": "MarcoPolo MCP",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/marcopolo_mcp",
+      "managedOAuth": false,
+      "isMcpToolkit": true
+    },
+    {
+      "slug": "MATTERPORT",
+      "name": "Matterport",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/matterport",
+      "managedOAuth": false,
+      "isMcpToolkit": false
+    },
+    {
+      "slug": "MEMELORD_MCP",
+      "name": "Memelord MCP",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/memelord_mcp",
+      "managedOAuth": false,
+      "isMcpToolkit": true
+    },
+    {
+      "slug": "MERCURY_MCP",
+      "name": "Mercury MCP",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/mercury_mcp",
+      "managedOAuth": false,
+      "isMcpToolkit": true
+    },
+    {
+      "slug": "METAADS",
+      "name": "Meta Ads",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/metaads",
+      "managedOAuth": false,
+      "isMcpToolkit": false
+    },
+    {
+      "slug": "MICROSOFT_ADVERTISING",
+      "name": "Microsoft Advertising",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/microsoft_advertising",
+      "managedOAuth": false,
+      "isMcpToolkit": false
+    },
+    {
+      "slug": "MICROSOFT_BOOKINGS",
+      "name": "Microsoft Bookings",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/microsoft_bookings",
+      "managedOAuth": false,
+      "isMcpToolkit": false
+    },
+    {
+      "slug": "MICROSOFT_ENTRA_ID",
+      "name": "Microsoft Entra ID",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/microsoft_entra_id",
+      "managedOAuth": false,
+      "isMcpToolkit": false
+    },
+    {
+      "slug": "ONENOTE",
+      "name": "Microsoft OneNote",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/onenote",
+      "managedOAuth": true,
+      "isMcpToolkit": false
+    },
+    {
+      "slug": "MICROSOFT_POWER_BI",
+      "name": "Microsoft Power Bi",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/microsoft_power_bi",
+      "managedOAuth": false,
+      "isMcpToolkit": false
+    },
+    {
+      "slug": "MICROSOFT_POWERPOINT",
+      "name": "Microsoft PowerPoint",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/microsoft_powerpoint",
+      "managedOAuth": false,
+      "isMcpToolkit": false
+    },
+    {
+      "slug": "MICROSOFT_TEAMS",
+      "name": "Microsoft Teams",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/microsoft_teams",
+      "managedOAuth": true,
+      "isMcpToolkit": false
+    },
+    {
+      "slug": "MICROSOFT_TODO",
+      "name": "Microsoft To Do",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/microsoft_todo",
+      "managedOAuth": false,
+      "isMcpToolkit": false
+    },
+    {
+      "slug": "MICROSOFT_WORD",
+      "name": "Microsoft Word",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/microsoft_word",
+      "managedOAuth": false,
+      "isMcpToolkit": false
+    },
+    {
+      "slug": "MIDPAGE_MCP",
+      "name": "Midpage MCP",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/midpage_mcp",
+      "managedOAuth": false,
+      "isMcpToolkit": true
+    },
+    {
+      "slug": "MINTLIFY_MCP",
+      "name": "Mintlify MCP",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/mintlify_mcp",
+      "managedOAuth": false,
+      "isMcpToolkit": true
+    },
+    {
+      "slug": "MIRO",
+      "name": "Miro",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/miro",
+      "managedOAuth": true,
+      "isMcpToolkit": false
+    },
+    {
+      "slug": "MOBBIN_MCP",
+      "name": "Mobbin MCP",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/mobbin_mcp",
+      "managedOAuth": false,
+      "isMcpToolkit": true
+    },
+    {
+      "slug": "MODEM_MCP",
+      "name": "Modem MCP",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/modem_mcp",
+      "managedOAuth": false,
+      "isMcpToolkit": true
+    },
+    {
+      "slug": "MONDAY",
+      "name": "Monday",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/monday",
+      "managedOAuth": true,
+      "isMcpToolkit": false
+    },
+    {
+      "slug": "MONDAY_MCP",
+      "name": "Monday MCP",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/monday_mcp",
+      "managedOAuth": false,
+      "isMcpToolkit": true
+    },
+    {
+      "slug": "MONEY_FORWARD",
+      "name": "Money Forward",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/money_forward",
+      "managedOAuth": false,
+      "isMcpToolkit": false
+    },
+    {
+      "slug": "MONEYBIRD",
+      "name": "Moneybird",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/moneybird",
+      "managedOAuth": true,
+      "isMcpToolkit": false
+    },
+    {
+      "slug": "MONGODB",
+      "name": "MongoDB",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/mongodb",
+      "managedOAuth": false,
+      "isMcpToolkit": false
+    },
+    {
+      "slug": "MONGODB_MCP",
+      "name": "MongoDB MCP",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/mongodb_mcp",
+      "managedOAuth": false,
+      "isMcpToolkit": true
+    },
+    {
+      "slug": "MOTHERDUCK_MCP",
+      "name": "MotherDuck MCP",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/motherduck_mcp",
+      "managedOAuth": false,
+      "isMcpToolkit": true
+    },
+    {
+      "slug": "MURAL",
+      "name": "Mural",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/mural",
+      "managedOAuth": true,
+      "isMcpToolkit": false
+    },
+    {
+      "slug": "NEO4J",
+      "name": "Neo4J",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/neo4j",
+      "managedOAuth": false,
+      "isMcpToolkit": false
+    },
+    {
+      "slug": "NEON",
+      "name": "Neon",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/neon",
+      "managedOAuth": false,
+      "isMcpToolkit": false
+    },
+    {
+      "slug": "NEON_MCP",
+      "name": "Neon MCP",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/neon_mcp",
+      "managedOAuth": false,
+      "isMcpToolkit": true
+    },
+    {
+      "slug": "NETLIFY_MCP",
+      "name": "Netlify MCP",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/netlify_mcp",
+      "managedOAuth": false,
+      "isMcpToolkit": true
+    },
+    {
+      "slug": "NETSUITE",
+      "name": "Netsuite",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/netsuite",
+      "managedOAuth": false,
+      "isMcpToolkit": false
+    },
+    {
+      "slug": "NOTEBOOK_LM",
+      "name": "NotebookLM",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/notebook_lm",
+      "managedOAuth": true,
+      "isMcpToolkit": false
+    },
+    {
+      "slug": "NOTION",
+      "name": "Notion",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/notion",
+      "managedOAuth": true,
+      "isMcpToolkit": false
+    },
+    {
+      "slug": "NOTION_MCP",
+      "name": "Notion MCP",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/notion_mcp",
+      "managedOAuth": false,
+      "isMcpToolkit": true
+    },
+    {
+      "slug": "OCTAGON_MCP",
+      "name": "Octagon MCP",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/octagon_mcp",
+      "managedOAuth": false,
+      "isMcpToolkit": true
+    },
+    {
+      "slug": "OMNISEND",
+      "name": "Omnisend",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/omnisend",
+      "managedOAuth": true,
+      "isMcpToolkit": false
+    },
+    {
+      "slug": "ONE_DRIVE",
+      "name": "OneDrive",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/one_drive",
+      "managedOAuth": true,
+      "isMcpToolkit": false
+    },
+    {
+      "slug": "OTTER_AI_MCP",
+      "name": "Otter.ai MCP",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/otter_ai_mcp",
+      "managedOAuth": false,
+      "isMcpToolkit": true
+    },
+    {
+      "slug": "OUTLOOK",
+      "name": "Outlook",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/outlook",
+      "managedOAuth": true,
+      "isMcpToolkit": false
+    },
+    {
+      "slug": "PAGERDUTY",
+      "name": "PagerDuty",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/pagerduty",
+      "managedOAuth": true,
+      "isMcpToolkit": false
+    },
+    {
+      "slug": "PANDADOC_MCP",
+      "name": "PandaDoc MCP",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/pandadoc_mcp",
+      "managedOAuth": false,
+      "isMcpToolkit": true
+    },
+    {
+      "slug": "PARALLEL_TASK_MCP",
+      "name": "Parallel Task MCP",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/parallel_task_mcp",
+      "managedOAuth": false,
+      "isMcpToolkit": true
+    },
+    {
+      "slug": "PARMA",
+      "name": "Parma",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/parma",
+      "managedOAuth": false,
+      "isMcpToolkit": false
+    },
+    {
+      "slug": "PARTICL_MCP",
+      "name": "Particl MCP",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/particl_mcp",
+      "managedOAuth": false,
+      "isMcpToolkit": true
+    },
+    {
+      "slug": "PAYPAL",
+      "name": "Paypal",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/paypal",
+      "managedOAuth": false,
+      "isMcpToolkit": false
+    },
+    {
+      "slug": "ZETTLE",
+      "name": "PayPal Zettle",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/zettle",
+      "managedOAuth": false,
+      "isMcpToolkit": false
+    },
+    {
+      "slug": "PEEC_AI_MCP",
+      "name": "Peec AI MCP",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/peec_ai_mcp",
+      "managedOAuth": false,
+      "isMcpToolkit": true
+    },
+    {
+      "slug": "PERSONIO",
+      "name": "Personio",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/personio",
+      "managedOAuth": false,
+      "isMcpToolkit": false
+    },
+    {
+      "slug": "PHOTON_MCP",
+      "name": "Photon MCP",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/photon_mcp",
+      "managedOAuth": false,
+      "isMcpToolkit": true
+    },
+    {
+      "slug": "PINECONE",
+      "name": "Pinecone",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/pinecone",
+      "managedOAuth": false,
+      "isMcpToolkit": false
+    },
+    {
+      "slug": "PINTEREST",
+      "name": "Pinterest",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/pinterest",
+      "managedOAuth": true,
+      "isMcpToolkit": false
+    },
+    {
+      "slug": "PINTEREST_ADS",
+      "name": "Pinterest Ads",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/pinterest_ads",
+      "managedOAuth": true,
+      "isMcpToolkit": false
+    },
+    {
+      "slug": "PIPEDRIVE",
+      "name": "Pipedrive",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/pipedrive",
+      "managedOAuth": false,
+      "isMcpToolkit": false
+    },
+    {
+      "slug": "PLAID_MCP",
+      "name": "Plaid MCP",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/plaid_mcp",
+      "managedOAuth": false,
+      "isMcpToolkit": true
+    },
+    {
+      "slug": "PLAIN_MCP",
+      "name": "Plain MCP",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/plain_mcp",
+      "managedOAuth": false,
+      "isMcpToolkit": true
+    },
+    {
+      "slug": "PLANETSCALE",
+      "name": "PlanetScale",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/planetscale",
+      "managedOAuth": false,
+      "isMcpToolkit": false
+    },
+    {
+      "slug": "POLAR",
+      "name": "Polar",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/polar",
+      "managedOAuth": false,
+      "isMcpToolkit": false
+    },
+    {
+      "slug": "POSTHOG_MCP",
+      "name": "PostHog MCP",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/posthog_mcp",
+      "managedOAuth": false,
+      "isMcpToolkit": true
+    },
+    {
+      "slug": "PRISMA",
+      "name": "Prisma",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/prisma",
+      "managedOAuth": true,
+      "isMcpToolkit": false
+    },
+    {
+      "slug": "PRODUCTBOARD",
+      "name": "Productboard",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/productboard",
+      "managedOAuth": true,
+      "isMcpToolkit": false
+    },
+    {
+      "slug": "PRODUCTNOW_MCP",
+      "name": "ProductNow MCP",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/productnow_mcp",
+      "managedOAuth": false,
+      "isMcpToolkit": true
+    },
+    {
+      "slug": "PUSHBULLET",
+      "name": "Pushbullet",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/pushbullet",
+      "managedOAuth": true,
+      "isMcpToolkit": false
+    },
+    {
+      "slug": "PYLON_MCP",
+      "name": "Pylon MCP",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/pylon_mcp",
+      "managedOAuth": false,
+      "isMcpToolkit": true
+    },
+    {
+      "slug": "QUICKBOOKS",
+      "name": "QuickBooks",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/quickbooks",
+      "managedOAuth": true,
+      "isMcpToolkit": false
+    },
+    {
+      "slug": "QUICKNODE_MCP",
+      "name": "QuickNode MCP",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/quicknode_mcp",
+      "managedOAuth": false,
+      "isMcpToolkit": true
+    },
+    {
+      "slug": "QUIRE",
+      "name": "Quire",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/quire",
+      "managedOAuth": false,
+      "isMcpToolkit": false
+    },
+    {
+      "slug": "RAILWAY",
+      "name": "Railway",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/railway",
+      "managedOAuth": false,
+      "isMcpToolkit": false
+    },
+    {
+      "slug": "RAILWAY_MCP",
+      "name": "Railway MCP",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/railway_mcp",
+      "managedOAuth": false,
+      "isMcpToolkit": true
+    },
+    {
+      "slug": "RAMP",
+      "name": "Ramp",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/ramp",
+      "managedOAuth": false,
+      "isMcpToolkit": false
+    },
+    {
+      "slug": "RAMP_MCP",
+      "name": "Ramp MCP",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/ramp_mcp",
+      "managedOAuth": false,
+      "isMcpToolkit": true
+    },
+    {
+      "slug": "RAZORPAY",
+      "name": "Razorpay",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/razorpay",
+      "managedOAuth": false,
+      "isMcpToolkit": false
+    },
+    {
+      "slug": "RD_STATION_MARKETING",
+      "name": "RD Station Marketing",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/rd_station_marketing",
+      "managedOAuth": false,
+      "isMcpToolkit": false
+    },
+    {
+      "slug": "READ_AI_MCP",
+      "name": "Read AI MCP",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/read_ai_mcp",
+      "managedOAuth": false,
+      "isMcpToolkit": true
+    },
+    {
+      "slug": "REBRANDLY",
+      "name": "Rebrandly",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/rebrandly",
+      "managedOAuth": false,
+      "isMcpToolkit": false
+    },
+    {
+      "slug": "RECRAFT_MCP",
+      "name": "Recraft MCP",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/recraft_mcp",
+      "managedOAuth": false,
+      "isMcpToolkit": true
+    },
+    {
+      "slug": "RECRUITEE",
+      "name": "Recruitee",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/recruitee",
+      "managedOAuth": false,
+      "isMcpToolkit": false
+    },
+    {
+      "slug": "REDDIT",
+      "name": "Reddit",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/reddit",
+      "managedOAuth": true,
+      "isMcpToolkit": false
+    },
+    {
+      "slug": "REDDIT_ADS",
+      "name": "Reddit Ads",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/reddit_ads",
+      "managedOAuth": true,
+      "isMcpToolkit": false
+    },
+    {
+      "slug": "RELOADLY",
+      "name": "Reloadly",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/reloadly",
+      "managedOAuth": false,
+      "isMcpToolkit": false
+    },
+    {
+      "slug": "RESEND",
+      "name": "Resend",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/resend",
+      "managedOAuth": false,
+      "isMcpToolkit": false
+    },
+    {
+      "slug": "RESEND_MCP",
+      "name": "Resend MCP",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/resend_mcp",
+      "managedOAuth": false,
+      "isMcpToolkit": true
+    },
+    {
+      "slug": "RILLET",
+      "name": "Rillet",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/rillet",
+      "managedOAuth": false,
+      "isMcpToolkit": false
+    },
+    {
+      "slug": "ROAM",
+      "name": "Roam",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/roam",
+      "managedOAuth": true,
+      "isMcpToolkit": false
+    },
+    {
+      "slug": "SALESFORCE",
+      "name": "Salesforce",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/salesforce",
+      "managedOAuth": true,
+      "isMcpToolkit": false
+    },
+    {
+      "slug": "SALESFORCE_SERVICE_CLOUD",
+      "name": "Salesforce Service Cloud",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/salesforce_service_cloud",
+      "managedOAuth": false,
+      "isMcpToolkit": false
+    },
+    {
+      "slug": "SCHEDULEONCE",
+      "name": "Scheduleonce",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/scheduleonce",
+      "managedOAuth": false,
+      "isMcpToolkit": false
+    },
+    {
+      "slug": "SCORECARD_MCP",
+      "name": "Scorecard MCP",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/scorecard_mcp",
+      "managedOAuth": false,
+      "isMcpToolkit": true
+    },
+    {
+      "slug": "SEARCHAPI_MCP",
+      "name": "SearchAPI MCP",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/searchapi_mcp",
+      "managedOAuth": false,
+      "isMcpToolkit": true
+    },
+    {
+      "slug": "SEMRUSH_MCP",
+      "name": "Semrush MCP",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/semrush_mcp",
+      "managedOAuth": false,
+      "isMcpToolkit": true
+    },
+    {
+      "slug": "SENDLOOP",
+      "name": "Sendloop",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/sendloop",
+      "managedOAuth": false,
+      "isMcpToolkit": false
+    },
+    {
+      "slug": "SEND_PULSE",
+      "name": "SendPulse",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/send_pulse",
+      "managedOAuth": false,
+      "isMcpToolkit": false
+    },
+    {
+      "slug": "SENTRY",
+      "name": "Sentry",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/sentry",
+      "managedOAuth": true,
+      "isMcpToolkit": false
+    },
+    {
+      "slug": "SENTRY_MCP",
+      "name": "Sentry MCP",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/sentry_mcp",
+      "managedOAuth": false,
+      "isMcpToolkit": true
+    },
+    {
+      "slug": "SERVICEM8",
+      "name": "Servicem8",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/servicem8",
+      "managedOAuth": true,
+      "isMcpToolkit": false
+    },
+    {
+      "slug": "SERVICENOW",
+      "name": "ServiceNow",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/servicenow",
+      "managedOAuth": false,
+      "isMcpToolkit": false
+    },
+    {
+      "slug": "SERVICETITAN",
+      "name": "ServiceTitan",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/servicetitan",
+      "managedOAuth": false,
+      "isMcpToolkit": false
+    },
+    {
+      "slug": "SHARE_POINT",
+      "name": "SharePoint",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/share_point",
+      "managedOAuth": true,
+      "isMcpToolkit": false
+    },
+    {
+      "slug": "SHAREPOINT_GRAPH",
+      "name": "SharePoint Graph",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/sharepoint_graph",
+      "managedOAuth": false,
+      "isMcpToolkit": false
+    },
+    {
+      "slug": "SHIPPO",
+      "name": "Shippo",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/shippo",
+      "managedOAuth": true,
+      "isMcpToolkit": false
+    },
+    {
+      "slug": "SHOPIFY",
+      "name": "Shopify",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/shopify",
+      "managedOAuth": false,
+      "isMcpToolkit": false
+    },
+    {
+      "slug": "SIDESHOW_MCP",
+      "name": "Sideshow MCP",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/sideshow_mcp",
+      "managedOAuth": false,
+      "isMcpToolkit": true
+    },
+    {
+      "slug": "SIGN_NOW",
+      "name": "SignNow",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/sign_now",
+      "managedOAuth": false,
+      "isMcpToolkit": false
+    },
+    {
+      "slug": "SIMPLESCRAPER_MCP",
+      "name": "Simplescraper MCP",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/simplescraper_mcp",
+      "managedOAuth": false,
+      "isMcpToolkit": true
+    },
+    {
+      "slug": "SLACK",
+      "name": "Slack",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/slack",
+      "managedOAuth": true,
+      "isMcpToolkit": false
+    },
+    {
+      "slug": "SLACKBOT",
+      "name": "Slackbot",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/slackbot",
+      "managedOAuth": true,
+      "isMcpToolkit": false
+    },
+    {
+      "slug": "SMARTSHEET",
+      "name": "Smartsheet",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/smartsheet",
+      "managedOAuth": false,
+      "isMcpToolkit": false
+    },
+    {
+      "slug": "SNAPCHAT",
+      "name": "Snapchat",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/snapchat",
+      "managedOAuth": false,
+      "isMcpToolkit": false
+    },
+    {
+      "slug": "SNOWFLAKE",
+      "name": "Snowflake",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/snowflake",
+      "managedOAuth": false,
+      "isMcpToolkit": false
+    },
+    {
+      "slug": "SNYK",
+      "name": "Snyk",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/snyk",
+      "managedOAuth": false,
+      "isMcpToolkit": false
+    },
+    {
+      "slug": "SOUNDCLOUD",
+      "name": "SoundCloud",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/soundcloud",
+      "managedOAuth": false,
+      "isMcpToolkit": false
+    },
+    {
+      "slug": "SPLICE_MCP",
+      "name": "Splice MCP",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/splice_mcp",
+      "managedOAuth": false,
+      "isMcpToolkit": true
+    },
+    {
+      "slug": "SPLITWISE",
+      "name": "Splitwise",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/splitwise",
+      "managedOAuth": true,
+      "isMcpToolkit": false
+    },
+    {
+      "slug": "SPOTIFY",
+      "name": "Spotify",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/spotify",
+      "managedOAuth": false,
+      "isMcpToolkit": false
+    },
+    {
+      "slug": "SQUARE",
+      "name": "Square",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/square",
+      "managedOAuth": true,
+      "isMcpToolkit": false
+    },
+    {
+      "slug": "STACK_EXCHANGE",
+      "name": "Stack Exchange",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/stack_exchange",
+      "managedOAuth": true,
+      "isMcpToolkit": false
+    },
+    {
+      "slug": "STATSIG_MCP",
+      "name": "Statsig MCP",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/statsig_mcp",
+      "managedOAuth": false,
+      "isMcpToolkit": true
+    },
+    {
+      "slug": "STORYBLOK",
+      "name": "Storyblok",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/storyblok",
+      "managedOAuth": false,
+      "isMcpToolkit": false
+    },
+    {
+      "slug": "STRIPE",
+      "name": "Stripe",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/stripe",
+      "managedOAuth": true,
+      "isMcpToolkit": false
+    },
+    {
+      "slug": "STRIPE_MCP",
+      "name": "Stripe MCP",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/stripe_mcp",
+      "managedOAuth": false,
+      "isMcpToolkit": true
+    },
+    {
+      "slug": "STYTCH_MCP",
+      "name": "Stytch MCP",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/stytch_mcp",
+      "managedOAuth": false,
+      "isMcpToolkit": true
+    },
+    {
+      "slug": "SUPABASE",
+      "name": "Supabase",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/supabase",
+      "managedOAuth": true,
+      "isMcpToolkit": false
+    },
+    {
+      "slug": "SUPABASE_MCP",
+      "name": "Supabase MCP",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/supabase_mcp",
+      "managedOAuth": false,
+      "isMcpToolkit": true
+    },
+    {
+      "slug": "SUPABASE_READ_MCP",
+      "name": "Supabase Read MCP",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/supabase_read_mcp",
+      "managedOAuth": false,
+      "isMcpToolkit": true
+    },
+    {
+      "slug": "SURVEY_MONKEY",
+      "name": "SurveyMonkey",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/survey_monkey",
+      "managedOAuth": false,
+      "isMcpToolkit": false
+    },
+    {
+      "slug": "SYNTHESIZE_BIO_MCP",
+      "name": "Synthesize Bio MCP",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/synthesize_bio_mcp",
+      "managedOAuth": false,
+      "isMcpToolkit": true
+    },
+    {
+      "slug": "TALLY",
+      "name": "Tally",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/tally",
+      "managedOAuth": false,
+      "isMcpToolkit": false
+    },
+    {
+      "slug": "TAVILY_MCP",
+      "name": "Tavily MCP",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/tavily_mcp",
+      "managedOAuth": false,
+      "isMcpToolkit": true
+    },
+    {
+      "slug": "THOUGHTSPOT_SPOTTER_MCP",
+      "name": "ThoughtSpot Spotter MCP",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/thoughtspot_spotter_mcp",
+      "managedOAuth": false,
+      "isMcpToolkit": true
+    },
+    {
+      "slug": "THREADS",
+      "name": "Threads",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/threads",
+      "managedOAuth": false,
+      "isMcpToolkit": false
+    },
+    {
+      "slug": "TICKET_TAILOR_MCP",
+      "name": "Ticket Tailor MCP",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/ticket_tailor_mcp",
+      "managedOAuth": false,
+      "isMcpToolkit": true
+    },
+    {
+      "slug": "TICKETMASTER",
+      "name": "Ticketmaster",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/ticketmaster",
+      "managedOAuth": true,
+      "isMcpToolkit": false
+    },
+    {
+      "slug": "TICKTICK",
+      "name": "Ticktick",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/ticktick",
+      "managedOAuth": true,
+      "isMcpToolkit": false
+    },
+    {
+      "slug": "TIKTOK",
+      "name": "Tiktok",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/tiktok",
+      "managedOAuth": false,
+      "isMcpToolkit": false
+    },
+    {
+      "slug": "TIKTOK_ADS",
+      "name": "TikTok Ads",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/tiktok_ads",
+      "managedOAuth": true,
+      "isMcpToolkit": false
+    },
+    {
+      "slug": "TIMELY",
+      "name": "Timely",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/timely",
+      "managedOAuth": true,
+      "isMcpToolkit": false
+    },
+    {
+      "slug": "TINYFISH_MCP",
+      "name": "TinyFish MCP",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/tinyfish_mcp",
+      "managedOAuth": false,
+      "isMcpToolkit": true
+    },
+    {
+      "slug": "TODOIST",
+      "name": "Todoist",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/todoist",
+      "managedOAuth": true,
+      "isMcpToolkit": false
+    },
+    {
+      "slug": "TODOIST_MCP",
+      "name": "Todoist MCP",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/todoist_mcp",
+      "managedOAuth": false,
+      "isMcpToolkit": true
+    },
+    {
+      "slug": "TONEDEN",
+      "name": "Toneden",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/toneden",
+      "managedOAuth": false,
+      "isMcpToolkit": false
+    },
+    {
+      "slug": "TRELLO",
+      "name": "Trello",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/trello",
+      "managedOAuth": true,
+      "isMcpToolkit": false
+    },
+    {
+      "slug": "TRELLO_MCP",
+      "name": "Trello MCP",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/trello_mcp",
+      "managedOAuth": false,
+      "isMcpToolkit": true
+    },
+    {
+      "slug": "TWITCH",
+      "name": "Twitch",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/twitch",
+      "managedOAuth": true,
+      "isMcpToolkit": false
+    },
+    {
+      "slug": "TWITTER",
+      "name": "Twitter",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/twitter",
+      "managedOAuth": false,
+      "isMcpToolkit": false
+    },
+    {
+      "slug": "TYPEFORM",
+      "name": "Typeform",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/typeform",
+      "managedOAuth": true,
+      "isMcpToolkit": false
+    },
+    {
+      "slug": "VANTAGE_MCP",
+      "name": "Vantage MCP",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/vantage_mcp",
+      "managedOAuth": false,
+      "isMcpToolkit": true
+    },
+    {
+      "slug": "VERCEL",
+      "name": "Vercel",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/vercel",
+      "managedOAuth": false,
+      "isMcpToolkit": false
+    },
+    {
+      "slug": "VERCEL_MCP",
+      "name": "Vercel MCP",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/vercel_mcp",
+      "managedOAuth": false,
+      "isMcpToolkit": true
+    },
+    {
+      "slug": "VIBE",
+      "name": "Vibe",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/vibe",
+      "managedOAuth": false,
+      "isMcpToolkit": false
+    },
+    {
+      "slug": "VIBE_PROSPECTING_MCP",
+      "name": "Vibe Prospecting MCP",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/vibe_prospecting_mcp",
+      "managedOAuth": false,
+      "isMcpToolkit": true
+    },
+    {
+      "slug": "VIDIQ_MCP",
+      "name": "vidIQ MCP",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/vidiq_mcp",
+      "managedOAuth": false,
+      "isMcpToolkit": true
+    },
+    {
+      "slug": "VIMEO",
+      "name": "Vimeo",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/vimeo",
+      "managedOAuth": false,
+      "isMcpToolkit": false
+    },
+    {
+      "slug": "WAKATIME",
+      "name": "WakaTime",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/wakatime",
+      "managedOAuth": true,
+      "isMcpToolkit": false
+    },
+    {
+      "slug": "WEBEX",
+      "name": "Webex",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/webex",
+      "managedOAuth": true,
+      "isMcpToolkit": false
+    },
+    {
+      "slug": "WEBFLOW",
+      "name": "Webflow",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/webflow",
+      "managedOAuth": false,
+      "isMcpToolkit": false
+    },
+    {
+      "slug": "WHATSAPP",
+      "name": "WhatsApp",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/whatsapp",
+      "managedOAuth": true,
+      "isMcpToolkit": false
+    },
+    {
+      "slug": "WHOP",
+      "name": "Whop",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/whop",
+      "managedOAuth": false,
+      "isMcpToolkit": false
+    },
+    {
+      "slug": "WILD_APRICOT",
+      "name": "WildApricot",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/wild_apricot",
+      "managedOAuth": false,
+      "isMcpToolkit": false
+    },
+    {
+      "slug": "WISPR_FLOW_MCP",
+      "name": "Wispr Flow MCP",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/wispr_flow_mcp",
+      "managedOAuth": false,
+      "isMcpToolkit": true
+    },
+    {
+      "slug": "WIX",
+      "name": "Wix",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/wix",
+      "managedOAuth": false,
+      "isMcpToolkit": false
+    },
+    {
+      "slug": "WIX_MCP",
+      "name": "Wix MCP",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/wix_mcp",
+      "managedOAuth": false,
+      "isMcpToolkit": true
+    },
+    {
+      "slug": "WORDPRESS_COM",
+      "name": "WordPress.com",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/wordpress_com",
+      "managedOAuth": false,
+      "isMcpToolkit": false
+    },
+    {
+      "slug": "WORKABLE",
+      "name": "Workable",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/workable",
+      "managedOAuth": false,
+      "isMcpToolkit": false
+    },
+    {
+      "slug": "WORKDAY",
+      "name": "Workday",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/workday",
+      "managedOAuth": false,
+      "isMcpToolkit": false
+    },
+    {
+      "slug": "WRIKE",
+      "name": "Wrike",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/wrike",
+      "managedOAuth": true,
+      "isMcpToolkit": false
+    },
+    {
+      "slug": "X_MCP",
+      "name": "X MCP",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/x_mcp",
+      "managedOAuth": false,
+      "isMcpToolkit": true
+    },
+    {
+      "slug": "XERO",
+      "name": "Xero",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/xero",
+      "managedOAuth": false,
+      "isMcpToolkit": false
+    },
+    {
+      "slug": "YANDEX",
+      "name": "Yandex",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/yandex",
+      "managedOAuth": true,
+      "isMcpToolkit": false
+    },
+    {
+      "slug": "YNAB",
+      "name": "YNAB",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/ynab",
+      "managedOAuth": true,
+      "isMcpToolkit": false
+    },
+    {
+      "slug": "YOUTUBE",
+      "name": "YouTube",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/youtube",
+      "managedOAuth": true,
+      "isMcpToolkit": false
+    },
+    {
+      "slug": "ZENDESK",
+      "name": "Zendesk",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/zendesk",
+      "managedOAuth": true,
+      "isMcpToolkit": false
+    },
+    {
+      "slug": "ZEPLIN",
+      "name": "Zeplin",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/zeplin",
+      "managedOAuth": true,
+      "isMcpToolkit": false
+    },
+    {
+      "slug": "ZERNIO_MCP",
+      "name": "Zernio MCP",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/zernio_mcp",
+      "managedOAuth": false,
+      "isMcpToolkit": true
+    },
+    {
+      "slug": "ZOHO",
+      "name": "Zoho",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/zoho",
+      "managedOAuth": true,
+      "isMcpToolkit": false
+    },
+    {
+      "slug": "ZOHO_BIGIN",
+      "name": "Zoho Bigin",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/zoho_bigin",
+      "managedOAuth": true,
+      "isMcpToolkit": false
+    },
+    {
+      "slug": "ZOHO_BOOKS",
+      "name": "Zoho Books",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/zoho_books",
+      "managedOAuth": true,
+      "isMcpToolkit": false
+    },
+    {
+      "slug": "ZOHO_CALENDAR",
+      "name": "Zoho Calendar",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/zoho_calendar",
+      "managedOAuth": false,
+      "isMcpToolkit": false
+    },
+    {
+      "slug": "ZOHO_CAMPAIGNS",
+      "name": "Zoho Campaigns",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/zoho_campaigns",
+      "managedOAuth": false,
+      "isMcpToolkit": false
+    },
+    {
+      "slug": "ZOHO_DESK",
+      "name": "Zoho Desk",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/zoho_desk",
+      "managedOAuth": true,
+      "isMcpToolkit": false
+    },
+    {
+      "slug": "ZOHO_INVENTORY",
+      "name": "Zoho Inventory",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/zoho_inventory",
+      "managedOAuth": true,
+      "isMcpToolkit": false
+    },
+    {
+      "slug": "ZOHO_INVOICE",
+      "name": "Zoho Invoice",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/zoho_invoice",
+      "managedOAuth": true,
+      "isMcpToolkit": false
+    },
+    {
+      "slug": "ZOHO_MAIL",
+      "name": "Zoho Mail",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/zoho_mail",
+      "managedOAuth": true,
+      "isMcpToolkit": false
+    },
+    {
+      "slug": "ZOHO_RECRUIT",
+      "name": "Zoho Recruit",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/zoho_recruit",
+      "managedOAuth": false,
+      "isMcpToolkit": false
+    },
+    {
+      "slug": "ZOHO_SIGN",
+      "name": "Zoho Sign",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/zoho_sign",
+      "managedOAuth": false,
+      "isMcpToolkit": false
+    },
+    {
+      "slug": "ZOHO_WORK_DRIVE",
+      "name": "Zoho WorkDrive",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/zoho_work_drive",
+      "managedOAuth": false,
+      "isMcpToolkit": false
+    },
+    {
+      "slug": "ZOOM",
+      "name": "Zoom",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/zoom",
+      "managedOAuth": true,
+      "isMcpToolkit": false
+    },
+    {
+      "slug": "ZOOM_CHAT",
+      "name": "Zoom Team Chat",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/zoom_chat",
+      "managedOAuth": false,
+      "isMcpToolkit": false
+    },
+    {
+      "slug": "ZOOMINFO",
+      "name": "Zoominfo",
+      "composioDocUrl": "https://docs.composio.dev/toolkits/zoominfo",
+      "managedOAuth": false,
+      "isMcpToolkit": false
+    }
+  ]
+}

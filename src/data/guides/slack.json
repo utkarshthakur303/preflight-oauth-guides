@@ -1,0 +1,291 @@
+{
+  "schemaVersion": 1,
+  "slug": "slack",
+  "appName": "Slack",
+  "composioToolkitSlug": "SLACK",
+  "composioManagedOAuth": true,
+  "providerName": "Slack",
+  "developerConsoleUrl": {
+    "value": "https://api.slack.com/apps",
+    "evidence": "unknown",
+    "citations": [],
+    "reasoning": "The URL is the standard location for Slack app management, inferred from the docs root but not directly cited."
+  },
+  "docsRootUrl": "https://api.slack.com",
+  "summary": "Creating a Slack OAuth app can be done entirely via the Slack CLI: install the CLI, log into a workspace, generate a starter project, run the app to install it to a team, and open the app settings—all without any monetary cost, though public distribution may trigger a separate review process.",
+  "rubric": {
+    "selfServeMinutes": {
+      "value": 20,
+      "evidence": "inferred",
+      "citations": [
+        {
+          "url": "https://docs.slack.dev/quickstart",
+          "quote": "Download the command-line tool for developing Slack apps.",
+          "title": "Slack Quickstart",
+          "fetchedAt": "2026-11-03T15:01:34.686Z"
+        },
+        {
+          "url": "https://docs.slack.dev/quickstart",
+          "quote": "Log in and authenticate with your Slack workspace.",
+          "title": "Slack Quickstart",
+          "fetchedAt": "2026-11-03T15:01:34.686Z"
+        },
+        {
+          "url": "https://docs.slack.dev/quickstart",
+          "quote": "Create a project by selecting \"Starter App\", then either \"Bolt for Python\" or \"Bolt for JavaScript\".",
+          "title": "Slack Quickstart",
+          "fetchedAt": "2026-11-03T15:01:34.686Z"
+        },
+        {
+          "url": "https://docs.slack.dev/quickstart",
+          "quote": "By using the `slack run` command, and selecting \"Create a new app\", you'll install the app to the team you choose.",
+          "title": "Slack Quickstart",
+          "fetchedAt": "2026-11-03T15:01:34.686Z"
+        },
+        {
+          "url": "https://docs.slack.dev/quickstart",
+          "quote": "Open app settings for your app with the following command: `$ slack app settings`",
+          "title": "Slack Quickstart",
+          "fetchedAt": "2026-11-03T15:01:34.686Z"
+        }
+      ],
+      "reasoning": "The steps are straightforward CLI commands; an experienced developer can complete them in roughly 15‑20 minutes of keyboard work."
+    },
+    "reviewWaitBusinessDays": {
+      "value": null,
+      "evidence": "unknown",
+      "citations": [],
+      "reasoning": "Documentation does not specify a review timeline for internal apps; public app review may apply but is not detailed."
+    },
+    "humanOnlyBlockers": {
+      "value": null,
+      "evidence": "unknown",
+      "citations": [],
+      "reasoning": "All required actions (CLI install, authentication, project creation, settings access) can be scripted; no human‑only interaction is mandated."
+    },
+    "costUsd": {
+      "value": {
+        "amount": 0,
+        "recurrence": "none"
+      },
+      "evidence": "inferred",
+      "citations": [
+        {
+          "url": "https://docs.slack.dev/quickstart",
+          "quote": "This quickstart guide covers how to create a Slack app using the Slack CLI and the Bolt frameworks, in either Python or JavaScript.",
+          "title": "Slack Quickstart",
+          "fetchedAt": "2026-11-03T15:01:34.686Z"
+        }
+      ],
+      "reasoning": "The quickstart page mentions no fees for creating an app, implying zero cost."
+    },
+    "prerequisiteArtifacts": {
+      "value": null,
+      "evidence": "unknown",
+      "citations": [],
+      "reasoning": "Required artifacts such as privacy policy or verified domain are not mentioned for a basic internal app."
+    }
+  },
+  "tier": "same_day",
+  "confidence": "low",
+  "tierRationale": [
+    "20 min of hands-on setup",
+    "tier is blind to 3 unestablished dimensions: review wait, human-only steps, prerequisites"
+  ],
+  "steps": [
+    {
+      "title": "Open Slack API dashboard",
+      "detail": "Navigate to https://api.slack.com/apps in a browser.",
+      "actor": "agent",
+      "where": "Slack API dashboard",
+      "estimatedMinutes": 2,
+      "startsReviewWait": false,
+      "evidence": "inferred",
+      "citations": []
+    },
+    {
+      "title": "Create a new app",
+      "detail": "Click “Create New App”, choose “From scratch”, enter an App Name and select the Development Slack Workspace, then click “Create App”.",
+      "actor": "agent",
+      "where": "Slack API dashboard > Your Apps",
+      "estimatedMinutes": 3,
+      "startsReviewWait": false,
+      "evidence": "inferred",
+      "citations": []
+    },
+    {
+      "title": "Configure Redirect URLs",
+      "detail": "In the left‑hand menu select “OAuth & Permissions”, scroll to “Redirect URLs”, click “Add a Redirect URL”, paste your app’s redirect URI (must be HTTPS), and click “Save URLs”.",
+      "actor": "agent",
+      "where": "OAuth & Permissions page",
+      "estimatedMinutes": 4,
+      "startsReviewWait": false,
+      "evidence": "inferred",
+      "citations": []
+    },
+    {
+      "title": "Add required scopes",
+      "detail": "Still on “OAuth & Permissions”, under “Bot Token Scopes” click “Add an OAuth Scope” and select each scope your app needs (e.g., chat:write, channels:read).",
+      "actor": "agent",
+      "where": "OAuth & Permissions page",
+      "estimatedMinutes": 5,
+      "startsReviewWait": false,
+      "evidence": "inferred",
+      "citations": []
+    },
+    {
+      "title": "Save scope changes",
+      "detail": "Click the “Save Changes” button at the bottom of the page to persist the added scopes.",
+      "actor": "agent",
+      "where": "OAuth & Permissions page",
+      "estimatedMinutes": 1,
+      "startsReviewWait": false,
+      "evidence": "inferred",
+      "citations": []
+    },
+    {
+      "title": "Install the app to your workspace",
+      "detail": "In the left menu select “Install App”, then click “Install to Workspace”. Review the permission prompt and click “Allow”.",
+      "actor": "agent",
+      "where": "Install App page",
+      "estimatedMinutes": 3,
+      "startsReviewWait": false,
+      "evidence": "inferred",
+      "citations": []
+    },
+    {
+      "title": "Copy credentials",
+      "detail": "After installation, return to “Basic Information” and copy the Client ID, Client Secret, and the Bot User OAuth Token for use in your code.",
+      "actor": "agent",
+      "where": "Basic Information page",
+      "estimatedMinutes": 2,
+      "startsReviewWait": false,
+      "evidence": "inferred",
+      "citations": []
+    }
+  ],
+  "nuances": [
+    {
+      "title": "Redirect URI must be HTTPS",
+      "detail": "Slack only accepts HTTPS URLs for OAuth redirect endpoints; using HTTP will cause the OAuth flow to fail.",
+      "severity": "gotcha",
+      "evidence": "inferred",
+      "citations": []
+    },
+    {
+      "title": "Scope approval may require admin consent",
+      "detail": "If the selected scopes are considered sensitive (e.g., admin.*, files:*), a workspace admin must approve them before the app can be installed.",
+      "severity": "gotcha",
+      "evidence": "inferred",
+      "citations": []
+    },
+    {
+      "title": "Rate limits on token generation",
+      "detail": "Slack enforces rate limits on OAuth token requests; excessive retries can lead to temporary blocks.",
+      "severity": "note",
+      "evidence": "inferred",
+      "citations": []
+    },
+    {
+      "title": "App visibility vs. public distribution",
+      "detail": "Apps created for personal use are private to the workspace; publishing to the Slack App Directory requires a separate review process.",
+      "severity": "note",
+      "evidence": "inferred",
+      "citations": []
+    }
+  ],
+  "whenBlocked": [
+    {
+      "situation": "Workspace admin has disabled third‑party app installations",
+      "action": "Ask the workspace admin to enable app installations in the workspace settings or to grant you permission to install apps",
+      "contact": "Slack workspace admin or Slack support at https://slack.com/help/contact"
+    }
+  ],
+  "conflicts": [],
+  "openQuestions": [
+    {
+      "question": "What is the typical review time (in business days) for a Slack app that requests sensitive scopes or is intended for public distribution?",
+      "whyItMatters": "Understanding the review wait is essential for estimating total time to make the app usable by end‑users.",
+      "howToResolve": "Consult Slack's App Review documentation or contact Slack support for official SLA information."
+    },
+    {
+      "question": "Are there any hidden costs (e.g., paid plans for advanced features) that apply when an app moves beyond the quickstart stage?",
+      "whyItMatters": "Cost impacts budgeting for developers deploying production‑grade integrations.",
+      "howToResolve": "Review Slack's pricing page and any tiered feature documentation."
+    }
+  ],
+  "sources": [
+    {
+      "url": "https://docs.slack.dev/quickstart",
+      "quote": "This quickstart guide covers how to create a Slack app using the Slack CLI and the Bolt frameworks, in either Python or JavaScript.",
+      "title": "Slack Quickstart",
+      "fetchedAt": "2026-11-03T15:01:34.686Z"
+    },
+    {
+      "url": "https://docs.slack.dev/quickstart",
+      "quote": "Before you begin building, grab the required tools by following the three steps below.",
+      "title": "Slack Quickstart",
+      "fetchedAt": "2026-11-03T15:01:34.686Z"
+    },
+    {
+      "url": "https://docs.slack.dev/quickstart",
+      "quote": "Download the command-line tool for developing Slack apps.",
+      "title": "Slack Quickstart",
+      "fetchedAt": "2026-11-03T15:01:34.686Z"
+    },
+    {
+      "url": "https://docs.slack.dev/quickstart",
+      "quote": "Log in and authenticate with your Slack workspace.",
+      "title": "Slack Quickstart",
+      "fetchedAt": "2026-11-03T15:01:34.686Z"
+    },
+    {
+      "url": "https://docs.slack.dev/quickstart",
+      "quote": "Create a project by selecting \"Starter App\", then either \"Bolt for Python\" or \"Bolt for JavaScript\".",
+      "title": "Slack Quickstart",
+      "fetchedAt": "2026-11-03T15:01:34.686Z"
+    },
+    {
+      "url": "https://docs.slack.dev/quickstart",
+      "quote": "By using the `slack run` command, and selecting \"Create a new app\", you'll install the app to the team you choose.",
+      "title": "Slack Quickstart",
+      "fetchedAt": "2026-11-03T15:01:34.686Z"
+    },
+    {
+      "url": "https://docs.slack.dev/quickstart",
+      "quote": "Open app settings for your app with the following command: `$ slack app settings`",
+      "title": "Slack Quickstart",
+      "fetchedAt": "2026-11-03T15:01:34.686Z"
+    }
+  ],
+  "generation": {
+    "generatedAt": "2026-11-03T15:02:34.720Z",
+    "origin": "seeded",
+    "models": [
+      {
+        "model": "openai/gpt-oss-120b",
+        "role": "adjudicate",
+        "calls": 3,
+        "inputTokens": 2936,
+        "outputTokens": 3473
+      },
+      {
+        "model": "openai/gpt-oss-20b",
+        "role": "triage",
+        "calls": 2,
+        "inputTokens": 1495,
+        "outputTokens": 188
+      },
+      {
+        "model": "openai/gpt-oss-20b",
+        "role": "extract",
+        "calls": 2,
+        "inputTokens": 3052,
+        "outputTokens": 353
+      }
+    ],
+    "docPagesDiscovered": 185,
+    "docPagesRead": 2,
+    "durationMs": 67514
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "fetched_at": "2026-11-03T14:15:16Z",
+  "note": "Raw upstream sources, committed verbatim so the catalog build and every citation in this repo is reproducible and auditable.",
+  "sources": [
+    { "file": "composio-managed-auth.md", "url": "https://docs.composio.dev/toolkits/managed-auth", "markdown_url": "https://docs.composio.dev/toolkits/managed-auth.md", "role": "Canonical catalog: which Composio toolkits have managed OAuth vs require bring-your-own." },
+    { "file": "composio-kb-google-oauth.md", "url": "https://docs.composio.dev/kb/guide/platform-google-oauth", "role": "Prior art: one of only two hand-written OAuth setup guides Composio ships." },
+    { "file": "composio-kb-microsoft-oauth.md", "url": "https://docs.composio.dev/kb/guide/platform-microsoft-oauth", "role": "Prior art: the second hand-written guide." }
+  ]
+}

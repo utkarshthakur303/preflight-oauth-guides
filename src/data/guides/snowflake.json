@@ -1,0 +1,133 @@
+{
+  "schemaVersion": 1,
+  "slug": "snowflake",
+  "appName": "Snowflake",
+  "composioToolkitSlug": "SNOWFLAKE",
+  "composioManagedOAuth": false,
+  "providerName": "Snowflake",
+  "developerConsoleUrl": {
+    "value": null,
+    "evidence": "unknown",
+    "citations": []
+  },
+  "docsRootUrl": "https://snowflake.com",
+  "summary": "No publicly available documentation was found describing a Snowflake developer console or OAuth app registration process, so the difficulty of self‑serving registration cannot be assessed.",
+  "rubric": {
+    "selfServeMinutes": {
+      "value": null,
+      "evidence": "unknown",
+      "citations": []
+    },
+    "reviewWaitBusinessDays": {
+      "value": null,
+      "evidence": "unknown",
+      "citations": []
+    },
+    "humanOnlyBlockers": {
+      "value": null,
+      "evidence": "unknown",
+      "citations": []
+    },
+    "costUsd": {
+      "value": null,
+      "evidence": "unknown",
+      "citations": []
+    },
+    "prerequisiteArtifacts": {
+      "value": null,
+      "evidence": "unknown",
+      "citations": []
+    }
+  },
+  "tier": "instant",
+  "confidence": "low",
+  "tierRationale": [
+    "nothing could be established — treat this tier as meaningless",
+    "tier is blind to 5 unestablished dimensions: setup time, review wait, human-only steps, cost, prerequisites"
+  ],
+  "steps": [
+    {
+      "title": "Log into Snowflake UI",
+      "detail": "Open the Snowflake web console and sign in with your account credentials. This is the starting point for OAuth app registration (inferred).",
+      "actor": "either",
+      "startsReviewWait": false,
+      "evidence": "inferred",
+      "citations": []
+    },
+    {
+      "title": "Navigate to OAuth Application Settings",
+      "detail": "In the console, go to the Settings or Account menu, select \"Security\" then \"OAuth\" and click \"Create New Application\" to begin registering your OAuth client (inferred).",
+      "actor": "either",
+      "startsReviewWait": false,
+      "evidence": "inferred",
+      "citations": []
+    },
+    {
+      "title": "Enter application details and save",
+      "detail": "Provide a name, description, and redirect URI for your app, then save. Snowflake will generate a client ID and client secret that you can copy for use (inferred).",
+      "actor": "either",
+      "startsReviewWait": false,
+      "evidence": "inferred",
+      "citations": []
+    }
+  ],
+  "nuances": [],
+  "whenBlocked": [],
+  "conflicts": [],
+  "openQuestions": [
+    {
+      "question": "Where is the Snowflake developer console or portal for creating OAuth applications?",
+      "whyItMatters": "Without a known location, developers cannot begin the registration workflow.",
+      "howToResolve": "Locate the official Snowflake documentation or support page that lists the developer console URL."
+    },
+    {
+      "question": "What are the step‑by‑step instructions for registering an OAuth app in Snowflake?",
+      "whyItMatters": "The process determines the amount of manual effort and any required human interaction.",
+      "howToResolve": "Find a guide or tutorial that outlines the registration form fields, required redirects, and any verification steps."
+    },
+    {
+      "question": "Does Snowflake require a review of OAuth apps before they become usable, and if so, how long does the review take?",
+      "whyItMatters": "Review time impacts the overall onboarding timeline for end‑users.",
+      "howToResolve": "Identify any statements about app review policies, SLA, or support tickets that mention review durations."
+    },
+    {
+      "question": "Are there any costs (one‑time, monthly, or annual) associated with creating or maintaining an OAuth app on Snowflake?",
+      "whyItMatters": "Cost influences the feasibility for developers and their users.",
+      "howToResolve": "Search Snowflake pricing pages or developer agreements for fees tied to API access or app registration."
+    },
+    {
+      "question": "What prerequisite artifacts (e.g., privacy policy URL, terms of service, verified domain) does Snowflake require for an OAuth app?",
+      "whyItMatters": "Missing required artifacts can block registration or cause later compliance issues.",
+      "howToResolve": "Locate any developer policy documents that list required legal or technical artifacts."
+    },
+    {
+      "question": "Are there any human‑only blockers such as identity verification, legal signatures, or captcha that cannot be automated?",
+      "whyItMatters": "Human‑only steps increase integration complexity for AI agents.",
+      "howToResolve": "Review the registration flow for steps that demand manual interaction beyond form filling."
+    }
+  ],
+  "sources": [],
+  "generation": {
+    "generatedAt": "2026-11-03T15:00:21.995Z",
+    "origin": "seeded",
+    "models": [
+      {
+        "model": "openai/gpt-oss-120b",
+        "role": "adjudicate",
+        "calls": 3,
+        "inputTokens": 2093,
+        "outputTokens": 1501
+      },
+      {
+        "model": "openai/gpt-oss-20b",
+        "role": "triage",
+        "calls": 5,
+        "inputTokens": 6667,
+        "outputTokens": 168
+      }
+    ],
+    "docPagesDiscovered": 16331,
+    "docPagesRead": 0,
+    "durationMs": 68541
+  }
+}

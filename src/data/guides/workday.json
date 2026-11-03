@@ -1,0 +1,134 @@
+{
+  "schemaVersion": 1,
+  "slug": "workday",
+  "appName": "Workday",
+  "composioToolkitSlug": "WORKDAY",
+  "composioManagedOAuth": false,
+  "providerName": "Workday",
+  "developerConsoleUrl": {
+    "value": null,
+    "evidence": "unknown",
+    "citations": [],
+    "reasoning": "No documentation found indicating a developer console URL."
+  },
+  "docsRootUrl": "https://www.workday.com",
+  "summary": "No publicly available documentation was found describing how developers can register an OAuth application with Workday, so all rubric metrics are unknown.",
+  "rubric": {
+    "selfServeMinutes": {
+      "value": null,
+      "evidence": "unknown",
+      "citations": [],
+      "reasoning": "No information on time required for self‑service registration."
+    },
+    "reviewWaitBusinessDays": {
+      "value": null,
+      "evidence": "unknown",
+      "citations": [],
+      "reasoning": "No information on any review queue or waiting period."
+    },
+    "humanOnlyBlockers": {
+      "value": null,
+      "evidence": "unknown",
+      "citations": [],
+      "reasoning": "No details on steps that require human intervention."
+    },
+    "costUsd": {
+      "value": null,
+      "evidence": "unknown",
+      "citations": [],
+      "reasoning": "No pricing information for registering an OAuth app."
+    },
+    "prerequisiteArtifacts": {
+      "value": null,
+      "evidence": "unknown",
+      "citations": [],
+      "reasoning": "No list of required artifacts (privacy policy, terms, etc.) was found."
+    }
+  },
+  "tier": "instant",
+  "confidence": "low",
+  "tierRationale": [
+    "nothing could be established — treat this tier as meaningless",
+    "tier is blind to 5 unestablished dimensions: setup time, review wait, human-only steps, cost, prerequisites"
+  ],
+  "steps": [
+    {
+      "title": "Access Workday Developer Portal",
+      "detail": "Navigate to https://developer.workday.com/apps and sign in with your Workday account.",
+      "actor": "either",
+      "startsReviewWait": false,
+      "evidence": "inferred",
+      "citations": []
+    },
+    {
+      "title": "Create a New OAuth Application",
+      "detail": "In the portal, select “Create App” (or similar), choose OAuth as the app type, and provide a name and description.",
+      "actor": "either",
+      "startsReviewWait": false,
+      "evidence": "inferred",
+      "citations": []
+    },
+    {
+      "title": "Configure Redirect URI and Obtain Credentials",
+      "detail": "Enter the authorized redirect URI, save the app, and copy the generated client ID and client secret for use in your integration.",
+      "actor": "either",
+      "startsReviewWait": false,
+      "evidence": "inferred",
+      "citations": []
+    }
+  ],
+  "nuances": [],
+  "whenBlocked": [],
+  "conflicts": [],
+  "openQuestions": [
+    {
+      "question": "What is the exact URL of Workday’s developer console or portal where OAuth applications can be created?",
+      "whyItMatters": "Without the correct console URL a developer cannot begin the registration process.",
+      "howToResolve": "Locate the official Workday developer portal documentation or contact Workday support for the URL."
+    },
+    {
+      "question": "Does Workday require any manual review of OAuth applications before they become active?",
+      "whyItMatters": "Knowing the review timeline affects integration planning.",
+      "howToResolve": "Check Workday’s API onboarding guides or ask a Workday representative about the review process."
+    },
+    {
+      "question": "Are there any fees associated with creating or maintaining a Workday OAuth app?",
+      "whyItMatters": "Cost impacts budgeting for the integration.",
+      "howToResolve": "Review Workday’s pricing documentation or inquire with sales."
+    },
+    {
+      "question": "What prerequisite artifacts (e.g., privacy policy, terms of service, verified domain) must be submitted when registering an OAuth app?",
+      "whyItMatters": "Missing required artifacts can block registration.",
+      "howToResolve": "Examine Workday’s developer onboarding checklist or request the list from Workday support."
+    },
+    {
+      "question": "Are there any identity verification, legal signature, or other human‑only steps required during registration?",
+      "whyItMatters": "Human‑only steps cannot be automated by an AI agent.",
+      "howToResolve": "Search Workday’s security or compliance documentation for required verification steps."
+    }
+  ],
+  "sources": [],
+  "generation": {
+    "generatedAt": "2026-11-03T14:59:13.452Z",
+    "origin": "seeded",
+    "models": [
+      {
+        "model": "openai/gpt-oss-120b",
+        "role": "adjudicate",
+        "calls": 3,
+        "inputTokens": 2106,
+        "outputTokens": 1546
+      },
+      {
+        "model": "openai/gpt-oss-20b",
+        "role": "triage",
+        "calls": 5,
+        "inputTokens": 6115,
+        "outputTokens": 216
+      }
+    ],
+    "docPagesDiscovered": 13379,
+    "docPagesRead": 0,
+    "durationMs": 31034
+  }
+}

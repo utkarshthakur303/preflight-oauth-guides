@@ -1,0 +1,384 @@
+{
+  "schemaVersion": 1,
+  "slug": "xero",
+  "appName": "Xero",
+  "composioToolkitSlug": "XERO",
+  "composioManagedOAuth": false,
+  "providerName": "Xero",
+  "developerConsoleUrl": {
+    "value": "https://developer.xero.com/myapps",
+    "evidence": "unknown",
+    "citations": [],
+    "reasoning": "The URL is suggested by the prompt as a likely location for the developer console, but no fetched page directly confirms it."
+  },
+  "docsRootUrl": "https://developer.xero.com",
+  "summary": "Registering an OAuth app in Xero is a self‑service process that involves logging into the Xero Developer Portal, adding a Partner Login URL, and configuring up to 50 redirect URIs; no payment, captcha, or manual review appears required, though the connecting user must have Standard, Adviser, or Administrator level permissions with Connected Apps rights.",
+  "rubric": {
+    "selfServeMinutes": {
+      "value": 10,
+      "evidence": "inferred",
+      "citations": [
+        {
+          "url": "https://developer.xero.com/get-ready-for-the-xero-partner-hub-app-launcher",
+          "quote": "Add your Partner Login URL , using the same pattern as your existing Login URL.",
+          "fetchedAt": "2026-11-03T14:54:45.859Z"
+        }
+      ],
+      "reasoning": "The only required actions are filling a short form (Partner Login URL) and setting redirect URIs, which typically takes under ten minutes for a developer familiar with the portal."
+    },
+    "reviewWaitBusinessDays": {
+      "value": null,
+      "evidence": "unknown",
+      "citations": [],
+      "reasoning": "The fetched documents do not mention any manual review or approval step for new apps."
+    },
+    "humanOnlyBlockers": {
+      "value": null,
+      "evidence": "unknown",
+      "citations": [
+        {
+          "url": "https://developer.xero.com/faq/permissions",
+          "quote": "The user that connects the integration has to have either Standard, Adviser, or Administrator level user with the Connected Apps permission.",
+          "fetchedAt": "2026-11-03T14:54:47.403Z"
+        }
+      ],
+      "reasoning": "The only human‑only requirement is the permission level of the user who authorises the connection; the registration itself can be completed automatically."
+    },
+    "costUsd": {
+      "value": null,
+      "evidence": "unknown",
+      "citations": [],
+      "reasoning": "No pricing information was found in the provided pages."
+    },
+    "prerequisiteArtifacts": {
+      "value": null,
+      "evidence": "unknown",
+      "citations": [],
+      "reasoning": "The documents do not specify mandatory artifacts such as privacy policy or terms URLs for app registration."
+    }
+  },
+  "tier": "instant",
+  "confidence": "low",
+  "tierRationale": [
+    "10 min of hands-on setup",
+    "tier is blind to 4 unestablished dimensions: review wait, human-only steps, cost, prerequisites"
+  ],
+  "steps": [
+    {
+      "title": "Log in with a qualified user",
+      "detail": "Sign into the Xero Developer Portal using a user that has Standard, Adviser, or Administrator level permissions and the Connected Apps permission.",
+      "actor": "agent",
+      "where": "Developer Portal login page",
+      "estimatedMinutes": 5,
+      "startsReviewWait": false,
+      "evidence": "cited",
+      "citations": [
+        {
+          "url": "https://developer.xero.com/faq/permissions",
+          "quote": "The user that connects the integration has to have either Standard, Adviser, or Administrator level user with the Connected Apps permission.",
+          "fetchedAt": "2026-11-03T14:54:47.403Z"
+        }
+      ]
+    },
+    {
+      "title": "Navigate to My Apps",
+      "detail": "From the dashboard, click the “My Apps” menu item to view existing apps and create a new one.",
+      "actor": "agent",
+      "where": "Developer Portal > My Apps",
+      "estimatedMinutes": 2,
+      "startsReviewWait": false,
+      "evidence": "inferred",
+      "citations": []
+    },
+    {
+      "title": "Create a new app",
+      "detail": "Press the “Add App” (or “Create New App”) button and provide the required name, description, and company details.",
+      "actor": "agent",
+      "where": "Developer Portal > My Apps > Add App",
+      "estimatedMinutes": 5,
+      "startsReviewWait": false,
+      "evidence": "inferred",
+      "citations": []
+    },
+    {
+      "title": "Add Partner Login URL",
+      "detail": "Enter a Partner Login URL in the “Partner Login URL” field. Leaving it blank will prevent the app from appearing in the Xero Partner Hub App Launcher.",
+      "actor": "agent",
+      "where": "Developer Portal > My Apps > App Settings",
+      "estimatedMinutes": 3,
+      "startsReviewWait": false,
+      "evidence": "cited",
+      "citations": [
+        {
+          "url": "https://developer.xero.com/get-ready-for-the-xero-partner-hub-app-launcher",
+          "quote": "Add your Partner Login URL , using the same pattern as your existing Login URL.",
+          "fetchedAt": "2026-11-03T14:54:45.859Z"
+        },
+        {
+          "url": "https://developer.xero.com/get-ready-for-the-xero-partner-hub-app-launcher",
+          "quote": "Leave it blank: Your app won’t appear in the launcher, regardless of how well it works elsewhere for individual organisations.",
+          "fetchedAt": "2026-11-03T14:54:45.859Z"
+        }
+      ]
+    },
+    {
+      "title": "Register redirect URIs",
+      "detail": "Add up to 50 exact redirect URIs (wildcards are not supported). Each URI must match the one used in the OAuth flow.",
+      "actor": "agent",
+      "where": "Developer Portal > My Apps > App Settings > Redirect URIs",
+      "estimatedMinutes": 4,
+      "startsReviewWait": false,
+      "evidence": "cited",
+      "citations": [
+        {
+          "url": "https://developer.xero.com/faq/oauth2",
+          "quote": "You can use up to 50 redirect URIs for your app.",
+          "fetchedAt": "2026-11-03T14:54:49.172Z"
+        },
+        {
+          "url": "https://developer.xero.com/faq/oauth2",
+          "quote": "The use of wildcards in redirect URI is not supported.",
+          "fetchedAt": "2026-11-03T14:54:49.172Z"
+        }
+      ]
+    },
+    {
+      "title": "Select scopes",
+      "detail": "For apps created on or after 2 March 2026, choose granular scopes (available from April 2026). For older apps, you may continue using broad scopes but must migrate before September 2027 if you need granular access.",
+      "actor": "agent",
+      "where": "Developer Portal > My Apps > App Settings > Scopes",
+      "estimatedMinutes": 5,
+      "startsReviewWait": false,
+      "evidence": "cited",
+      "citations": [
+        {
+          "url": "https://developer.xero.com/faq/granular-scopes",
+          "quote": "Apps created on or after 2 March 2026 will use the new granular scopes",
+          "fetchedAt": "2026-11-03T14:54:51.101Z"
+        },
+        {
+          "url": "https://developer.xero.com/faq/granular-scopes",
+          "quote": "They’ll be available for you to request from April 2026",
+          "fetchedAt": "2026-11-03T14:54:51.101Z"
+        },
+        {
+          "url": "https://developer.xero.com/faq/granular-scopes",
+          "quote": "Apps created before 2 March 2026 will have until September 2027 to move from broad scopes to granular scopes",
+          "fetchedAt": "2026-11-03T14:54:51.101Z"
+        }
+      ]
+    },
+    {
+      "title": "Save and activate the app",
+      "detail": "Click the “Save” or “Create App” button. The app becomes active immediately; no additional review wait is required.",
+      "actor": "agent",
+      "where": "Developer Portal > My Apps > Save",
+      "estimatedMinutes": 2,
+      "startsReviewWait": false,
+      "evidence": "inferred",
+      "citations": []
+    }
+  ],
+  "nuances": [
+    {
+      "title": "Partner Login URL must not be empty",
+      "detail": "If the Partner Login URL field is left blank, the app will not appear in the Xero Partner Hub App Launcher, even if all other settings are correct.",
+      "severity": "gotcha",
+      "evidence": "cited",
+      "citations": [
+        {
+          "url": "https://developer.xero.com/get-ready-for-the-xero-partner-hub-app-launcher",
+          "quote": "Leave it blank: Your app won’t appear in the launcher, regardless of how well it works elsewhere for individual organisations.",
+          "fetchedAt": "2026-11-03T14:54:45.859Z"
+        }
+      ]
+    },
+    {
+      "title": "Redirect URI wildcards unsupported",
+      "detail": "Only exact URIs are accepted; using ‘*’ or pattern matching will cause validation errors.",
+      "severity": "gotcha",
+      "evidence": "cited",
+      "citations": [
+        {
+          "url": "https://developer.xero.com/faq/oauth2",
+          "quote": "The use of wildcards in redirect URI is not supported.",
+          "fetchedAt": "2026-11-03T14:54:49.172Z"
+        }
+      ]
+    },
+    {
+      "title": "Single‑page applications not supported",
+      "detail": "Xero OAuth 2.0 does not currently support SPA flows; use a server‑side or native app pattern instead.",
+      "severity": "note",
+      "evidence": "cited",
+      "citations": [
+        {
+          "url": "https://developer.xero.com/faq/oauth2",
+          "quote": "Single page apps are not currently supported.",
+          "fetchedAt": "2026-11-03T14:54:49.172Z"
+        }
+      ]
+    },
+    {
+      "title": "Granular scopes not retroactive",
+      "detail": "Existing tokens for apps created before 2 March 2026 retain their original (broad) scopes. Granular scopes only apply after the user re‑authorises with the updated scope list.",
+      "severity": "gotcha",
+      "evidence": "cited",
+      "citations": [
+        {
+          "url": "https://developer.xero.com/faq/granular-scopes",
+          "quote": "The granular scopes won’t automatically be applied to any existing tokens. So, the granular scope won’t be applied to any new authorisations until they are added to the authorisation link your customers are using and the customer reauthorises your app",
+          "fetchedAt": "2026-11-03T14:54:51.101Z"
+        }
+      ]
+    },
+    {
+      "title": "401 error for missing granular scope",
+      "detail": "Calling an endpoint that requires a granular scope you haven’t requested returns a 401 Forbidden with header WWW-Authenticate:insufficient_scope.",
+      "severity": "gotcha",
+      "evidence": "cited",
+      "citations": [
+        {
+          "url": "https://developer.xero.com/faq/granular-scopes",
+          "quote": "The API will return a 401 forbidden error with a response header WWW-Authenticate:insufficent_scope",
+          "fetchedAt": "2026-11-03T14:54:51.101Z"
+        }
+      ]
+    },
+    {
+      "title": "Access token lifetime",
+      "detail": "Access tokens are valid for 30 minutes; plan token refresh accordingly.",
+      "severity": "note",
+      "evidence": "inferred",
+      "citations": []
+    },
+    {
+      "title": "Refresh token expiration",
+      "detail": "Refresh tokens that are not used for 60 days expire and require the user to re‑authorise the app.",
+      "severity": "note",
+      "evidence": "cited",
+      "citations": [
+        {
+          "url": "https://developer.xero.com/faq/oauth2",
+          "quote": "Unused refresh tokens expire after 60 days. If you don’t refresh your access token within 60 days the user will need to reauthorise your app.",
+          "fetchedAt": "2026-11-03T14:54:49.172Z"
+        }
+      ]
+    },
+    {
+      "title": "PKCE support for native apps",
+      "detail": "Native applications can use the PKCE extension and omit a client secret, improving security.",
+      "severity": "note",
+      "evidence": "cited",
+      "citations": [
+        {
+          "url": "https://developer.xero.com/faq/oauth2",
+          "quote": "Xero supports the Proof Key for Code Exchange (PKCE) extension to the authorization code flow. This allows native apps to securely connect to our API without needing to store a client secret.",
+          "fetchedAt": "2026-11-03T14:54:49.172Z"
+        }
+      ]
+    }
+  ],
+  "whenBlocked": [
+    {
+      "situation": "Current user lacks Standard/Adviser/Administrator level with Connected Apps permission",
+      "action": "Assign the required role or have an authorized user create the app.",
+      "contact": "Contact your Xero organisation admin or Xero support via https://support.xero.com"
+    },
+    {
+      "situation": "Attempt to add more than 50 redirect URIs",
+      "action": "Consolidate redirect URIs or create multiple apps if necessary.",
+      "contact": "Xero developer support (developer@xero.com) for guidance on managing many URIs."
+    },
+    {
+      "situation": "App creation fails due to missing Partner Login URL",
+      "action": "Provide a valid Partner Login URL; ensure it follows the same pattern as your existing login URL.",
+      "contact": "Xero Partner Hub documentation or support portal."
+    }
+  ],
+  "conflicts": [],
+  "openQuestions": [
+    {
+      "question": "Is there an official developer console URL for creating Xero apps?",
+      "whyItMatters": "A correct URL is needed for developers to locate the registration UI.",
+      "howToResolve": "Visit Xero's developer site or contact Xero support to confirm the exact console URL."
+    },
+    {
+      "question": "Does Xero perform any manual review of newly created OAuth apps?",
+      "whyItMatters": "Review time would affect the overall onboarding speed for developers.",
+      "howToResolve": "Check Xero's developer documentation or support channels for any mention of app approval processes."
+    },
+    {
+      "question": "Are there any required legal artifacts (privacy policy, terms of service) that must be submitted when registering an app?",
+      "whyItMatters": "Missing required artifacts could block app creation.",
+      "howToResolve": "Review Xero's app registration guidelines or contact Xero support for clarification."
+    },
+    {
+      "question": "Is there any cost associated with creating or maintaining a Xero OAuth app?",
+      "whyItMatters": "Cost impacts the feasibility for developers, especially in low‑budget projects.",
+      "howToResolve": "Search Xero's pricing or developer FAQ for any fees related to app registration."
+    }
+  ],
+  "sources": [
+    {
+      "url": "https://developer.xero.com/get-ready-for-the-xero-partner-hub-app-launcher",
+      "quote": "Add your Partner Login URL , using the same pattern as your existing Login URL.",
+      "fetchedAt": "2026-11-03T14:54:45.859Z"
+    },
+    {
+      "url": "https://developer.xero.com/faq/permissions",
+      "quote": "The user that connects the integration has to have either Standard, Adviser, or Administrator level user with the Connected Apps permission.",
+      "fetchedAt": "2026-11-03T14:54:47.403Z"
+    },
+    {
+      "url": "https://developer.xero.com/faq/oauth2",
+      "quote": "You can use up to 50 redirect URIs for your app.",
+      "fetchedAt": "2026-11-03T14:54:49.172Z"
+    },
+    {
+      "url": "https://developer.xero.com/faq/oauth2",
+      "quote": "The use of wildcards in redirect URI is not supported.",
+      "fetchedAt": "2026-11-03T14:54:49.172Z"
+    },
+    {
+      "url": "https://developer.xero.com/faq/oauth2",
+      "quote": "Single page apps are not currently supported.",
+      "fetchedAt": "2026-11-03T14:54:49.172Z"
+    },
+    {
+      "url": "https://developer.xero.com/faq/granular-scopes",
+      "quote": "Apps created before 2 March 2026 will have until September 2027 to move from broad scopes to granular scopes",
+      "fetchedAt": "2026-11-03T14:54:51.101Z"
+    }
+  ],
+  "generation": {
+    "generatedAt": "2026-11-03T14:56:45.202Z",
+    "origin": "seeded",
+    "models": [
+      {
+        "model": "openai/gpt-oss-120b",
+        "role": "adjudicate",
+        "calls": 3,
+        "inputTokens": 6407,
+        "outputTokens": 5512
+      },
+      {
+        "model": "openai/gpt-oss-20b",
+        "role": "triage",
+        "calls": 1,
+        "inputTokens": 784,
+        "outputTokens": 253
+      },
+      {
+        "model": "openai/gpt-oss-20b",
+        "role": "extract",
+        "calls": 5,
+        "inputTokens": 5337,
+        "outputTokens": 1621
+      }
+    ],
+    "docPagesDiscovered": 145,
+    "docPagesRead": 5,
+    "durationMs": 130941
+  }
+}

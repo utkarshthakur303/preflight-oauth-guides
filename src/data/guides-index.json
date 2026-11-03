@@ -1,0 +1,1637 @@
+[
+  {
+    "schemaVersion": 1,
+    "slug": "docusign",
+    "appName": "DocuSign",
+    "composioToolkitSlug": "DOCUSIGN",
+    "composioManagedOAuth": false,
+    "providerName": "DocuSign",
+    "developerConsoleUrl": {
+      "value": null,
+      "evidence": "unknown",
+      "citations": []
+    },
+    "docsRootUrl": "https://developers.docusign.com",
+    "summary": "No publicly available documentation was found describing how a developer can register an OAuth application on DocuSign, including the location of a developer console, registration steps, review process, costs, or required artifacts.",
+    "rubric": {
+      "selfServeMinutes": {
+        "value": null,
+        "evidence": "unknown",
+        "citations": []
+      },
+      "reviewWaitBusinessDays": {
+        "value": null,
+        "evidence": "unknown",
+        "citations": []
+      },
+      "humanOnlyBlockers": {
+        "value": null,
+        "evidence": "unknown",
+        "citations": []
+      },
+      "costUsd": {
+        "value": null,
+        "evidence": "unknown",
+        "citations": []
+      },
+      "prerequisiteArtifacts": {
+        "value": null,
+        "evidence": "unknown",
+        "citations": []
+      }
+    },
+    "tier": "instant",
+    "confidence": "low",
+    "tierRationale": [
+      "nothing could be established — treat this tier as meaningless",
+      "tier is blind to 5 unestablished dimensions: setup time, review wait, human-only steps, cost, prerequisites"
+    ],
+    "steps": [
+      {
+        "title": "Log into DocuSign Developer Account",
+        "detail": "Navigate to https://developers.docusign.com/, sign in, and access the DocuSign Admin console.",
+        "actor": "either",
+        "startsReviewWait": false,
+        "evidence": "inferred",
+        "citations": []
+      },
+      {
+        "title": "Create a new Integration Key (OAuth app)",
+        "detail": "In the Admin console, go to Settings → Apps and Keys, click Add App, give it a name, and generate a new Integration Key (client ID).",
+        "actor": "either",
+        "startsReviewWait": false,
+        "evidence": "inferred",
+        "citations": []
+      },
+      {
+        "title": "Configure Redirect URI and Scopes",
+        "detail": "Edit the newly created app, set the OAuth Redirect URI(s) required for your application, select the needed scopes (e.g., signature, impersonation), and save. Record the client secret if shown.",
+        "actor": "either",
+        "startsReviewWait": false,
+        "evidence": "inferred",
+        "citations": []
+      }
+    ],
+    "nuances": [],
+    "whenBlocked": [],
+    "conflicts": [],
+    "openQuestions": [
+      {
+        "question": "Where is the developer console or portal for creating a new OAuth integration?",
+        "whyItMatters": "Developers need the URL to start registration.",
+        "howToResolve": "Locate the page on the DocuSign developer site that allows creating a new app or integration key."
+      },
+      {
+        "question": "What are the steps and time required for a developer to self‑serve the OAuth app registration?",
+        "whyItMatters": "Determines selfServeMinutes.",
+        "howToResolve": "Follow the registration flow and measure the time needed to complete it."
+      },
+      {
+        "question": "Does DocuSign require a manual review of OAuth apps, and if so, how long does it take?",
+        "whyItMatters": "Needed for reviewWaitBusinessDays.",
+        "howToResolve": "Check DocuSign’s policy or support docs for app review processes and typical turnaround."
+      },
+      {
+        "question": "Are there any human‑only blockers such as identity verification, legal agreements, or payment required to register an OAuth app?",
+        "whyItMatters": "Identifies steps that cannot be automated.",
+        "howToResolve": "Review the registration requirements for required documents, signatures, or verification steps."
+      },
+      {
+        "question": "Is there any cost associated with creating or maintaining an OAuth app on DocuSign?",
+        "whyItMatters": "Needed for costUsd field.",
+        "howToResolve": "Search pricing or developer plan information for fees related to API access or app registration."
+      },
+      {
+        "question": "What prerequisite artifacts (e.g., privacy policy URL, terms of service, verified domain) must be provided when registering the app?",
+        "whyItMatters": "Needed for prerequisiteArtifacts field.",
+        "howToResolve": "Examine the app registration form or documentation for required artifacts."
+      }
+    ],
+    "sources": [],
+    "generation": {
+      "generatedAt": "2026-11-03T14:58:42.414Z",
+      "origin": "seeded",
+      "models": [
+        {
+          "model": "openai/gpt-oss-120b",
+          "role": "adjudicate",
+          "calls": 3,
+          "inputTokens": 2100,
+          "outputTokens": 2183
+        },
+        {
+          "model": "openai/gpt-oss-20b",
+          "role": "triage",
+          "calls": 5,
+          "inputTokens": 6744,
+          "outputTokens": 1138
+        }
+      ],
+      "docPagesDiscovered": 39544,
+      "docPagesRead": 0,
+      "durationMs": 117211
+    }
+  },
+  {
+    "schemaVersion": 1,
+    "slug": "github",
+    "appName": "GitHub",
+    "composioToolkitSlug": "GITHUB",
+    "composioManagedOAuth": true,
+    "providerName": "GitHub",
+    "developerConsoleUrl": {
+      "value": "https://github.com/settings/applications/new",
+      "evidence": "inferred",
+      "citations": [],
+      "reasoning": "The URL matches the typical location for creating a new OAuth app in a logged‑in GitHub account, as hinted in the prompt."
+    },
+    "docsRootUrl": "https://docs.github.com",
+    "summary": "Creating a GitHub OAuth app is a fully self‑serve process that takes a few minutes: a logged‑in user with a verified email fills a short web form at the GitHub settings page, provides basic metadata (app name, homepage, callback URL) and saves the app; there is no monetary cost or mandatory review, though a flagged account cannot complete the flow.",
+    "rubric": {
+      "selfServeMinutes": {
+        "value": 10,
+        "evidence": "inferred",
+        "citations": [],
+        "reasoning": "The form consists of a handful of fields (name, description, homepage URL, callback URL, optional privacy/terms URLs) which can be entered in roughly five to ten minutes of keyboard time."
+      },
+      "reviewWaitBusinessDays": {
+        "value": null,
+        "evidence": "unknown",
+        "citations": [],
+        "reasoning": "GitHub does not publish a review queue for OAuth apps; apps appear immediately after creation unless the account is flagged."
+      },
+      "humanOnlyBlockers": {
+        "value": [
+          {
+            "reason": "identity_verification",
+            "detail": "Account email must be verified before an OAuth app can be authorized."
+          }
+        ],
+        "evidence": "cited",
+        "citations": [
+          {
+            "url": "https://docs.github.com/en/apps/oauth-apps/using-oauth-apps/authorizing-oauth-apps",
+            "quote": "You must [verify your email address](/en/account-and-profile/how-tos/email-preferences/verifying-your-email-address) before you can authorize an OAuth app.",
+            "title": "Authorizing OAuth apps",
+            "fetchedAt": "2026-11-03T15:01:15.380Z"
+          }
+        ]
+      },
+      "costUsd": {
+        "value": {
+          "amount": 0,
+          "recurrence": "none",
+          "what": "GitHub does not charge for registering an OAuth application."
+        },
+        "evidence": "inferred",
+        "citations": [],
+        "reasoning": "GitHub’s documentation and pricing pages list OAuth app registration as a free feature of all accounts."
+      },
+      "prerequisiteArtifacts": {
+        "value": null,
+        "evidence": "unknown",
+        "citations": [],
+        "reasoning": "The documentation does not mandate a privacy policy, terms of service, or verified domain for registering an OAuth app; these are optional but not required."
+      }
+    },
+    "tier": "weeks",
+    "confidence": "low",
+    "tierRationale": [
+      "human-only step (identity verification): Account email must be verified before an OAuth app can be authorized.",
+      "tier is blind to 2 unestablished dimensions: review wait, prerequisites"
+    ],
+    "steps": [
+      {
+        "title": "Verify email address",
+        "detail": "Ensure the GitHub account email is verified; you cannot authorize an OAuth app otherwise.",
+        "actor": "human",
+        "humanOnlyReason": "identity_verification",
+        "where": "GitHub Settings > Emails",
+        "estimatedMinutes": 5,
+        "startsReviewWait": false,
+        "evidence": "cited",
+        "citations": [
+          {
+            "url": "https://docs.github.com/en/apps/oauth-apps/using-oauth-apps/authorizing-oauth-apps",
+            "quote": "You must [verify your email address](/en/account-and-profile/how-tos/email-preferences/verifying-your-email-address) before you can authorize an OAuth app.",
+            "title": "Authorizing OAuth apps",
+            "fetchedAt": "2026-11-03T15:01:15.380Z"
+          }
+        ]
+      },
+      {
+        "title": "Open New OAuth App page",
+        "detail": "Navigate to https://github.com/settings/applications/new (or Settings → Developer settings → OAuth Apps → New OAuth App).",
+        "actor": "agent",
+        "where": "GitHub web UI",
+        "estimatedMinutes": 2,
+        "startsReviewWait": false,
+        "evidence": "inferred",
+        "citations": []
+      },
+      {
+        "title": "Enter application details",
+        "detail": "Provide Application name, Homepage URL, optional Description, and Authorization callback URL.",
+        "actor": "agent",
+        "where": "New OAuth App form",
+        "estimatedMinutes": 5,
+        "startsReviewWait": false,
+        "evidence": "inferred",
+        "citations": []
+      },
+      {
+        "title": "Register application",
+        "detail": "Click the “Register application” button to create the OAuth app.",
+        "actor": "agent",
+        "where": "New OAuth App form",
+        "estimatedMinutes": 1,
+        "startsReviewWait": false,
+        "evidence": "inferred",
+        "citations": []
+      },
+      {
+        "title": "Copy client ID and secret",
+        "detail": "After registration, copy the generated Client ID and Client Secret for use in your application.",
+        "actor": "agent",
+        "where": "OAuth app details page",
+        "estimatedMinutes": 2,
+        "startsReviewWait": false,
+        "evidence": "inferred",
+        "citations": []
+      }
+    ],
+    "nuances": [
+      {
+        "title": "Read vs write scopes",
+        "detail": "OAuth apps can request read or write access to your GitHub data; choose scopes carefully to follow the principle of least privilege.",
+        "severity": "note",
+        "evidence": "cited",
+        "citations": [
+          {
+            "url": "https://docs.github.com/en/apps/oauth-apps/using-oauth-apps/authorizing-oauth-apps",
+            "quote": "OAuth apps can have *read* or *write* access to your GitHub data.",
+            "title": "Authorizing OAuth apps",
+            "fetchedAt": "2026-11-03T15:01:15.380Z"
+          }
+        ]
+      },
+      {
+        "title": "Token capabilities",
+        "detail": "A token inherits the permissions of its owner and is further limited by the scopes granted to it.",
+        "severity": "note",
+        "evidence": "cited",
+        "citations": [
+          {
+            "url": "https://docs.github.com/en/apps/oauth-apps/using-oauth-apps/authorizing-oauth-apps",
+            "quote": "A token has the same capabilities to access resources and perform actions on those resources that the owner of the token has, and is further limited by any scopes or permissions granted to the token.",
+            "title": "Authorizing OAuth apps",
+            "fetchedAt": "2026-11-03T15:01:15.380Z"
+          }
+        ]
+      },
+      {
+        "title": "Token creation limits",
+        "detail": "GitHub limits each user/application/scope combination to ten active tokens and caps token creation at ten per hour. Exceeding these limits may cause token creation to fail.",
+        "severity": "gotcha",
+        "evidence": "cited",
+        "citations": [
+          {
+            "url": "https://docs.github.com/en/apps/oauth-apps/using-oauth-apps/authorizing-oauth-apps",
+            "quote": "There is a limit of ten tokens that are issued per user/application/scope combination, and a rate limit of ten tokens created per hour.",
+            "title": "Authorizing OAuth apps",
+            "fetchedAt": "2026-11-03T15:01:15.380Z"
+          }
+        ]
+      },
+      {
+        "title": "Token revocation on overflow",
+        "detail": "If more than ten tokens are created for the same user and scopes, GitHub automatically revokes an existing token in that combination.",
+        "severity": "gotcha",
+        "evidence": "cited",
+        "citations": [
+          {
+            "url": "https://docs.github.com/en/apps/oauth-apps/using-oauth-apps/authorizing-oauth-apps",
+            "quote": "If an application creates more than ten tokens for the same user and the same scopes, GitHub revokes one of the existing tokens with the same user/application/scope combination, chosen in this order:",
+            "title": "Authorizing OAuth apps",
+            "fetchedAt": "2026-11-03T15:01:15.380Z"
+          }
+        ]
+      }
+    ],
+    "whenBlocked": [
+      {
+        "situation": "Account flagged and cannot authorize third‑party applications",
+        "action": "Contact GitHub Support to resolve the restriction or request a review of the flag",
+        "contact": "https://github.com/contact"
+      }
+    ],
+    "conflicts": [],
+    "openQuestions": [
+      {
+        "question": "Is there any formal review period for newly created OAuth apps on GitHub?",
+        "whyItMatters": "Knowing whether a review delay exists affects the total time to make the app usable for end users.",
+        "howToResolve": "Check GitHub’s developer documentation or support pages for any mention of app review queues or approval timelines."
+      }
+    ],
+    "sources": [
+      {
+        "url": "https://docs.github.com/en/apps/oauth-apps/using-oauth-apps/authorizing-oauth-apps",
+        "quote": "You must [verify your email address](/en/account-and-profile/how-tos/email-preferences/verifying-your-email-address) before you can authorize an OAuth app.",
+        "title": "Authorizing OAuth apps",
+        "fetchedAt": "2026-11-03T15:01:15.380Z"
+      }
+    ],
+    "generation": {
+      "generatedAt": "2026-11-03T15:01:27.205Z",
+      "origin": "seeded",
+      "models": [
+        {
+          "model": "openai/gpt-oss-120b",
+          "role": "adjudicate",
+          "calls": 3,
+          "inputTokens": 3340,
+          "outputTokens": 3734
+        },
+        {
+          "model": "openai/gpt-oss-20b",
+          "role": "triage",
+          "calls": 2,
+          "inputTokens": 1887,
+          "outputTokens": 201
+        },
+        {
+          "model": "openai/gpt-oss-20b",
+          "role": "extract",
+          "calls": 1,
+          "inputTokens": 1514,
+          "outputTokens": 395
+        }
+      ],
+      "docPagesDiscovered": 215,
+      "docPagesRead": 1,
+      "durationMs": 65208
+    }
+  },
+  {
+    "schemaVersion": 1,
+    "slug": "shopify",
+    "appName": "Shopify",
+    "composioToolkitSlug": "SHOPIFY",
+    "composioManagedOAuth": false,
+    "providerName": "Shopify",
+    "developerConsoleUrl": {
+      "value": "https://partners.shopify.com",
+      "evidence": "inferred",
+      "citations": [],
+      "reasoning": "The partner dashboard is the known place for developers to create and manage apps; the hint URL points to it."
+    },
+    "docsRootUrl": "https://shopify.dev",
+    "summary": "Shopify requires developers to register apps via the Partner Dashboard, meet install, review, rating, and performance thresholds, and respond to quality checks within 7 days and make required changes within 30 days, all managed through the dashboard.",
+    "rubric": {
+      "selfServeMinutes": {
+        "value": 15,
+        "evidence": "inferred",
+        "citations": [],
+        "reasoning": "Creating an app in the Partner Dashboard is a straightforward web form; typical developers can complete it in about a quarter hour."
+      },
+      "reviewWaitBusinessDays": {
+        "value": {
+          "min": 0,
+          "max": 30
+        },
+        "evidence": "cited",
+        "citations": [
+          {
+            "url": "https://shopify.dev/docs/apps/launch/app-store-review/app-quality-checks",
+            "quote": "If your quality check has a list of changes that you need to make to your app, then you have 30 days to make those changes.",
+            "fetchedAt": "2026-11-03T14:48:27.848Z"
+          },
+          {
+            "url": "https://shopify.dev/docs/apps/launch/app-store-review/app-quality-checks",
+            "quote": "If you don't respond to the initial quality check within 7 days, then your app will be demoted.",
+            "fetchedAt": "2026-11-03T14:48:27.848Z"
+          }
+        ],
+        "reasoning": "The 7‑day response deadline and the subsequent 30‑day change window define the maximum wait time for review."
+      },
+      "humanOnlyBlockers": {
+        "value": [
+          {
+            "reason": "human_review_response",
+            "detail": "Submitting evidence of changes and managing feedback must be done in the Partner Dashboard, which requires a human to gather and upload proof."
+          }
+        ],
+        "evidence": "cited",
+        "citations": [
+          {
+            "url": "https://shopify.dev/docs/apps/launch/app-store-review/app-quality-checks",
+            "quote": "After you make the changes, submit your response in the Partner Dashboard and provide evidence of the changes that you've made.",
+            "fetchedAt": "2026-11-03T14:48:27.848Z"
+          },
+          {
+            "url": "https://shopify.dev/docs/apps/launch/app-store-review/app-quality-checks",
+            "quote": "All feedback and your responses are managed in the Partner Dashboard until the quality check process is complete.",
+            "fetchedAt": "2026-11-03T14:48:27.848Z"
+          }
+        ],
+        "reasoning": "An autonomous agent cannot generate the required evidence or interact with the dashboard UI without human involvement."
+      },
+      "costUsd": {
+        "value": null,
+        "evidence": "unknown",
+        "citations": [],
+        "reasoning": "The fetched pages do not mention any fees for registering an OAuth app; Shopify’s public docs focus on technical and review requirements."
+      },
+      "prerequisiteArtifacts": {
+        "value": null,
+        "evidence": "unknown",
+        "citations": [
+          {
+            "url": "https://shopify.dev/docs/apps/launch/built-for-shopify/requirements",
+            "quote": "Your app must have a minimum of 50 net installs from active shops on paid plans.",
+            "fetchedAt": "2026-11-03T14:48:32.459Z"
+          },
+          {
+            "url": "https://shopify.dev/docs/apps/launch/built-for-shopify/requirements",
+            "quote": "Your app must have a minimum of five reviews.",
+            "fetchedAt": "2026-11-03T14:48:32.459Z"
+          },
+          {
+            "url": "https://shopify.dev/docs/apps/launch/built-for-shopify/requirements",
+            "quote": "Your app must meet a minimum recent app rating threshold in the Shopify App Store.",
+            "fetchedAt": "2026-11-03T14:48:32.459Z"
+          }
+        ],
+        "reasoning": "These are the explicit quantitative prerequisites a developer must satisfy before the app can be reviewed."
+      }
+    },
+    "tier": "enterprise",
+    "confidence": "low",
+    "tierRationale": [
+      "provider review of 0–30 business days",
+      "tier is blind to 2 unestablished dimensions: cost, prerequisites"
+    ],
+    "steps": [
+      {
+        "title": "Log into Shopify Partners dashboard",
+        "detail": "Open https://partners.shopify.com and sign in with your Partner account credentials.",
+        "actor": "agent",
+        "where": "Partner Dashboard",
+        "estimatedMinutes": 2,
+        "startsReviewWait": false,
+        "evidence": "inferred",
+        "citations": []
+      },
+      {
+        "title": "Create a new app",
+        "detail": "In the dashboard sidebar select **Apps**, then click **Create app** and choose **Public app** (or the appropriate type).",
+        "actor": "agent",
+        "where": "Partner Dashboard > Apps",
+        "estimatedMinutes": 3,
+        "startsReviewWait": false,
+        "evidence": "inferred",
+        "citations": []
+      },
+      {
+        "title": "Enter basic app information",
+        "detail": "Provide an app name, App URL, and one or more Redirect URI(s). All Redirect URIs must be HTTPS and match exactly what your OAuth flow will use.",
+        "actor": "agent",
+        "where": "App creation form",
+        "estimatedMinutes": 4,
+        "startsReviewWait": false,
+        "evidence": "inferred",
+        "citations": []
+      },
+      {
+        "title": "Save to generate API credentials",
+        "detail": "Click **Save**. Shopify will display the **API key (Client ID)** and **API secret key** – copy these for your server configuration.",
+        "actor": "agent",
+        "where": "App details page",
+        "estimatedMinutes": 2,
+        "startsReviewWait": false,
+        "evidence": "inferred",
+        "citations": []
+      },
+      {
+        "title": "Configure OAuth scopes",
+        "detail": "Under **Configuration → OAuth scopes**, select the permissions your app requires (e.g., read_products, write_orders). Save the changes.",
+        "actor": "agent",
+        "where": "App configuration",
+        "estimatedMinutes": 3,
+        "startsReviewWait": false,
+        "evidence": "inferred",
+        "citations": []
+      },
+      {
+        "title": "Submit the app for review",
+        "detail": "From the app’s overview page click **Submit for review** and follow the prompts to provide any required assets (screenshots, description, privacy policy).",
+        "actor": "agent",
+        "where": "Partner Dashboard > App overview",
+        "estimatedMinutes": 5,
+        "startsReviewWait": true,
+        "evidence": "cited",
+        "citations": [
+          {
+            "url": "https://shopify.dev/docs/apps/launch/app-store-review/app-quality-checks",
+            "quote": "After you make the changes, submit your response in the Partner Dashboard and provide evidence of the changes that you've made.",
+            "title": "App quality checks – Shopify Dev",
+            "fetchedAt": "2026-11-03T14:48:27.848Z"
+          }
+        ]
+      },
+      {
+        "title": "Monitor review status",
+        "detail": "All feedback and your responses are managed in the Partner Dashboard until the quality check process is complete.",
+        "actor": "agent",
+        "where": "Partner Dashboard > Review inbox",
+        "estimatedMinutes": 2,
+        "startsReviewWait": false,
+        "evidence": "cited",
+        "citations": [
+          {
+            "url": "https://shopify.dev/docs/apps/launch/app-store-review/app-quality-checks",
+            "quote": "All feedback and your responses are managed in the Partner Dashboard until the quality check process is complete.",
+            "title": "App quality checks – Shopify Dev",
+            "fetchedAt": "2026-11-03T14:48:27.848Z"
+          }
+        ]
+      }
+    ],
+    "nuances": [
+      {
+        "title": "Prerequisite install and review thresholds",
+        "detail": "Shopify will not allow a public app to be listed unless it already has at least 50 net installs on paid‑plan shops, a minimum of five reviews, and meets the recent rating threshold.",
+        "severity": "blocker",
+        "evidence": "cited",
+        "citations": [
+          {
+            "url": "https://shopify.dev/docs/apps/launch/built-for-shopify/requirements",
+            "quote": "Your app must have a minimum of 50 net installs from active shops on paid plans.",
+            "title": "App launch requirements – Shopify Dev",
+            "fetchedAt": "2026-11-03T14:48:32.459Z"
+          },
+          {
+            "url": "https://shopify.dev/docs/apps/launch/built-for-shopify/requirements",
+            "quote": "Your app must have a minimum of five reviews.",
+            "title": "App launch requirements – Shopify Dev",
+            "fetchedAt": "2026-11-03T14:48:32.459Z"
+          },
+          {
+            "url": "https://shopify.dev/docs/apps/launch/built-for-shopify/requirements",
+            "quote": "Your app must meet a minimum recent app rating threshold in the Shopify App Store.",
+            "title": "App launch requirements – Shopify Dev",
+            "fetchedAt": "2026-11-03T14:48:32.459Z"
+          }
+        ]
+      },
+      {
+        "title": "Redirect URI must be exact and HTTPS",
+        "detail": "Shopify only accepts redirect URIs that use HTTPS and match the value sent in the OAuth request byte‑for‑byte; wildcards or query‑string variations are rejected.",
+        "severity": "gotcha",
+        "evidence": "inferred",
+        "citations": []
+      },
+      {
+        "title": "Scope approval may be limited for new apps",
+        "detail": "If your app requests sensitive scopes (e.g., write_orders), Shopify reviewers may ask for additional justification or limit the scopes until the app proves compliance.",
+        "severity": "note",
+        "evidence": "inferred",
+        "citations": []
+      }
+    ],
+    "whenBlocked": [
+      {
+        "situation": "App does not meet the 50‑install, 5‑review, or rating prerequisites",
+        "action": "You cannot submit the app for public listing. Focus on acquiring installs and reviews on a development store or private distribution, then re‑attempt submission.",
+        "contact": "Shopify Partner Support via https://help.shopify.com/partners or email partners@shopify.com"
+      },
+      {
+        "situation": "Redirect URI validation fails",
+        "action": "Edit the app’s OAuth configuration in the Partner Dashboard to use an exact HTTPS URL that matches your OAuth flow, then resubmit.",
+        "contact": "Shopify Partner Support"
+      }
+    ],
+    "conflicts": [],
+    "openQuestions": [
+      {
+        "question": "Is there any monetary cost (e.g., partner program fee) associated with creating a public OAuth app on Shopify?",
+        "whyItMatters": "Cost affects the feasibility for developers, especially small teams.",
+        "howToResolve": "Check Shopify Partner Program pricing documentation or contact Shopify support."
+      },
+      {
+        "question": "What is the typical actual time a developer spends filling out the Partner Dashboard form to register an OAuth app?",
+        "whyItMatters": "Accurate self‑serve minutes help set realistic expectations for automation.",
+        "howToResolve": "Observe a developer performing the registration or consult community reports."
+      }
+    ],
+    "sources": [
+      {
+        "url": "https://shopify.dev/docs/apps/launch/app-store-review/app-quality-checks",
+        "quote": "If your quality check has a list of changes that you need to make to your app, then you have 30 days to make those changes.",
+        "fetchedAt": "2026-11-03T14:48:27.848Z"
+      },
+      {
+        "url": "https://shopify.dev/docs/apps/launch/app-store-review/app-quality-checks",
+        "quote": "If you don't respond to the initial quality check within 7 days, then your app will be demoted.",
+        "fetchedAt": "2026-11-03T14:48:27.848Z"
+      },
+      {
+        "url": "https://shopify.dev/docs/apps/launch/built-for-shopify/requirements",
+        "quote": "Your app must have a minimum of 50 net installs from active shops on paid plans.",
+        "fetchedAt": "2026-11-03T14:48:32.459Z"
+      },
+      {
+        "url": "https://shopify.dev/docs/apps/launch/built-for-shopify/requirements",
+        "quote": "Your app must have a minimum of five reviews.",
+        "fetchedAt": "2026-11-03T14:48:32.459Z"
+      },
+      {
+        "url": "https://shopify.dev/docs/apps/launch/built-for-shopify/requirements",
+        "quote": "Your app must meet a minimum recent app rating threshold in the Shopify App Store.",
+        "fetchedAt": "2026-11-03T14:48:32.459Z"
+      },
+      {
+        "url": "https://shopify.dev/docs/apps/launch/app-store-review/app-quality-checks",
+        "quote": "After you make the changes, submit your response in the Partner Dashboard and provide evidence of the changes that you've made.",
+        "fetchedAt": "2026-11-03T14:48:27.848Z"
+      },
+      {
+        "url": "https://shopify.dev/docs/apps/launch/app-store-review/app-quality-checks",
+        "quote": "All feedback and your responses are managed in the Partner Dashboard until the quality check process is complete.",
+        "fetchedAt": "2026-11-03T14:48:27.848Z"
+      }
+    ],
+    "generation": {
+      "generatedAt": "2026-11-03T14:51:04.108Z",
+      "origin": "seeded",
+      "models": [
+        {
+          "model": "openai/gpt-oss-120b",
+          "role": "adjudicate",
+          "calls": 3,
+          "inputTokens": 3626,
+          "outputTokens": 4340
+        },
+        {
+          "model": "openai/gpt-oss-20b",
+          "role": "triage",
+          "calls": 5,
+          "inputTokens": 5708,
+          "outputTokens": 574
+        },
+        {
+          "model": "openai/gpt-oss-20b",
+          "role": "extract",
+          "calls": 7,
+          "inputTokens": 10640,
+          "outputTokens": 990
+        }
+      ],
+      "docPagesDiscovered": 19510,
+      "docPagesRead": 7,
+      "durationMs": 232613
+    }
+  },
+  {
+    "schemaVersion": 1,
+    "slug": "slack",
+    "appName": "Slack",
+    "composioToolkitSlug": "SLACK",
+    "composioManagedOAuth": true,
+    "providerName": "Slack",
+    "developerConsoleUrl": {
+      "value": "https://api.slack.com/apps",
+      "evidence": "unknown",
+      "citations": [],
+      "reasoning": "The URL is the standard location for Slack app management, inferred from the docs root but not directly cited."
+    },
+    "docsRootUrl": "https://api.slack.com",
+    "summary": "Creating a Slack OAuth app can be done entirely via the Slack CLI: install the CLI, log into a workspace, generate a starter project, run the app to install it to a team, and open the app settings—all without any monetary cost, though public distribution may trigger a separate review process.",
+    "rubric": {
+      "selfServeMinutes": {
+        "value": 20,
+        "evidence": "inferred",
+        "citations": [
+          {
+            "url": "https://docs.slack.dev/quickstart",
+            "quote": "Download the command-line tool for developing Slack apps.",
+            "title": "Slack Quickstart",
+            "fetchedAt": "2026-11-03T15:01:34.686Z"
+          },
+          {
+            "url": "https://docs.slack.dev/quickstart",
+            "quote": "Log in and authenticate with your Slack workspace.",
+            "title": "Slack Quickstart",
+            "fetchedAt": "2026-11-03T15:01:34.686Z"
+          },
+          {
+            "url": "https://docs.slack.dev/quickstart",
+            "quote": "Create a project by selecting \"Starter App\", then either \"Bolt for Python\" or \"Bolt for JavaScript\".",
+            "title": "Slack Quickstart",
+            "fetchedAt": "2026-11-03T15:01:34.686Z"
+          },
+          {
+            "url": "https://docs.slack.dev/quickstart",
+            "quote": "By using the `slack run` command, and selecting \"Create a new app\", you'll install the app to the team you choose.",
+            "title": "Slack Quickstart",
+            "fetchedAt": "2026-11-03T15:01:34.686Z"
+          },
+          {
+            "url": "https://docs.slack.dev/quickstart",
+            "quote": "Open app settings for your app with the following command: `$ slack app settings`",
+            "title": "Slack Quickstart",
+            "fetchedAt": "2026-11-03T15:01:34.686Z"
+          }
+        ],
+        "reasoning": "The steps are straightforward CLI commands; an experienced developer can complete them in roughly 15‑20 minutes of keyboard work."
+      },
+      "reviewWaitBusinessDays": {
+        "value": null,
+        "evidence": "unknown",
+        "citations": [],
+        "reasoning": "Documentation does not specify a review timeline for internal apps; public app review may apply but is not detailed."
+      },
+      "humanOnlyBlockers": {
+        "value": null,
+        "evidence": "unknown",
+        "citations": [],
+        "reasoning": "All required actions (CLI install, authentication, project creation, settings access) can be scripted; no human‑only interaction is mandated."
+      },
+      "costUsd": {
+        "value": {
+          "amount": 0,
+          "recurrence": "none"
+        },
+        "evidence": "inferred",
+        "citations": [
+          {
+            "url": "https://docs.slack.dev/quickstart",
+            "quote": "This quickstart guide covers how to create a Slack app using the Slack CLI and the Bolt frameworks, in either Python or JavaScript.",
+            "title": "Slack Quickstart",
+            "fetchedAt": "2026-11-03T15:01:34.686Z"
+          }
+        ],
+        "reasoning": "The quickstart page mentions no fees for creating an app, implying zero cost."
+      },
+      "prerequisiteArtifacts": {
+        "value": null,
+        "evidence": "unknown",
+        "citations": [],
+        "reasoning": "Required artifacts such as privacy policy or verified domain are not mentioned for a basic internal app."
+      }
+    },
+    "tier": "same_day",
+    "confidence": "low",
+    "tierRationale": [
+      "20 min of hands-on setup",
+      "tier is blind to 3 unestablished dimensions: review wait, human-only steps, prerequisites"
+    ],
+    "steps": [
+      {
+        "title": "Open Slack API dashboard",
+        "detail": "Navigate to https://api.slack.com/apps in a browser.",
+        "actor": "agent",
+        "where": "Slack API dashboard",
+        "estimatedMinutes": 2,
+        "startsReviewWait": false,
+        "evidence": "inferred",
+        "citations": []
+      },
+      {
+        "title": "Create a new app",
+        "detail": "Click “Create New App”, choose “From scratch”, enter an App Name and select the Development Slack Workspace, then click “Create App”.",
+        "actor": "agent",
+        "where": "Slack API dashboard > Your Apps",
+        "estimatedMinutes": 3,
+        "startsReviewWait": false,
+        "evidence": "inferred",
+        "citations": []
+      },
+      {
+        "title": "Configure Redirect URLs",
+        "detail": "In the left‑hand menu select “OAuth & Permissions”, scroll to “Redirect URLs”, click “Add a Redirect URL”, paste your app’s redirect URI (must be HTTPS), and click “Save URLs”.",
+        "actor": "agent",
+        "where": "OAuth & Permissions page",
+        "estimatedMinutes": 4,
+        "startsReviewWait": false,
+        "evidence": "inferred",
+        "citations": []
+      },
+      {
+        "title": "Add required scopes",
+        "detail": "Still on “OAuth & Permissions”, under “Bot Token Scopes” click “Add an OAuth Scope” and select each scope your app needs (e.g., chat:write, channels:read).",
+        "actor": "agent",
+        "where": "OAuth & Permissions page",
+        "estimatedMinutes": 5,
+        "startsReviewWait": false,
+        "evidence": "inferred",
+        "citations": []
+      },
+      {
+        "title": "Save scope changes",
+        "detail": "Click the “Save Changes” button at the bottom of the page to persist the added scopes.",
+        "actor": "agent",
+        "where": "OAuth & Permissions page",
+        "estimatedMinutes": 1,
+        "startsReviewWait": false,
+        "evidence": "inferred",
+        "citations": []
+      },
+      {
+        "title": "Install the app to your workspace",
+        "detail": "In the left menu select “Install App”, then click “Install to Workspace”. Review the permission prompt and click “Allow”.",
+        "actor": "agent",
+        "where": "Install App page",
+        "estimatedMinutes": 3,
+        "startsReviewWait": false,
+        "evidence": "inferred",
+        "citations": []
+      },
+      {
+        "title": "Copy credentials",
+        "detail": "After installation, return to “Basic Information” and copy the Client ID, Client Secret, and the Bot User OAuth Token for use in your code.",
+        "actor": "agent",
+        "where": "Basic Information page",
+        "estimatedMinutes": 2,
+        "startsReviewWait": false,
+        "evidence": "inferred",
+        "citations": []
+      }
+    ],
+    "nuances": [
+      {
+        "title": "Redirect URI must be HTTPS",
+        "detail": "Slack only accepts HTTPS URLs for OAuth redirect endpoints; using HTTP will cause the OAuth flow to fail.",
+        "severity": "gotcha",
+        "evidence": "inferred",
+        "citations": []
+      },
+      {
+        "title": "Scope approval may require admin consent",
+        "detail": "If the selected scopes are considered sensitive (e.g., admin.*, files:*), a workspace admin must approve them before the app can be installed.",
+        "severity": "gotcha",
+        "evidence": "inferred",
+        "citations": []
+      },
+      {
+        "title": "Rate limits on token generation",
+        "detail": "Slack enforces rate limits on OAuth token requests; excessive retries can lead to temporary blocks.",
+        "severity": "note",
+        "evidence": "inferred",
+        "citations": []
+      },
+      {
+        "title": "App visibility vs. public distribution",
+        "detail": "Apps created for personal use are private to the workspace; publishing to the Slack App Directory requires a separate review process.",
+        "severity": "note",
+        "evidence": "inferred",
+        "citations": []
+      }
+    ],
+    "whenBlocked": [
+      {
+        "situation": "Workspace admin has disabled third‑party app installations",
+        "action": "Ask the workspace admin to enable app installations in the workspace settings or to grant you permission to install apps",
+        "contact": "Slack workspace admin or Slack support at https://slack.com/help/contact"
+      }
+    ],
+    "conflicts": [],
+    "openQuestions": [
+      {
+        "question": "What is the typical review time (in business days) for a Slack app that requests sensitive scopes or is intended for public distribution?",
+        "whyItMatters": "Understanding the review wait is essential for estimating total time to make the app usable by end‑users.",
+        "howToResolve": "Consult Slack's App Review documentation or contact Slack support for official SLA information."
+      },
+      {
+        "question": "Are there any hidden costs (e.g., paid plans for advanced features) that apply when an app moves beyond the quickstart stage?",
+        "whyItMatters": "Cost impacts budgeting for developers deploying production‑grade integrations.",
+        "howToResolve": "Review Slack's pricing page and any tiered feature documentation."
+      }
+    ],
+    "sources": [
+      {
+        "url": "https://docs.slack.dev/quickstart",
+        "quote": "This quickstart guide covers how to create a Slack app using the Slack CLI and the Bolt frameworks, in either Python or JavaScript.",
+        "title": "Slack Quickstart",
+        "fetchedAt": "2026-11-03T15:01:34.686Z"
+      },
+      {
+        "url": "https://docs.slack.dev/quickstart",
+        "quote": "Before you begin building, grab the required tools by following the three steps below.",
+        "title": "Slack Quickstart",
+        "fetchedAt": "2026-11-03T15:01:34.686Z"
+      },
+      {
+        "url": "https://docs.slack.dev/quickstart",
+        "quote": "Download the command-line tool for developing Slack apps.",
+        "title": "Slack Quickstart",
+        "fetchedAt": "2026-11-03T15:01:34.686Z"
+      },
+      {
+        "url": "https://docs.slack.dev/quickstart",
+        "quote": "Log in and authenticate with your Slack workspace.",
+        "title": "Slack Quickstart",
+        "fetchedAt": "2026-11-03T15:01:34.686Z"
+      },
+      {
+        "url": "https://docs.slack.dev/quickstart",
+        "quote": "Create a project by selecting \"Starter App\", then either \"Bolt for Python\" or \"Bolt for JavaScript\".",
+        "title": "Slack Quickstart",
+        "fetchedAt": "2026-11-03T15:01:34.686Z"
+      },
+      {
+        "url": "https://docs.slack.dev/quickstart",
+        "quote": "By using the `slack run` command, and selecting \"Create a new app\", you'll install the app to the team you choose.",
+        "title": "Slack Quickstart",
+        "fetchedAt": "2026-11-03T15:01:34.686Z"
+      },
+      {
+        "url": "https://docs.slack.dev/quickstart",
+        "quote": "Open app settings for your app with the following command: `$ slack app settings`",
+        "title": "Slack Quickstart",
+        "fetchedAt": "2026-11-03T15:01:34.686Z"
+      }
+    ],
+    "generation": {
+      "generatedAt": "2026-11-03T15:02:34.720Z",
+      "origin": "seeded",
+      "models": [
+        {
+          "model": "openai/gpt-oss-120b",
+          "role": "adjudicate",
+          "calls": 3,
+          "inputTokens": 2936,
+          "outputTokens": 3473
+        },
+        {
+          "model": "openai/gpt-oss-20b",
+          "role": "triage",
+          "calls": 2,
+          "inputTokens": 1495,
+          "outputTokens": 188
+        },
+        {
+          "model": "openai/gpt-oss-20b",
+          "role": "extract",
+          "calls": 2,
+          "inputTokens": 3052,
+          "outputTokens": 353
+        }
+      ],
+      "docPagesDiscovered": 185,
+      "docPagesRead": 2,
+      "durationMs": 67514
+    }
+  },
+  {
+    "schemaVersion": 1,
+    "slug": "snowflake",
+    "appName": "Snowflake",
+    "composioToolkitSlug": "SNOWFLAKE",
+    "composioManagedOAuth": false,
+    "providerName": "Snowflake",
+    "developerConsoleUrl": {
+      "value": null,
+      "evidence": "unknown",
+      "citations": []
+    },
+    "docsRootUrl": "https://snowflake.com",
+    "summary": "No publicly available documentation was found describing a Snowflake developer console or OAuth app registration process, so the difficulty of self‑serving registration cannot be assessed.",
+    "rubric": {
+      "selfServeMinutes": {
+        "value": null,
+        "evidence": "unknown",
+        "citations": []
+      },
+      "reviewWaitBusinessDays": {
+        "value": null,
+        "evidence": "unknown",
+        "citations": []
+      },
+      "humanOnlyBlockers": {
+        "value": null,
+        "evidence": "unknown",
+        "citations": []
+      },
+      "costUsd": {
+        "value": null,
+        "evidence": "unknown",
+        "citations": []
+      },
+      "prerequisiteArtifacts": {
+        "value": null,
+        "evidence": "unknown",
+        "citations": []
+      }
+    },
+    "tier": "instant",
+    "confidence": "low",
+    "tierRationale": [
+      "nothing could be established — treat this tier as meaningless",
+      "tier is blind to 5 unestablished dimensions: setup time, review wait, human-only steps, cost, prerequisites"
+    ],
+    "steps": [
+      {
+        "title": "Log into Snowflake UI",
+        "detail": "Open the Snowflake web console and sign in with your account credentials. This is the starting point for OAuth app registration (inferred).",
+        "actor": "either",
+        "startsReviewWait": false,
+        "evidence": "inferred",
+        "citations": []
+      },
+      {
+        "title": "Navigate to OAuth Application Settings",
+        "detail": "In the console, go to the Settings or Account menu, select \"Security\" then \"OAuth\" and click \"Create New Application\" to begin registering your OAuth client (inferred).",
+        "actor": "either",
+        "startsReviewWait": false,
+        "evidence": "inferred",
+        "citations": []
+      },
+      {
+        "title": "Enter application details and save",
+        "detail": "Provide a name, description, and redirect URI for your app, then save. Snowflake will generate a client ID and client secret that you can copy for use (inferred).",
+        "actor": "either",
+        "startsReviewWait": false,
+        "evidence": "inferred",
+        "citations": []
+      }
+    ],
+    "nuances": [],
+    "whenBlocked": [],
+    "conflicts": [],
+    "openQuestions": [
+      {
+        "question": "Where is the Snowflake developer console or portal for creating OAuth applications?",
+        "whyItMatters": "Without a known location, developers cannot begin the registration workflow.",
+        "howToResolve": "Locate the official Snowflake documentation or support page that lists the developer console URL."
+      },
+      {
+        "question": "What are the step‑by‑step instructions for registering an OAuth app in Snowflake?",
+        "whyItMatters": "The process determines the amount of manual effort and any required human interaction.",
+        "howToResolve": "Find a guide or tutorial that outlines the registration form fields, required redirects, and any verification steps."
+      },
+      {
+        "question": "Does Snowflake require a review of OAuth apps before they become usable, and if so, how long does the review take?",
+        "whyItMatters": "Review time impacts the overall onboarding timeline for end‑users.",
+        "howToResolve": "Identify any statements about app review policies, SLA, or support tickets that mention review durations."
+      },
+      {
+        "question": "Are there any costs (one‑time, monthly, or annual) associated with creating or maintaining an OAuth app on Snowflake?",
+        "whyItMatters": "Cost influences the feasibility for developers and their users.",
+        "howToResolve": "Search Snowflake pricing pages or developer agreements for fees tied to API access or app registration."
+      },
+      {
+        "question": "What prerequisite artifacts (e.g., privacy policy URL, terms of service, verified domain) does Snowflake require for an OAuth app?",
+        "whyItMatters": "Missing required artifacts can block registration or cause later compliance issues.",
+        "howToResolve": "Locate any developer policy documents that list required legal or technical artifacts."
+      },
+      {
+        "question": "Are there any human‑only blockers such as identity verification, legal signatures, or captcha that cannot be automated?",
+        "whyItMatters": "Human‑only steps increase integration complexity for AI agents.",
+        "howToResolve": "Review the registration flow for steps that demand manual interaction beyond form filling."
+      }
+    ],
+    "sources": [],
+    "generation": {
+      "generatedAt": "2026-11-03T15:00:21.995Z",
+      "origin": "seeded",
+      "models": [
+        {
+          "model": "openai/gpt-oss-120b",
+          "role": "adjudicate",
+          "calls": 3,
+          "inputTokens": 2093,
+          "outputTokens": 1501
+        },
+        {
+          "model": "openai/gpt-oss-20b",
+          "role": "triage",
+          "calls": 5,
+          "inputTokens": 6667,
+          "outputTokens": 168
+        }
+      ],
+      "docPagesDiscovered": 16331,
+      "docPagesRead": 0,
+      "durationMs": 68541
+    }
+  },
+  {
+    "schemaVersion": 1,
+    "slug": "workday",
+    "appName": "Workday",
+    "composioToolkitSlug": "WORKDAY",
+    "composioManagedOAuth": false,
+    "providerName": "Workday",
+    "developerConsoleUrl": {
+      "value": null,
+      "evidence": "unknown",
+      "citations": [],
+      "reasoning": "No documentation found indicating a developer console URL."
+    },
+    "docsRootUrl": "https://www.workday.com",
+    "summary": "No publicly available documentation was found describing how developers can register an OAuth application with Workday, so all rubric metrics are unknown.",
+    "rubric": {
+      "selfServeMinutes": {
+        "value": null,
+        "evidence": "unknown",
+        "citations": [],
+        "reasoning": "No information on time required for self‑service registration."
+      },
+      "reviewWaitBusinessDays": {
+        "value": null,
+        "evidence": "unknown",
+        "citations": [],
+        "reasoning": "No information on any review queue or waiting period."
+      },
+      "humanOnlyBlockers": {
+        "value": null,
+        "evidence": "unknown",
+        "citations": [],
+        "reasoning": "No details on steps that require human intervention."
+      },
+      "costUsd": {
+        "value": null,
+        "evidence": "unknown",
+        "citations": [],
+        "reasoning": "No pricing information for registering an OAuth app."
+      },
+      "prerequisiteArtifacts": {
+        "value": null,
+        "evidence": "unknown",
+        "citations": [],
+        "reasoning": "No list of required artifacts (privacy policy, terms, etc.) was found."
+      }
+    },
+    "tier": "instant",
+    "confidence": "low",
+    "tierRationale": [
+      "nothing could be established — treat this tier as meaningless",
+      "tier is blind to 5 unestablished dimensions: setup time, review wait, human-only steps, cost, prerequisites"
+    ],
+    "steps": [
+      {
+        "title": "Access Workday Developer Portal",
+        "detail": "Navigate to https://developer.workday.com/apps and sign in with your Workday account.",
+        "actor": "either",
+        "startsReviewWait": false,
+        "evidence": "inferred",
+        "citations": []
+      },
+      {
+        "title": "Create a New OAuth Application",
+        "detail": "In the portal, select “Create App” (or similar), choose OAuth as the app type, and provide a name and description.",
+        "actor": "either",
+        "startsReviewWait": false,
+        "evidence": "inferred",
+        "citations": []
+      },
+      {
+        "title": "Configure Redirect URI and Obtain Credentials",
+        "detail": "Enter the authorized redirect URI, save the app, and copy the generated client ID and client secret for use in your integration.",
+        "actor": "either",
+        "startsReviewWait": false,
+        "evidence": "inferred",
+        "citations": []
+      }
+    ],
+    "nuances": [],
+    "whenBlocked": [],
+    "conflicts": [],
+    "openQuestions": [
+      {
+        "question": "What is the exact URL of Workday’s developer console or portal where OAuth applications can be created?",
+        "whyItMatters": "Without the correct console URL a developer cannot begin the registration process.",
+        "howToResolve": "Locate the official Workday developer portal documentation or contact Workday support for the URL."
+      },
+      {
+        "question": "Does Workday require any manual review of OAuth applications before they become active?",
+        "whyItMatters": "Knowing the review timeline affects integration planning.",
+        "howToResolve": "Check Workday’s API onboarding guides or ask a Workday representative about the review process."
+      },
+      {
+        "question": "Are there any fees associated with creating or maintaining a Workday OAuth app?",
+        "whyItMatters": "Cost impacts budgeting for the integration.",
+        "howToResolve": "Review Workday’s pricing documentation or inquire with sales."
+      },
+      {
+        "question": "What prerequisite artifacts (e.g., privacy policy, terms of service, verified domain) must be submitted when registering an OAuth app?",
+        "whyItMatters": "Missing required artifacts can block registration.",
+        "howToResolve": "Examine Workday’s developer onboarding checklist or request the list from Workday support."
+      },
+      {
+        "question": "Are there any identity verification, legal signature, or other human‑only steps required during registration?",
+        "whyItMatters": "Human‑only steps cannot be automated by an AI agent.",
+        "howToResolve": "Search Workday’s security or compliance documentation for required verification steps."
+      }
+    ],
+    "sources": [],
+    "generation": {
+      "generatedAt": "2026-11-03T14:59:13.452Z",
+      "origin": "seeded",
+      "models": [
+        {
+          "model": "openai/gpt-oss-120b",
+          "role": "adjudicate",
+          "calls": 3,
+          "inputTokens": 2106,
+          "outputTokens": 1546
+        },
+        {
+          "model": "openai/gpt-oss-20b",
+          "role": "triage",
+          "calls": 5,
+          "inputTokens": 6115,
+          "outputTokens": 216
+        }
+      ],
+      "docPagesDiscovered": 13379,
+      "docPagesRead": 0,
+      "durationMs": 31034
+    }
+  },
+  {
+    "schemaVersion": 1,
+    "slug": "xero",
+    "appName": "Xero",
+    "composioToolkitSlug": "XERO",
+    "composioManagedOAuth": false,
+    "providerName": "Xero",
+    "developerConsoleUrl": {
+      "value": "https://developer.xero.com/myapps",
+      "evidence": "unknown",
+      "citations": [],
+      "reasoning": "The URL is suggested by the prompt as a likely location for the developer console, but no fetched page directly confirms it."
+    },
+    "docsRootUrl": "https://developer.xero.com",
+    "summary": "Registering an OAuth app in Xero is a self‑service process that involves logging into the Xero Developer Portal, adding a Partner Login URL, and configuring up to 50 redirect URIs; no payment, captcha, or manual review appears required, though the connecting user must have Standard, Adviser, or Administrator level permissions with Connected Apps rights.",
+    "rubric": {
+      "selfServeMinutes": {
+        "value": 10,
+        "evidence": "inferred",
+        "citations": [
+          {
+            "url": "https://developer.xero.com/get-ready-for-the-xero-partner-hub-app-launcher",
+            "quote": "Add your Partner Login URL , using the same pattern as your existing Login URL.",
+            "fetchedAt": "2026-11-03T14:54:45.859Z"
+          }
+        ],
+        "reasoning": "The only required actions are filling a short form (Partner Login URL) and setting redirect URIs, which typically takes under ten minutes for a developer familiar with the portal."
+      },
+      "reviewWaitBusinessDays": {
+        "value": null,
+        "evidence": "unknown",
+        "citations": [],
+        "reasoning": "The fetched documents do not mention any manual review or approval step for new apps."
+      },
+      "humanOnlyBlockers": {
+        "value": null,
+        "evidence": "unknown",
+        "citations": [
+          {
+            "url": "https://developer.xero.com/faq/permissions",
+            "quote": "The user that connects the integration has to have either Standard, Adviser, or Administrator level user with the Connected Apps permission.",
+            "fetchedAt": "2026-11-03T14:54:47.403Z"
+          }
+        ],
+        "reasoning": "The only human‑only requirement is the permission level of the user who authorises the connection; the registration itself can be completed automatically."
+      },
+      "costUsd": {
+        "value": null,
+        "evidence": "unknown",
+        "citations": [],
+        "reasoning": "No pricing information was found in the provided pages."
+      },
+      "prerequisiteArtifacts": {
+        "value": null,
+        "evidence": "unknown",
+        "citations": [],
+        "reasoning": "The documents do not specify mandatory artifacts such as privacy policy or terms URLs for app registration."
+      }
+    },
+    "tier": "instant",
+    "confidence": "low",
+    "tierRationale": [
+      "10 min of hands-on setup",
+      "tier is blind to 4 unestablished dimensions: review wait, human-only steps, cost, prerequisites"
+    ],
+    "steps": [
+      {
+        "title": "Log in with a qualified user",
+        "detail": "Sign into the Xero Developer Portal using a user that has Standard, Adviser, or Administrator level permissions and the Connected Apps permission.",
+        "actor": "agent",
+        "where": "Developer Portal login page",
+        "estimatedMinutes": 5,
+        "startsReviewWait": false,
+        "evidence": "cited",
+        "citations": [
+          {
+            "url": "https://developer.xero.com/faq/permissions",
+            "quote": "The user that connects the integration has to have either Standard, Adviser, or Administrator level user with the Connected Apps permission.",
+            "fetchedAt": "2026-11-03T14:54:47.403Z"
+          }
+        ]
+      },
+      {
+        "title": "Navigate to My Apps",
+        "detail": "From the dashboard, click the “My Apps” menu item to view existing apps and create a new one.",
+        "actor": "agent",
+        "where": "Developer Portal > My Apps",
+        "estimatedMinutes": 2,
+        "startsReviewWait": false,
+        "evidence": "inferred",
+        "citations": []
+      },
+      {
+        "title": "Create a new app",
+        "detail": "Press the “Add App” (or “Create New App”) button and provide the required name, description, and company details.",
+        "actor": "agent",
+        "where": "Developer Portal > My Apps > Add App",
+        "estimatedMinutes": 5,
+        "startsReviewWait": false,
+        "evidence": "inferred",
+        "citations": []
+      },
+      {
+        "title": "Add Partner Login URL",
+        "detail": "Enter a Partner Login URL in the “Partner Login URL” field. Leaving it blank will prevent the app from appearing in the Xero Partner Hub App Launcher.",
+        "actor": "agent",
+        "where": "Developer Portal > My Apps > App Settings",
+        "estimatedMinutes": 3,
+        "startsReviewWait": false,
+        "evidence": "cited",
+        "citations": [
+          {
+            "url": "https://developer.xero.com/get-ready-for-the-xero-partner-hub-app-launcher",
+            "quote": "Add your Partner Login URL , using the same pattern as your existing Login URL.",
+            "fetchedAt": "2026-11-03T14:54:45.859Z"
+          },
+          {
+            "url": "https://developer.xero.com/get-ready-for-the-xero-partner-hub-app-launcher",
+            "quote": "Leave it blank: Your app won’t appear in the launcher, regardless of how well it works elsewhere for individual organisations.",
+            "fetchedAt": "2026-11-03T14:54:45.859Z"
+          }
+        ]
+      },
+      {
+        "title": "Register redirect URIs",
+        "detail": "Add up to 50 exact redirect URIs (wildcards are not supported). Each URI must match the one used in the OAuth flow.",
+        "actor": "agent",
+        "where": "Developer Portal > My Apps > App Settings > Redirect URIs",
+        "estimatedMinutes": 4,
+        "startsReviewWait": false,
+        "evidence": "cited",
+        "citations": [
+          {
+            "url": "https://developer.xero.com/faq/oauth2",
+            "quote": "You can use up to 50 redirect URIs for your app.",
+            "fetchedAt": "2026-11-03T14:54:49.172Z"
+          },
+          {
+            "url": "https://developer.xero.com/faq/oauth2",
+            "quote": "The use of wildcards in redirect URI is not supported.",
+            "fetchedAt": "2026-11-03T14:54:49.172Z"
+          }
+        ]
+      },
+      {
+        "title": "Select scopes",
+        "detail": "For apps created on or after 2 March 2026, choose granular scopes (available from April 2026). For older apps, you may continue using broad scopes but must migrate before September 2027 if you need granular access.",
+        "actor": "agent",
+        "where": "Developer Portal > My Apps > App Settings > Scopes",
+        "estimatedMinutes": 5,
+        "startsReviewWait": false,
+        "evidence": "cited",
+        "citations": [
+          {
+            "url": "https://developer.xero.com/faq/granular-scopes",
+            "quote": "Apps created on or after 2 March 2026 will use the new granular scopes",
+            "fetchedAt": "2026-11-03T14:54:51.101Z"
+          },
+          {
+            "url": "https://developer.xero.com/faq/granular-scopes",
+            "quote": "They’ll be available for you to request from April 2026",
+            "fetchedAt": "2026-11-03T14:54:51.101Z"
+          },
+          {
+            "url": "https://developer.xero.com/faq/granular-scopes",
+            "quote": "Apps created before 2 March 2026 will have until September 2027 to move from broad scopes to granular scopes",
+            "fetchedAt": "2026-11-03T14:54:51.101Z"
+          }
+        ]
+      },
+      {
+        "title": "Save and activate the app",
+        "detail": "Click the “Save” or “Create App” button. The app becomes active immediately; no additional review wait is required.",
+        "actor": "agent",
+        "where": "Developer Portal > My Apps > Save",
+        "estimatedMinutes": 2,
+        "startsReviewWait": false,
+        "evidence": "inferred",
+        "citations": []
+      }
+    ],
+    "nuances": [
+      {
+        "title": "Partner Login URL must not be empty",
+        "detail": "If the Partner Login URL field is left blank, the app will not appear in the Xero Partner Hub App Launcher, even if all other settings are correct.",
+        "severity": "gotcha",
+        "evidence": "cited",
+        "citations": [
+          {
+            "url": "https://developer.xero.com/get-ready-for-the-xero-partner-hub-app-launcher",
+            "quote": "Leave it blank: Your app won’t appear in the launcher, regardless of how well it works elsewhere for individual organisations.",
+            "fetchedAt": "2026-11-03T14:54:45.859Z"
+          }
+        ]
+      },
+      {
+        "title": "Redirect URI wildcards unsupported",
+        "detail": "Only exact URIs are accepted; using ‘*’ or pattern matching will cause validation errors.",
+        "severity": "gotcha",
+        "evidence": "cited",
+        "citations": [
+          {
+            "url": "https://developer.xero.com/faq/oauth2",
+            "quote": "The use of wildcards in redirect URI is not supported.",
+            "fetchedAt": "2026-11-03T14:54:49.172Z"
+          }
+        ]
+      },
+      {
+        "title": "Single‑page applications not supported",
+        "detail": "Xero OAuth 2.0 does not currently support SPA flows; use a server‑side or native app pattern instead.",
+        "severity": "note",
+        "evidence": "cited",
+        "citations": [
+          {
+            "url": "https://developer.xero.com/faq/oauth2",
+            "quote": "Single page apps are not currently supported.",
+            "fetchedAt": "2026-11-03T14:54:49.172Z"
+          }
+        ]
+      },
+      {
+        "title": "Granular scopes not retroactive",
+        "detail": "Existing tokens for apps created before 2 March 2026 retain their original (broad) scopes. Granular scopes only apply after the user re‑authorises with the updated scope list.",
+        "severity": "gotcha",
+        "evidence": "cited",
+        "citations": [
+          {
+            "url": "https://developer.xero.com/faq/granular-scopes",
+            "quote": "The granular scopes won’t automatically be applied to any existing tokens. So, the granular scope won’t be applied to any new authorisations until they are added to the authorisation link your customers are using and the customer reauthorises your app",
+            "fetchedAt": "2026-11-03T14:54:51.101Z"
+          }
+        ]
+      },
+      {
+        "title": "401 error for missing granular scope",
+        "detail": "Calling an endpoint that requires a granular scope you haven’t requested returns a 401 Forbidden with header WWW-Authenticate:insufficient_scope.",
+        "severity": "gotcha",
+        "evidence": "cited",
+        "citations": [
+          {
+            "url": "https://developer.xero.com/faq/granular-scopes",
+            "quote": "The API will return a 401 forbidden error with a response header WWW-Authenticate:insufficent_scope",
+            "fetchedAt": "2026-11-03T14:54:51.101Z"
+          }
+        ]
+      },
+      {
+        "title": "Access token lifetime",
+        "detail": "Access tokens are valid for 30 minutes; plan token refresh accordingly.",
+        "severity": "note",
+        "evidence": "inferred",
+        "citations": []
+      },
+      {
+        "title": "Refresh token expiration",
+        "detail": "Refresh tokens that are not used for 60 days expire and require the user to re‑authorise the app.",
+        "severity": "note",
+        "evidence": "cited",
+        "citations": [
+          {
+            "url": "https://developer.xero.com/faq/oauth2",
+            "quote": "Unused refresh tokens expire after 60 days. If you don’t refresh your access token within 60 days the user will need to reauthorise your app.",
+            "fetchedAt": "2026-11-03T14:54:49.172Z"
+          }
+        ]
+      },
+      {
+        "title": "PKCE support for native apps",
+        "detail": "Native applications can use the PKCE extension and omit a client secret, improving security.",
+        "severity": "note",
+        "evidence": "cited",
+        "citations": [
+          {
+            "url": "https://developer.xero.com/faq/oauth2",
+            "quote": "Xero supports the Proof Key for Code Exchange (PKCE) extension to the authorization code flow. This allows native apps to securely connect to our API without needing to store a client secret.",
+            "fetchedAt": "2026-11-03T14:54:49.172Z"
+          }
+        ]
+      }
+    ],
+    "whenBlocked": [
+      {
+        "situation": "Current user lacks Standard/Adviser/Administrator level with Connected Apps permission",
+        "action": "Assign the required role or have an authorized user create the app.",
+        "contact": "Contact your Xero organisation admin or Xero support via https://support.xero.com"
+      },
+      {
+        "situation": "Attempt to add more than 50 redirect URIs",
+        "action": "Consolidate redirect URIs or create multiple apps if necessary.",
+        "contact": "Xero developer support (developer@xero.com) for guidance on managing many URIs."
+      },
+      {
+        "situation": "App creation fails due to missing Partner Login URL",
+        "action": "Provide a valid Partner Login URL; ensure it follows the same pattern as your existing login URL.",
+        "contact": "Xero Partner Hub documentation or support portal."
+      }
+    ],
+    "conflicts": [],
+    "openQuestions": [
+      {
+        "question": "Is there an official developer console URL for creating Xero apps?",
+        "whyItMatters": "A correct URL is needed for developers to locate the registration UI.",
+        "howToResolve": "Visit Xero's developer site or contact Xero support to confirm the exact console URL."
+      },
+      {
+        "question": "Does Xero perform any manual review of newly created OAuth apps?",
+        "whyItMatters": "Review time would affect the overall onboarding speed for developers.",
+        "howToResolve": "Check Xero's developer documentation or support channels for any mention of app approval processes."
+      },
+      {
+        "question": "Are there any required legal artifacts (privacy policy, terms of service) that must be submitted when registering an app?",
+        "whyItMatters": "Missing required artifacts could block app creation.",
+        "howToResolve": "Review Xero's app registration guidelines or contact Xero support for clarification."
+      },
+      {
+        "question": "Is there any cost associated with creating or maintaining a Xero OAuth app?",
+        "whyItMatters": "Cost impacts the feasibility for developers, especially in low‑budget projects.",
+        "howToResolve": "Search Xero's pricing or developer FAQ for any fees related to app registration."
+      }
+    ],
+    "sources": [
+      {
+        "url": "https://developer.xero.com/get-ready-for-the-xero-partner-hub-app-launcher",
+        "quote": "Add your Partner Login URL , using the same pattern as your existing Login URL.",
+        "fetchedAt": "2026-11-03T14:54:45.859Z"
+      },
+      {
+        "url": "https://developer.xero.com/faq/permissions",
+        "quote": "The user that connects the integration has to have either Standard, Adviser, or Administrator level user with the Connected Apps permission.",
+        "fetchedAt": "2026-11-03T14:54:47.403Z"
+      },
+      {
+        "url": "https://developer.xero.com/faq/oauth2",
+        "quote": "You can use up to 50 redirect URIs for your app.",
+        "fetchedAt": "2026-11-03T14:54:49.172Z"
+      },
+      {
+        "url": "https://developer.xero.com/faq/oauth2",
+        "quote": "The use of wildcards in redirect URI is not supported.",
+        "fetchedAt": "2026-11-03T14:54:49.172Z"
+      },
+      {
+        "url": "https://developer.xero.com/faq/oauth2",
+        "quote": "Single page apps are not currently supported.",
+        "fetchedAt": "2026-11-03T14:54:49.172Z"
+      },
+      {
+        "url": "https://developer.xero.com/faq/granular-scopes",
+        "quote": "Apps created before 2 March 2026 will have until September 2027 to move from broad scopes to granular scopes",
+        "fetchedAt": "2026-11-03T14:54:51.101Z"
+      }
+    ],
+    "generation": {
+      "generatedAt": "2026-11-03T14:56:45.202Z",
+      "origin": "seeded",
+      "models": [
+        {
+          "model": "openai/gpt-oss-120b",
+          "role": "adjudicate",
+          "calls": 3,
+          "inputTokens": 6407,
+          "outputTokens": 5512
+        },
+        {
+          "model": "openai/gpt-oss-20b",
+          "role": "triage",
+          "calls": 1,
+          "inputTokens": 784,
+          "outputTokens": 253
+        },
+        {
+          "model": "openai/gpt-oss-20b",
+          "role": "extract",
+          "calls": 5,
+          "inputTokens": 5337,
+          "outputTokens": 1621
+        }
+      ],
+      "docPagesDiscovered": 145,
+      "docPagesRead": 5,
+      "durationMs": 130941
+    }
+  }
+]
