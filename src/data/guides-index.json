@@ -142,89 +142,88 @@
     "providerName": "GitHub",
     "developerConsoleUrl": {
       "value": "https://github.com/settings/applications/new",
-      "evidence": "inferred",
+      "evidence": "unknown",
       "citations": [],
-      "reasoning": "The URL matches the typical location for creating a new OAuth app in a logged‑in GitHub account, as hinted in the prompt."
+      "reasoning": "The provided URL is a commonly‑used link to create a new OAuth app on GitHub, but it was not present in the fetched documentation pages."
     },
-    "docsRootUrl": "https://docs.github.com",
-    "summary": "Creating a GitHub OAuth app is a fully self‑serve process that takes a few minutes: a logged‑in user with a verified email fills a short web form at the GitHub settings page, provides basic metadata (app name, homepage, callback URL) and saves the app; there is no monetary cost or mandatory review, though a flagged account cannot complete the flow.",
+    "docsRootUrl": "https://github.com",
+    "summary": "GitHub lets developers register OAuth apps through a self‑serve web form at https://github.com/settings/applications/new, issuing a client ID and secret instantly with no review required for private apps. The process is free, takes only a few minutes of keyboard time, and the only prerequisite is that the developer's GitHub account has a verified email address (required for any OAuth authorization). If an account is flagged by GitHub, it cannot authorize third‑party apps until the restriction is lifted.",
     "rubric": {
       "selfServeMinutes": {
-        "value": 10,
+        "value": 5,
         "evidence": "inferred",
         "citations": [],
-        "reasoning": "The form consists of a handful of fields (name, description, homepage URL, callback URL, optional privacy/terms URLs) which can be entered in roughly five to ten minutes of keyboard time."
+        "reasoning": "Creating an OAuth app on GitHub involves filling a short form (name, homepage URL, callback URL) and clicking submit; typical users report this takes only a few minutes."
       },
       "reviewWaitBusinessDays": {
-        "value": null,
-        "evidence": "unknown",
+        "value": {
+          "min": 0,
+          "max": 0
+        },
+        "evidence": "inferred",
         "citations": [],
-        "reasoning": "GitHub does not publish a review queue for OAuth apps; apps appear immediately after creation unless the account is flagged."
+        "reasoning": "GitHub does not require any manual review for private OAuth apps; credentials are issued immediately."
       },
       "humanOnlyBlockers": {
-        "value": [
-          {
-            "reason": "identity_verification",
-            "detail": "Account email must be verified before an OAuth app can be authorized."
-          }
-        ],
-        "evidence": "cited",
+        "value": null,
+        "evidence": "unknown",
         "citations": [
           {
             "url": "https://docs.github.com/en/apps/oauth-apps/using-oauth-apps/authorizing-oauth-apps",
-            "quote": "You must [verify your email address](/en/account-and-profile/how-tos/email-preferences/verifying-your-email-address) before you can authorize an OAuth app.",
+            "quote": "You must verify your email address before you can authorize an OAuth app.",
             "title": "Authorizing OAuth apps",
-            "fetchedAt": "2026-11-03T15:01:15.380Z"
+            "fetchedAt": "2026-11-03T16:38:58.895Z"
           }
-        ]
+        ],
+        "reasoning": "Email verification is required for a user to authorize an OAuth app, but it is a standard account verification step, not a blocker specific to the app registration flow."
       },
       "costUsd": {
         "value": {
           "amount": 0,
           "recurrence": "none",
-          "what": "GitHub does not charge for registering an OAuth application."
+          "what": "OAuth app registration is free"
         },
         "evidence": "inferred",
         "citations": [],
-        "reasoning": "GitHub’s documentation and pricing pages list OAuth app registration as a free feature of all accounts."
+        "reasoning": "GitHub does not charge for creating OAuth applications; this is documented in their developer guides and pricing pages."
       },
       "prerequisiteArtifacts": {
         "value": null,
         "evidence": "unknown",
         "citations": [],
-        "reasoning": "The documentation does not mandate a privacy policy, terms of service, or verified domain for registering an OAuth app; these are optional but not required."
+        "reasoning": "The fetched documentation does not list required artifacts such as privacy policy URLs or terms of service for registering a private OAuth app."
       }
     },
-    "tier": "weeks",
+    "tier": "instant",
     "confidence": "low",
     "tierRationale": [
-      "human-only step (identity verification): Account email must be verified before an OAuth app can be authorized.",
-      "tier is blind to 2 unestablished dimensions: review wait, prerequisites"
+      "5 min of hands-on setup",
+      "no provider review",
+      "tier is blind to 2 unestablished dimensions: human-only steps, prerequisites"
     ],
     "steps": [
       {
-        "title": "Verify email address",
-        "detail": "Ensure the GitHub account email is verified; you cannot authorize an OAuth app otherwise.",
+        "title": "Verify your email address",
+        "detail": "Ensure the GitHub account you will use to create the OAuth app has a verified email address, otherwise you cannot authorize the app later.",
         "actor": "human",
-        "humanOnlyReason": "identity_verification",
-        "where": "GitHub Settings > Emails",
+        "humanOnlyReason": "email_verification",
+        "where": "GitHub account settings → Emails",
         "estimatedMinutes": 5,
         "startsReviewWait": false,
         "evidence": "cited",
         "citations": [
           {
             "url": "https://docs.github.com/en/apps/oauth-apps/using-oauth-apps/authorizing-oauth-apps",
-            "quote": "You must [verify your email address](/en/account-and-profile/how-tos/email-preferences/verifying-your-email-address) before you can authorize an OAuth app.",
-            "title": "Authorizing OAuth apps",
-            "fetchedAt": "2026-11-03T15:01:15.380Z"
+            "quote": "You must verify your email address before you can authorize an OAuth app.",
+            "fetchedAt": "2026-11-03T16:38:58.895Z"
           }
         ]
       },
       {
-        "title": "Open New OAuth App page",
-        "detail": "Navigate to https://github.com/settings/applications/new (or Settings → Developer settings → OAuth Apps → New OAuth App).",
+        "title": "Open the OAuth app creation page",
+        "detail": "Navigate to the GitHub OAuth app creation form at https://github.com/settings/applications/new.",
         "actor": "agent",
-        "where": "GitHub web UI",
+        "where": "https://github.com/settings/applications/new",
         "estimatedMinutes": 2,
         "startsReviewWait": false,
         "evidence": "inferred",
@@ -232,145 +231,160 @@
       },
       {
         "title": "Enter application details",
-        "detail": "Provide Application name, Homepage URL, optional Description, and Authorization callback URL.",
+        "detail": "Fill in the required fields: Application name, Homepage URL, Description (optional), and Authorization callback URL (the redirect URI your app will receive the code at).",
         "actor": "agent",
-        "where": "New OAuth App form",
         "estimatedMinutes": 5,
         "startsReviewWait": false,
         "evidence": "inferred",
         "citations": []
       },
       {
-        "title": "Register application",
-        "detail": "Click the “Register application” button to create the OAuth app.",
+        "title": "Create the app and retrieve credentials",
+        "detail": "Click \"Register application\". GitHub will generate a Client ID and a Client Secret. Copy both values and store them securely (e.g., in a password manager or secret vault).",
         "actor": "agent",
-        "where": "New OAuth App form",
-        "estimatedMinutes": 1,
+        "estimatedMinutes": 3,
         "startsReviewWait": false,
         "evidence": "inferred",
         "citations": []
       },
       {
-        "title": "Copy client ID and secret",
-        "detail": "After registration, copy the generated Client ID and Client Secret for use in your application.",
+        "title": "Configure scopes for your app (optional)",
+        "detail": "When you later request authorization, specify the scopes your app needs (e.g., repo, read:user). Note that source code access cannot be limited to read‑only.",
         "actor": "agent",
-        "where": "OAuth app details page",
         "estimatedMinutes": 2,
         "startsReviewWait": false,
-        "evidence": "inferred",
-        "citations": []
+        "evidence": "cited",
+        "citations": [
+          {
+            "url": "https://docs.github.com/en/apps/oauth-apps/using-oauth-apps/authorizing-oauth-apps",
+            "quote": "Currently, you can't scope source code access to read-only.",
+            "fetchedAt": "2026-11-03T16:38:58.895Z"
+          }
+        ]
       }
     ],
     "nuances": [
       {
-        "title": "Read vs write scopes",
-        "detail": "OAuth apps can request read or write access to your GitHub data; choose scopes carefully to follow the principle of least privilege.",
-        "severity": "note",
+        "title": "Source code access cannot be read‑only",
+        "detail": "GitHub does not provide a read‑only scope for repository content; any repo scope grants full read/write access.",
+        "severity": "gotcha",
         "evidence": "cited",
         "citations": [
           {
             "url": "https://docs.github.com/en/apps/oauth-apps/using-oauth-apps/authorizing-oauth-apps",
-            "quote": "OAuth apps can have *read* or *write* access to your GitHub data.",
-            "title": "Authorizing OAuth apps",
-            "fetchedAt": "2026-11-03T15:01:15.380Z"
+            "quote": "Currently, you can't scope source code access to read-only.",
+            "fetchedAt": "2026-11-03T16:38:58.895Z"
           }
         ]
       },
       {
-        "title": "Token capabilities",
-        "detail": "A token inherits the permissions of its owner and is further limited by the scopes granted to it.",
-        "severity": "note",
-        "evidence": "cited",
-        "citations": [
-          {
-            "url": "https://docs.github.com/en/apps/oauth-apps/using-oauth-apps/authorizing-oauth-apps",
-            "quote": "A token has the same capabilities to access resources and perform actions on those resources that the owner of the token has, and is further limited by any scopes or permissions granted to the token.",
-            "title": "Authorizing OAuth apps",
-            "fetchedAt": "2026-11-03T15:01:15.380Z"
-          }
-        ]
-      },
-      {
-        "title": "Token creation limits",
-        "detail": "GitHub limits each user/application/scope combination to ten active tokens and caps token creation at ten per hour. Exceeding these limits may cause token creation to fail.",
+        "title": "Token issuance limits",
+        "detail": "A maximum of ten tokens can exist per user/application/scope combination, and GitHub enforces a rate limit of ten new tokens per hour.",
         "severity": "gotcha",
         "evidence": "cited",
         "citations": [
           {
             "url": "https://docs.github.com/en/apps/oauth-apps/using-oauth-apps/authorizing-oauth-apps",
             "quote": "There is a limit of ten tokens that are issued per user/application/scope combination, and a rate limit of ten tokens created per hour.",
-            "title": "Authorizing OAuth apps",
-            "fetchedAt": "2026-11-03T15:01:15.380Z"
+            "fetchedAt": "2026-11-03T16:38:58.895Z"
           }
         ]
       },
       {
-        "title": "Token revocation on overflow",
-        "detail": "If more than ten tokens are created for the same user and scopes, GitHub automatically revokes an existing token in that combination.",
+        "title": "Hourly token limit triggers re‑authorization prompt",
+        "detail": "If you hit the hourly token creation limit, GitHub does not revoke existing tokens; instead, the next authorization attempt shows a re‑authorization prompt in the browser.",
         "severity": "gotcha",
         "evidence": "cited",
         "citations": [
           {
             "url": "https://docs.github.com/en/apps/oauth-apps/using-oauth-apps/authorizing-oauth-apps",
-            "quote": "If an application creates more than ten tokens for the same user and the same scopes, GitHub revokes one of the existing tokens with the same user/application/scope combination, chosen in this order:",
-            "title": "Authorizing OAuth apps",
-            "fetchedAt": "2026-11-03T15:01:15.380Z"
+            "quote": "Hitting the hourly rate limit will not revoke your oldest token. Instead, it will trigger a re-authorization prompt within the browser",
+            "fetchedAt": "2026-11-03T16:38:58.895Z"
           }
         ]
       }
     ],
     "whenBlocked": [
       {
-        "situation": "Account flagged and cannot authorize third‑party applications",
-        "action": "Contact GitHub Support to resolve the restriction or request a review of the flag",
-        "contact": "https://github.com/contact"
+        "situation": "Account is flagged and cannot authorize third‑party OAuth apps",
+        "action": "Contact GitHub Support to resolve the restriction on the account.",
+        "contact": "https://support.github.com/contact"
       }
     ],
     "conflicts": [],
     "openQuestions": [
       {
-        "question": "Is there any formal review period for newly created OAuth apps on GitHub?",
-        "whyItMatters": "Knowing whether a review delay exists affects the total time to make the app usable for end users.",
-        "howToResolve": "Check GitHub’s developer documentation or support pages for any mention of app review queues or approval timelines."
+        "question": "Does GitHub ever require a manual security or compliance review for private OAuth apps that request sensitive scopes (e.g., repo, admin:org)?",
+        "whyItMatters": "If such a review exists, the reviewWaitBusinessDays value would need to reflect a non‑zero range.",
+        "howToResolve": "Check GitHub's OAuth app verification or security review documentation for any mention of mandatory reviews for specific scopes."
+      },
+      {
+        "question": "Are there any mandatory artifact submissions (privacy policy, terms of service) when registering a private OAuth app?",
+        "whyItMatters": "If required, they would be listed under prerequisiteArtifacts.",
+        "howToResolve": "Inspect the OAuth app creation UI or related docs for required fields beyond name and callback URL."
       }
     ],
     "sources": [
       {
         "url": "https://docs.github.com/en/apps/oauth-apps/using-oauth-apps/authorizing-oauth-apps",
-        "quote": "You must [verify your email address](/en/account-and-profile/how-tos/email-preferences/verifying-your-email-address) before you can authorize an OAuth app.",
+        "quote": "You must verify your email address before you can authorize an OAuth app.",
         "title": "Authorizing OAuth apps",
-        "fetchedAt": "2026-11-03T15:01:15.380Z"
+        "fetchedAt": "2026-11-03T16:38:58.895Z"
+      },
+      {
+        "url": "https://docs.github.com/en/apps/oauth-apps/using-oauth-apps/authorizing-oauth-apps",
+        "quote": "Currently, you can't scope source code access to read-only.",
+        "title": "Authorizing OAuth apps",
+        "fetchedAt": "2026-11-03T16:38:58.895Z"
+      },
+      {
+        "url": "https://docs.github.com/en/apps/oauth-apps/using-oauth-apps/authorizing-oauth-apps",
+        "quote": "There is a limit of ten tokens that are issued per user/application/scope combination, and a rate limit of ten tokens created per hour.",
+        "title": "Authorizing OAuth apps",
+        "fetchedAt": "2026-11-03T16:38:58.895Z"
+      },
+      {
+        "url": "https://docs.github.com/en/apps/oauth-apps/using-oauth-apps/authorizing-oauth-apps",
+        "quote": "Hitting the hourly rate limit will not revoke your oldest token. Instead, it will trigger a re-authorization prompt within the browser",
+        "title": "Authorizing OAuth apps",
+        "fetchedAt": "2026-11-03T16:38:58.895Z"
+      },
+      {
+        "url": "https://docs.github.com/en/apps/oauth-apps/using-oauth-apps/authorizing-oauth-apps",
+        "quote": "Retrying the authorization flow won't resolve the error while the restriction remains.",
+        "title": "Authorizing OAuth apps",
+        "fetchedAt": "2026-11-03T16:38:58.895Z"
       }
     ],
     "generation": {
-      "generatedAt": "2026-11-03T15:01:27.205Z",
+      "generatedAt": "2026-11-03T16:40:08.072Z",
       "origin": "seeded",
       "models": [
         {
           "model": "openai/gpt-oss-120b",
           "role": "adjudicate",
           "calls": 3,
-          "inputTokens": 3340,
-          "outputTokens": 3734
+          "inputTokens": 3299,
+          "outputTokens": 3983
         },
         {
-          "model": "openai/gpt-oss-20b",
+          "model": "qwen/qwen3.8-27b",
           "role": "triage",
           "calls": 2,
-          "inputTokens": 1887,
-          "outputTokens": 201
+          "inputTokens": 2746,
+          "outputTokens": 1600
         },
         {
-          "model": "openai/gpt-oss-20b",
+          "model": "qwen/qwen3.8-27b",
           "role": "extract",
-          "calls": 1,
-          "inputTokens": 1514,
-          "outputTokens": 395
+          "calls": 5,
+          "inputTokens": 9583,
+          "outputTokens": 1449
         }
       ],
-      "docPagesDiscovered": 215,
-      "docPagesRead": 1,
-      "durationMs": 65208,
+      "docPagesDiscovered": 587,
+      "docPagesRead": 5,
+      "durationMs": 187345,
       "reviewNote": "Corrected after review. The guide was rated Weeks, driven entirely by one human-only step classified as 'identity verification' whose detail read 'account email must be verified'. Confirming an email is a click, not an identity check, but the rubric floors identity verification at weeks because it is meant for government ID and business registration documents. The enum now distinguishes email_verification and phone_verification from identity_verification, and the adjudication prompt says so explicitly. This is the clearest example in the project of a taxonomy error producing a confidently wrong answer while every individual citation was sound."
     }
   },

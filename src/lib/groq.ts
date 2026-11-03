@@ -19,11 +19,31 @@
 const GROQ_URL = "https://api.groq.com/openai/v1/chat/completions";
 
 export const MODELS = {
-  /** Breadth. URL triage, claim extraction from a single page. */
+  /**
+   * Breadth. URL triage and per-page claim extraction — the high-volume tier.
+   *
+   * Groq meters tokens per day *per model* (200,000 on the free tier), so the
+   * choice here is partly about which bucket the volume lands in. Keeping the
+   * cheap tier on a different model from the smart one means exhausting one
+   * does not take the other down with it.
+   */
   cheap: "openai/gpt-oss-20b",
   /** Depth. Synthesis, conflict resolution, writing the guide. */
   smart: "openai/gpt-oss-120b",
 } as const;
+
+/** Fallbacks, tried in order when a model's daily budget is spent. */
+export const CHEAP_FALLBACKS = ["openai/gpt-oss-120b", "qwen/qwen3.8-27b"];
+
+/**
+ * Why gpt-oss-20b and not a model with an untouched daily budget: the
+ * alternatives are worse in ways that only show up under load. qwen3.8-27b
+ * caps *output* tokens per minute at 1,000 and rejects any request asking for
+ * more outright, and being a reasoning model it then spends that small budget
+ * thinking and returns an empty completion. gpt-oss-20b is the one free model
+ * here that reliably emits structured output at the sizes this pipeline needs.
+ * Its daily cap is handled by failing fast and moving down this chain.
+ */
 
 export type ModelRole = "triage" | "extract" | "adjudicate";
 
@@ -175,6 +195,8 @@ export class GroqError extends Error {
     message: string,
     readonly status?: number,
     readonly retryAfterMs?: number,
+    /** True when the model's daily token budget is spent. */
+    readonly dailyBudgetSpent = false,
   ) {
     super(message);
     this.name = "GroqError";
@@ -236,13 +258,14 @@ export async function chat(opts: ChatOpts): Promise<string> {
 
   for (let attempt = 0; attempt <= retries; attempt++) {
     if (attempt > 0) {
-      // Free-tier 429s clear quickly; back off and keep going rather than
-      // failing a generation the user is watching.
-      const waitMs =
+      // Per-minute 429s clear in seconds; back off and keep going. The cap
+      // matters: Groq answers a per-day 429 with "try again in 4m29s", and
+      // honouring that makes the pipeline look hung.
+      const suggested =
         lastErr instanceof GroqError && lastErr.retryAfterMs
           ? lastErr.retryAfterMs
           : Math.min(1000 * 2 ** attempt, 8000);
-      await new Promise((r) => setTimeout(r, waitMs));
+      await new Promise((r) => setTimeout(r, Math.min(suggested, 20_000)));
     }
 
     try {
@@ -284,12 +307,18 @@ export async function chat(opts: ChatOpts): Promise<string> {
           continue;
         }
 
+        // Per-day exhaustion is not transient: the suggested wait can be
+        // hours, and sleeping on it is why a run once sat in "triage" for six
+        // minutes. Surface it immediately so the caller can switch models.
+        const perDay = /tokens per day|TPD|requests per day|RPD/i.test(body);
+
         throw new GroqError(
           `Groq ${res.status} for ${model}: ${body.slice(0, 400)}`,
           res.status,
           Number.isFinite(retryAfter) && retryAfter > 0
             ? retryAfter * 1000
             : retryAfterFromBody(body),
+          perDay,
         );
       }
 
@@ -302,6 +331,7 @@ export async function chat(opts: ChatOpts): Promise<string> {
     } catch (err) {
       lastErr = err;
       // A 4xx that isn't rate limiting won't fix itself.
+      if (err instanceof GroqError && err.dailyBudgetSpent) throw err;
       if (
         err instanceof GroqError &&
         err.status &&
@@ -365,4 +395,34 @@ export function parseJson<T = unknown>(raw: string): T {
  */
 export async function chatJson<T = unknown>(opts: ChatOpts): Promise<T> {
   return parseJson<T>(await chat({ ...opts, json: false }));
+}
+
+/**
+ * Run a call, moving to another model if this one's daily budget is spent.
+ *
+ * Daily exhaustion is the one failure that cannot be waited out inside a
+ * request, and it is invisible until it happens — the per-minute headers look
+ * healthy right up to the moment the per-day counter runs out. Since each model
+ * is metered separately, the recovery is simply to use a different one and say
+ * so, rather than returning an empty guide because the budget ran out
+ * mid-investigation.
+ */
+export async function chatJsonWithFallback<T = unknown>(
+  opts: ChatOpts & { fallbacks?: string[]; onFallback?: (from: string, to: string) => void },
+): Promise<T> {
+  const chain = [opts.model, ...(opts.fallbacks ?? [])];
+  let lastErr: unknown;
+
+  for (let i = 0; i < chain.length; i++) {
+    try {
+      return await chatJson<T>({ ...opts, model: chain[i] });
+    } catch (err) {
+      lastErr = err;
+      const spent = err instanceof GroqError && err.dailyBudgetSpent;
+      if (!spent || i === chain.length - 1) throw err;
+      opts.onFallback?.(chain[i], chain[i + 1]);
+    }
+  }
+
+  throw lastErr instanceof Error ? lastErr : new GroqError(String(lastErr));
 }

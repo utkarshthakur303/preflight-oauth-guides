@@ -1,4 +1,4 @@
-import { MODELS, TokenLedger, chatJson } from "../groq";
+import { CHEAP_FALLBACKS, MODELS, TokenLedger, chatJson, chatJsonWithFallback } from "../groq";
 import {
   Guide,
   GuideDraft,
@@ -115,12 +115,15 @@ async function triage(
 
     const batch = candidates.slice(i, i + BATCH);
     try {
-      const res = await chatJson<{ picks: { i: number; relevance: number; topic: string }[] }>({
+      const res = await chatJsonWithFallback<{ picks: { i: number; relevance: number; topic: string }[] }>({
+        fallbacks: CHEAP_FALLBACKS,
+        onFallback: (from, to) =>
+          emit({ type: "log", message: `${from} daily budget spent — switching to ${to}` }),
         model: MODELS.cheap,
         role: "triage",
         ledger,
         signal,
-        maxTokens: 1300,
+        maxTokens: 800,
         system: [
           "You rank documentation URLs by how likely the page explains how a THIRD-PARTY DEVELOPER",
           "registers their own OAuth application with this provider and gets it approved.",
@@ -218,14 +221,15 @@ async function extractFromPage(
   ledger: TokenLedger,
   signal?: AbortSignal,
 ): Promise<Finding[]> {
-  const res = await chatJson<{
+  const res = await chatJsonWithFallback<{
     findings: { claim: string; quote: string; field: string }[];
   }>({
+    fallbacks: CHEAP_FALLBACKS,
     model: MODELS.cheap,
     role: "extract",
     ledger,
     signal,
-    maxTokens: 2600,
+    maxTokens: 900,
     system: [
       "You extract facts about registering a third-party OAuth app with a provider.",
       "",
@@ -246,8 +250,8 @@ async function extractFromPage(
       "- `quote` MUST be copied verbatim from the page, character for character.",
       "- Never write a quote that is not literally present in the text given to you.",
       "- If the page does not state something, do not produce a finding for it.",
-      "- Extract at most 8 findings. Prefer specific, numeric, actionable facts.",
-      "- Keep each quote under 240 characters. Trim to the sentence that carries the fact.",
+      "- Extract at most 5 findings. Prefer specific, numeric, actionable facts.",
+      "- Keep each quote under 180 characters. Trim to the sentence that carries the fact.",
       "- An empty findings array is a correct answer for an irrelevant page.",
     ].join("\n"),
     user: [
