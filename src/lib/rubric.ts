@@ -83,6 +83,7 @@ function floorForReviewWait(max: number): Tier {
 const BLOCKER_FLOOR: Record<HumanOnlyReason, Tier> = {
   captcha: "instant",
   mfa: "instant",
+  email_verification: "instant",
   phone_verification: "instant",
   legal_signature: "instant",
   payment: "same_day",
@@ -114,6 +115,25 @@ function floorForCost(amount: number): Tier {
 }
 
 // --- tier -------------------------------------------------------------------
+
+/**
+ * True when not one of the five dimensions could be established.
+ *
+ * Such a guide has no business displaying a tier. `deriveTier` returns
+ * "instant" for it — correctly, since nothing known demands a higher floor —
+ * and that renders as a confident green badge saying setup is trivial, which is
+ * the exact opposite of what we know. Callers must check this before showing a
+ * tier anywhere.
+ */
+export function isUngrounded(r: Rubric): boolean {
+  return (
+    r.selfServeMinutes.value === null &&
+    r.reviewWaitBusinessDays.value === null &&
+    r.humanOnlyBlockers.value === null &&
+    r.costUsd.value === null &&
+    r.prerequisiteArtifacts.value === null
+  );
+}
 
 export type TierResult = {
   tier: Tier;

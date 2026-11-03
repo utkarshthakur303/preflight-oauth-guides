@@ -182,3 +182,115 @@ a.brand-link:hover {
   body { background: #fff; }
   .card { box-shadow: none; border-color: #ddd; break-inside: avoid; }
 }
+
+
+/* ---------------------------------------------------------------------------
+   Buttons and nav, matched to Composio's own surface.
+   Their control language is uppercase monospace inside hard-edged boxes —
+   small radius, visible border, generous letter-spacing — used consistently
+   for every action from "GET STARTED FOR FREE" to "READ THE DOCS". Borrowing
+   that is most of what makes this read as part of their product rather than a
+   generic Tailwind site.
+   --------------------------------------------------------------------------- */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--font-geist-mono), ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 11.5px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 0.6rem 0.9rem;
+  border-radius: 6px;
+  border: 1px solid var(--border-strong);
+  color: var(--foreground);
+  background: var(--card);
+  white-space: nowrap;
+  transition: background-color 0.13s ease, border-color 0.13s ease, color 0.13s ease;
+}
+.btn:hover {
+  border-color: var(--brand);
+  color: var(--brand);
+}
+
+.btn-primary {
+  background: var(--brand);
+  border-color: var(--brand);
+  color: #fff;
+}
+.btn-primary:hover {
+  background: var(--brand-hover);
+  border-color: var(--brand-hover);
+  color: #fff;
+}
+
+/* The secondary call to action: boxed and tinted, so it reads as an action
+   rather than as another navigation word. */
+.btn-accent {
+  background: var(--brand-wash);
+  border-color: color-mix(in oklab, var(--brand) 42%, transparent);
+  color: var(--brand);
+}
+.btn-accent:hover {
+  background: color-mix(in oklab, var(--brand) 16%, transparent);
+  border-color: var(--brand);
+  color: var(--brand);
+}
+
+.btn-sm {
+  padding: 0.4rem 0.65rem;
+  font-size: 10.5px;
+}
+
+.navlink {
+  font-family: var(--font-geist-mono), ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 11.5px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 0.6rem 0.7rem;
+  border-radius: 6px;
+  color: var(--muted);
+  border: 1px solid transparent;
+  transition: color 0.13s ease, background-color 0.13s ease;
+}
+.navlink:hover {
+  color: var(--foreground);
+  background: color-mix(in oklab, var(--muted) 10%, transparent);
+}
+.navlink[data-active="true"] {
+  color: var(--foreground);
+  background: color-mix(in oklab, var(--muted) 12%, transparent);
+}
+
+/* Composio sets a phrase of each headline in a solid blue block. It is the
+   single most recognisable thing about their type, and it doubles as a way to
+   put the real claim of a sentence in the reader's eye first. */
+.mark {
+  background: var(--brand);
+  color: #fff;
+  padding: 0.02em 0.22em;
+  border-radius: 3px;
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+}
+
+/* Their small all-caps labels above a section ("TRUSTED BY →"). */
+.eyebrow {
+  font-family: var(--font-geist-mono), ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 10.5px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+/* The dark band used for their hero and platform sections. Fixed dark in both
+   themes, as theirs is. */
+.band-dark {
+  background: #0b0b0c;
+  color: #f3f3f3;
+  border-radius: 14px;
+}
+.band-dark .muted-on-dark {
+  color: #a3a3a8;
+}

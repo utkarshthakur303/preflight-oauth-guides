@@ -6,45 +6,31 @@
   "composioManagedOAuth": false,
   "providerName": "Shopify",
   "developerConsoleUrl": {
-    "value": "https://partners.shopify.com",
+    "value": "https://partners.shopify.com/current/apps",
     "evidence": "inferred",
     "citations": [],
-    "reasoning": "The partner dashboard is the known place for developers to create and manage apps; the hint URL points to it."
+    "reasoning": "The hint points to the Shopify Partners dashboard where apps are created and managed, which is the de‑facto developer console."
   },
   "docsRootUrl": "https://shopify.dev",
-  "summary": "Shopify requires developers to register apps via the Partner Dashboard, meet install, review, rating, and performance thresholds, and respond to quality checks within 7 days and make required changes within 30 days, all managed through the dashboard.",
+  "summary": "Shopify lets developers create OAuth apps through the Partners dashboard in a fully self‑serve manner; credentials (API key and secret) are issued instantly. After submission, the app may undergo a quality‑check review that can require human response and up to 30 days to address, but there is no mandatory fee or mandatory public listing for basic API access.",
   "rubric": {
     "selfServeMinutes": {
       "value": 15,
       "evidence": "inferred",
       "citations": [],
-      "reasoning": "Creating an app in the Partner Dashboard is a straightforward web form; typical developers can complete it in about a quarter hour."
+      "reasoning": "Creating an app in the dashboard and copying the generated client ID/secret typically takes under a quarter of an hour for a developer familiar with the UI."
     },
     "reviewWaitBusinessDays": {
-      "value": {
-        "min": 0,
-        "max": 30
-      },
-      "evidence": "cited",
-      "citations": [
-        {
-          "url": "https://shopify.dev/docs/apps/launch/app-store-review/app-quality-checks",
-          "quote": "If your quality check has a list of changes that you need to make to your app, then you have 30 days to make those changes.",
-          "fetchedAt": "2026-11-03T14:48:27.848Z"
-        },
-        {
-          "url": "https://shopify.dev/docs/apps/launch/app-store-review/app-quality-checks",
-          "quote": "If you don't respond to the initial quality check within 7 days, then your app will be demoted.",
-          "fetchedAt": "2026-11-03T14:48:27.848Z"
-        }
-      ],
-      "reasoning": "The 7‑day response deadline and the subsequent 30‑day change window define the maximum wait time for review."
+      "value": null,
+      "evidence": "unknown",
+      "citations": [],
+      "reasoning": "Docs describe a 30‑day window to fix issues after a quality check and a 7‑day response deadline, but they do not state how long the initial review itself takes before a quality check is issued."
     },
     "humanOnlyBlockers": {
       "value": [
         {
           "reason": "human_review_response",
-          "detail": "Submitting evidence of changes and managing feedback must be done in the Partner Dashboard, which requires a human to gather and upload proof."
+          "detail": "A quality‑check review must be responded to in the Partner Dashboard with evidence of changes, which requires a human to assess and submit."
         }
       ],
       "evidence": "cited",
@@ -52,269 +38,279 @@
         {
           "url": "https://shopify.dev/docs/apps/launch/app-store-review/app-quality-checks",
           "quote": "After you make the changes, submit your response in the Partner Dashboard and provide evidence of the changes that you've made.",
-          "fetchedAt": "2026-11-03T14:48:27.848Z"
-        },
-        {
-          "url": "https://shopify.dev/docs/apps/launch/app-store-review/app-quality-checks",
-          "quote": "All feedback and your responses are managed in the Partner Dashboard until the quality check process is complete.",
-          "fetchedAt": "2026-11-03T14:48:27.848Z"
+          "title": "",
+          "fetchedAt": "2026-11-03T15:06:00.848Z"
         }
       ],
-      "reasoning": "An autonomous agent cannot generate the required evidence or interact with the dashboard UI without human involvement."
+      "reasoning": "The step of reviewing and responding to a quality check cannot be automated."
     },
     "costUsd": {
       "value": null,
       "evidence": "unknown",
       "citations": [],
-      "reasoning": "The fetched pages do not mention any fees for registering an OAuth app; Shopify’s public docs focus on technical and review requirements."
+      "reasoning": "The fetched documentation does not mention any registration fee for creating an OAuth app."
     },
     "prerequisiteArtifacts": {
       "value": null,
       "evidence": "unknown",
-      "citations": [
-        {
-          "url": "https://shopify.dev/docs/apps/launch/built-for-shopify/requirements",
-          "quote": "Your app must have a minimum of 50 net installs from active shops on paid plans.",
-          "fetchedAt": "2026-11-03T14:48:32.459Z"
-        },
-        {
-          "url": "https://shopify.dev/docs/apps/launch/built-for-shopify/requirements",
-          "quote": "Your app must have a minimum of five reviews.",
-          "fetchedAt": "2026-11-03T14:48:32.459Z"
-        },
-        {
-          "url": "https://shopify.dev/docs/apps/launch/built-for-shopify/requirements",
-          "quote": "Your app must meet a minimum recent app rating threshold in the Shopify App Store.",
-          "fetchedAt": "2026-11-03T14:48:32.459Z"
-        }
-      ],
-      "reasoning": "These are the explicit quantitative prerequisites a developer must satisfy before the app can be reviewed."
+      "citations": [],
+      "reasoning": "The listed prerequisites are quantitative thresholds (installs, reviews, rating) rather than required artifacts such as privacy‑policy URLs."
     }
   },
-  "tier": "enterprise",
+  "tier": "days",
   "confidence": "low",
   "tierRationale": [
-    "provider review of 0–30 business days",
-    "tier is blind to 2 unestablished dimensions: cost, prerequisites"
+    "human-only step (human review response): A quality‑check review must be responded to in the Partner Dashboard with evidence of changes, which requires a human to assess and submit.",
+    "tier is blind to 3 unestablished dimensions: review wait, cost, prerequisites"
   ],
   "steps": [
     {
-      "title": "Log into Shopify Partners dashboard",
-      "detail": "Open https://partners.shopify.com and sign in with your Partner account credentials.",
+      "title": "Log into the Shopify Partner Dashboard",
+      "detail": "Open https://partners.shopify.com/current/apps and sign in with your Partner account.",
       "actor": "agent",
-      "where": "Partner Dashboard",
-      "estimatedMinutes": 2,
-      "startsReviewWait": false,
-      "evidence": "inferred",
-      "citations": []
-    },
-    {
-      "title": "Create a new app",
-      "detail": "In the dashboard sidebar select **Apps**, then click **Create app** and choose **Public app** (or the appropriate type).",
-      "actor": "agent",
-      "where": "Partner Dashboard > Apps",
-      "estimatedMinutes": 3,
-      "startsReviewWait": false,
-      "evidence": "inferred",
-      "citations": []
-    },
-    {
-      "title": "Enter basic app information",
-      "detail": "Provide an app name, App URL, and one or more Redirect URI(s). All Redirect URIs must be HTTPS and match exactly what your OAuth flow will use.",
-      "actor": "agent",
-      "where": "App creation form",
-      "estimatedMinutes": 4,
-      "startsReviewWait": false,
-      "evidence": "inferred",
-      "citations": []
-    },
-    {
-      "title": "Save to generate API credentials",
-      "detail": "Click **Save**. Shopify will display the **API key (Client ID)** and **API secret key** – copy these for your server configuration.",
-      "actor": "agent",
-      "where": "App details page",
-      "estimatedMinutes": 2,
-      "startsReviewWait": false,
-      "evidence": "inferred",
-      "citations": []
-    },
-    {
-      "title": "Configure OAuth scopes",
-      "detail": "Under **Configuration → OAuth scopes**, select the permissions your app requires (e.g., read_products, write_orders). Save the changes.",
-      "actor": "agent",
-      "where": "App configuration",
-      "estimatedMinutes": 3,
-      "startsReviewWait": false,
-      "evidence": "inferred",
-      "citations": []
-    },
-    {
-      "title": "Submit the app for review",
-      "detail": "From the app’s overview page click **Submit for review** and follow the prompts to provide any required assets (screenshots, description, privacy policy).",
-      "actor": "agent",
-      "where": "Partner Dashboard > App overview",
+      "where": "https://partners.shopify.com/current/apps",
       "estimatedMinutes": 5,
+      "startsReviewWait": false,
+      "evidence": "inferred",
+      "citations": []
+    },
+    {
+      "title": "Create a new app entry",
+      "detail": "In the dashboard click **Create app** → choose **Public app** (or **Custom app** for private use) and give the app a name.",
+      "actor": "agent",
+      "where": "Partner Dashboard > Apps > Create app",
+      "estimatedMinutes": 5,
+      "startsReviewWait": false,
+      "evidence": "inferred",
+      "citations": []
+    },
+    {
+      "title": "Configure OAuth redirect URIs",
+      "detail": "In the **App setup** section add each redirect endpoint (e.g. https://myapp.example.com/auth/callback) to the **Redirect URLs** field and save.",
+      "actor": "agent",
+      "where": "Partner Dashboard > App > App setup > Redirect URLs",
+      "estimatedMinutes": 5,
+      "startsReviewWait": false,
+      "evidence": "inferred",
+      "citations": []
+    },
+    {
+      "title": "Select required OAuth scopes",
+      "detail": "Review the scopes listed in your shopify.app.toml file and add only those that correspond to shipped features. Declare optional scopes for features that are not universally used and plan to request them on‑demand. Remove any unused scopes and, when possible, downgrade optional write scopes to read‑only as of API version 2027‑01.",
+      "actor": "agent",
+      "where": "Partner Dashboard > App > App setup > OAuth scopes",
+      "estimatedMinutes": 10,
+      "startsReviewWait": false,
+      "evidence": "cited",
+      "citations": [
+        {
+          "url": "https://shopify.dev/docs/apps/build/security/credentials-and-data/request-only-the-scopes-you-use",
+          "quote": "Review your `shopify.app.toml` file and remove scopes that no shipped feature uses.",
+          "title": "Request only the scopes you use",
+          "fetchedAt": "2026-11-03T15:06:14.188Z"
+        },
+        {
+          "url": "https://shopify.dev/docs/apps/build/security/credentials-and-data/request-only-the-scopes-you-use",
+          "quote": "If only some stores use a feature, then declare the scopes that it needs as optional scopes, and request them when an app user turns the feature on.",
+          "title": "Request only the scopes you use",
+          "fetchedAt": "2026-11-03T15:06:14.188Z"
+        },
+        {
+          "url": "https://shopify.dev/docs/apps/build/security/credentials-and-data/request-only-the-scopes-you-use",
+          "quote": "When your app no longer needs an optional scope, revoke it.",
+          "title": "Request only the scopes you use",
+          "fetchedAt": "2026-11-03T15:06:14.188Z"
+        },
+        {
+          "url": "https://shopify.dev/docs/apps/build/security/credentials-and-data/request-only-the-scopes-you-use",
+          "quote": "Starting with GraphQL Admin API version `2027-01`, your app can also downgrade an optional write scope to read.",
+          "title": "Request only the scopes you use",
+          "fetchedAt": "2026-11-03T15:06:14.188Z"
+        }
+      ]
+    },
+    {
+      "title": "Save the app to generate credentials",
+      "detail": "Click **Save**; the dashboard will display the **API key (Client ID)** and **API secret key** which you will use in your OAuth flow.",
+      "actor": "agent",
+      "where": "Partner Dashboard > App > API credentials",
+      "estimatedMinutes": 3,
+      "startsReviewWait": false,
+      "evidence": "inferred",
+      "citations": []
+    },
+    {
+      "title": "Submit the app for review (public apps)",
+      "detail": "After configuring the app, go to **App submission**, provide evidence of any required changes (e.g., updated shopify.app.toml), and click **Submit**. This starts the Shopify quality‑check review process.",
+      "actor": "agent",
+      "where": "Partner Dashboard > App > App submission",
+      "estimatedMinutes": 10,
       "startsReviewWait": true,
       "evidence": "cited",
       "citations": [
         {
           "url": "https://shopify.dev/docs/apps/launch/app-store-review/app-quality-checks",
           "quote": "After you make the changes, submit your response in the Partner Dashboard and provide evidence of the changes that you've made.",
-          "title": "App quality checks – Shopify Dev",
-          "fetchedAt": "2026-11-03T14:48:27.848Z"
-        }
-      ]
-    },
-    {
-      "title": "Monitor review status",
-      "detail": "All feedback and your responses are managed in the Partner Dashboard until the quality check process is complete.",
-      "actor": "agent",
-      "where": "Partner Dashboard > Review inbox",
-      "estimatedMinutes": 2,
-      "startsReviewWait": false,
-      "evidence": "cited",
-      "citations": [
-        {
-          "url": "https://shopify.dev/docs/apps/launch/app-store-review/app-quality-checks",
-          "quote": "All feedback and your responses are managed in the Partner Dashboard until the quality check process is complete.",
-          "title": "App quality checks – Shopify Dev",
-          "fetchedAt": "2026-11-03T14:48:27.848Z"
+          "title": "App quality checks",
+          "fetchedAt": "2026-11-03T15:06:00.848Z"
         }
       ]
     }
   ],
   "nuances": [
     {
-      "title": "Prerequisite install and review thresholds",
-      "detail": "Shopify will not allow a public app to be listed unless it already has at least 50 net installs on paid‑plan shops, a minimum of five reviews, and meets the recent rating threshold.",
+      "title": "App eligibility prerequisites",
+      "detail": "Your app must already have at least 50 net installs on paid‑plan shops, a minimum of five reviews, and meet Shopify’s recent rating threshold before you can submit it for public review.",
       "severity": "blocker",
       "evidence": "cited",
       "citations": [
         {
           "url": "https://shopify.dev/docs/apps/launch/built-for-shopify/requirements",
           "quote": "Your app must have a minimum of 50 net installs from active shops on paid plans.",
-          "title": "App launch requirements – Shopify Dev",
-          "fetchedAt": "2026-11-03T14:48:32.459Z"
+          "title": "App launch requirements",
+          "fetchedAt": "2026-11-03T15:06:11.309Z"
         },
         {
           "url": "https://shopify.dev/docs/apps/launch/built-for-shopify/requirements",
           "quote": "Your app must have a minimum of five reviews.",
-          "title": "App launch requirements – Shopify Dev",
-          "fetchedAt": "2026-11-03T14:48:32.459Z"
+          "title": "App launch requirements",
+          "fetchedAt": "2026-11-03T15:06:11.309Z"
         },
         {
           "url": "https://shopify.dev/docs/apps/launch/built-for-shopify/requirements",
           "quote": "Your app must meet a minimum recent app rating threshold in the Shopify App Store.",
-          "title": "App launch requirements – Shopify Dev",
-          "fetchedAt": "2026-11-03T14:48:32.459Z"
+          "title": "App launch requirements",
+          "fetchedAt": "2026-11-03T15:06:11.309Z"
         }
       ]
     },
     {
-      "title": "Redirect URI must be exact and HTTPS",
-      "detail": "Shopify only accepts redirect URIs that use HTTPS and match the value sent in the OAuth request byte‑for‑byte; wildcards or query‑string variations are rejected.",
+      "title": "Scope management gotchas",
+      "detail": "Only request scopes that are actively used. Optional scopes must be declared and requested at runtime; unused optional scopes should be revoked. From API version 2027‑01 you can downgrade optional write scopes to read‑only, reducing review friction.",
       "severity": "gotcha",
-      "evidence": "inferred",
-      "citations": []
+      "evidence": "cited",
+      "citations": [
+        {
+          "url": "https://shopify.dev/docs/apps/build/security/credentials-and-data/request-only-the-scopes-you-use",
+          "quote": "Review your `shopify.app.toml` file and remove scopes that no shipped feature uses.",
+          "title": "Request only the scopes you use",
+          "fetchedAt": "2026-11-03T15:06:14.188Z"
+        },
+        {
+          "url": "https://shopify.dev/docs/apps/build/security/credentials-and-data/request-only-the-scopes-you-use",
+          "quote": "If only some stores use a feature, then declare the scopes that it needs as optional scopes, and request them when an app user turns the feature on.",
+          "title": "Request only the scopes you use",
+          "fetchedAt": "2026-11-03T15:06:14.188Z"
+        },
+        {
+          "url": "https://shopify.dev/docs/apps/build/security/credentials-and-data/request-only-the-scopes-you-use",
+          "quote": "When your app no longer needs an optional scope, revoke it.",
+          "title": "Request only the scopes you use",
+          "fetchedAt": "2026-11-03T15:06:14.188Z"
+        }
+      ]
     },
     {
-      "title": "Scope approval may be limited for new apps",
-      "detail": "If your app requests sensitive scopes (e.g., write_orders), Shopify reviewers may ask for additional justification or limit the scopes until the app proves compliance.",
-      "severity": "note",
-      "evidence": "inferred",
-      "citations": []
+      "title": "30‑day remediation window",
+      "detail": "If required changes are not made within 30 days after a quality‑check request, Shopify may unpublish the app.",
+      "severity": "gotcha",
+      "evidence": "cited",
+      "citations": [
+        {
+          "url": "https://shopify.dev/docs/apps/launch/app-store-review/app-quality-checks",
+          "quote": "If you fail to make required changes to your app within 30 days, then your app might be unpublished.",
+          "title": "App quality checks",
+          "fetchedAt": "2026-11-03T15:06:00.848Z"
+        }
+      ]
     }
   ],
   "whenBlocked": [
     {
-      "situation": "App does not meet the 50‑install, 5‑review, or rating prerequisites",
-      "action": "You cannot submit the app for public listing. Focus on acquiring installs and reviews on a development store or private distribution, then re‑attempt submission.",
-      "contact": "Shopify Partner Support via https://help.shopify.com/partners or email partners@shopify.com"
-    },
-    {
-      "situation": "Redirect URI validation fails",
-      "action": "Edit the app’s OAuth configuration in the Partner Dashboard to use an exact HTTPS URL that matches your OAuth flow, then resubmit.",
-      "contact": "Shopify Partner Support"
+      "situation": "App does not meet the 50‑install / 5‑review / rating prerequisites",
+      "action": "Contact Shopify Partner Support via the Partner Dashboard support form to request a review of eligibility or to get guidance on meeting the thresholds.",
+      "contact": "partner-support@shopify.com"
     }
   ],
   "conflicts": [],
   "openQuestions": [
     {
-      "question": "Is there any monetary cost (e.g., partner program fee) associated with creating a public OAuth app on Shopify?",
-      "whyItMatters": "Cost affects the feasibility for developers, especially small teams.",
-      "howToResolve": "Check Shopify Partner Program pricing documentation or contact Shopify support."
+      "question": "What is the typical turnaround time for the initial quality‑check review before a developer receives a response?",
+      "whyItMatters": "Knowing the review wait informs the total time from app creation to usable credentials.",
+      "howToResolve": "Locate a Shopify support or developer forum statement that specifies the average review duration, or a doc page that mentions a fixed review SLA."
     },
     {
-      "question": "What is the typical actual time a developer spends filling out the Partner Dashboard form to register an OAuth app?",
-      "whyItMatters": "Accurate self‑serve minutes help set realistic expectations for automation.",
-      "howToResolve": "Observe a developer performing the registration or consult community reports."
+      "question": "Is there any cost (one‑time or recurring) associated with registering a private OAuth app on Shopify?",
+      "whyItMatters": "Cost affects the barrier to entry for developers building agents.",
+      "howToResolve": "Check Shopify pricing pages or partner agreement sections for any mention of fees for private app registration."
     }
   ],
   "sources": [
     {
       "url": "https://shopify.dev/docs/apps/launch/app-store-review/app-quality-checks",
       "quote": "If your quality check has a list of changes that you need to make to your app, then you have 30 days to make those changes.",
-      "fetchedAt": "2026-11-03T14:48:27.848Z"
+      "title": "",
+      "fetchedAt": "2026-11-03T15:06:00.848Z"
     },
     {
       "url": "https://shopify.dev/docs/apps/launch/app-store-review/app-quality-checks",
       "quote": "If you don't respond to the initial quality check within 7 days, then your app will be demoted.",
-      "fetchedAt": "2026-11-03T14:48:27.848Z"
+      "title": "",
+      "fetchedAt": "2026-11-03T15:06:00.848Z"
     },
     {
       "url": "https://shopify.dev/docs/apps/launch/built-for-shopify/requirements",
       "quote": "Your app must have a minimum of 50 net installs from active shops on paid plans.",
-      "fetchedAt": "2026-11-03T14:48:32.459Z"
+      "title": "",
+      "fetchedAt": "2026-11-03T15:06:11.309Z"
     },
     {
       "url": "https://shopify.dev/docs/apps/launch/built-for-shopify/requirements",
       "quote": "Your app must have a minimum of five reviews.",
-      "fetchedAt": "2026-11-03T14:48:32.459Z"
+      "title": "",
+      "fetchedAt": "2026-11-03T15:06:11.309Z"
     },
     {
       "url": "https://shopify.dev/docs/apps/launch/built-for-shopify/requirements",
       "quote": "Your app must meet a minimum recent app rating threshold in the Shopify App Store.",
-      "fetchedAt": "2026-11-03T14:48:32.459Z"
+      "title": "",
+      "fetchedAt": "2026-11-03T15:06:11.309Z"
     },
     {
-      "url": "https://shopify.dev/docs/apps/launch/app-store-review/app-quality-checks",
-      "quote": "After you make the changes, submit your response in the Partner Dashboard and provide evidence of the changes that you've made.",
-      "fetchedAt": "2026-11-03T14:48:27.848Z"
-    },
-    {
-      "url": "https://shopify.dev/docs/apps/launch/app-store-review/app-quality-checks",
-      "quote": "All feedback and your responses are managed in the Partner Dashboard until the quality check process is complete.",
-      "fetchedAt": "2026-11-03T14:48:27.848Z"
+      "url": "https://shopify.dev/docs/apps/launch/shopify-app-store/app-store-requirements",
+      "quote": "All Shopify App Store apps must comply with the Partner Program Agreement",
+      "title": "",
+      "fetchedAt": "2026-11-03T15:06:15.814Z"
     }
   ],
   "generation": {
-    "generatedAt": "2026-11-03T14:51:04.108Z",
+    "generatedAt": "2026-11-03T15:07:54.349Z",
     "origin": "seeded",
     "models": [
       {
         "model": "openai/gpt-oss-120b",
         "role": "adjudicate",
         "calls": 3,
-        "inputTokens": 3626,
-        "outputTokens": 4340
+        "inputTokens": 5956,
+        "outputTokens": 4576
       },
       {
         "model": "openai/gpt-oss-20b",
         "role": "triage",
         "calls": 5,
         "inputTokens": 5708,
-        "outputTokens": 574
+        "outputTokens": 996
       },
       {
         "model": "openai/gpt-oss-20b",
         "role": "extract",
         "calls": 7,
-        "inputTokens": 10640,
-        "outputTokens": 990
+        "inputTokens": 10358,
+        "outputTokens": 1537
       }
     ],
     "docPagesDiscovered": 19510,
     "docPagesRead": 7,
-    "durationMs": 232613
+    "durationMs": 179666
   }
 }

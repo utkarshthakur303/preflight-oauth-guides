@@ -1,0 +1,40 @@
+{
+  "_comment": [
+    "Human review of generated guides, kept deliberately separate from the generated files.",
+    "A guide in src/data/guides/ is exactly what the pipeline produced; this file is what a",
+    "person concluded after checking it against primary sources. Keeping them apart means a",
+    "regenerated guide never silently inherits an old review, and the diff between what the",
+    "machine said and what a human corrected stays legible in version control.",
+    "",
+    "build-guides-index.mjs merges `note` into guide.generation.reviewNote, which the guide",
+    "page renders as a 'reviewed by hand' panel."
+  ],
+  "xero": {
+    "checkedOn": "2026-11-03",
+    "note": "Spot-checked against Xero's developer documentation. The Developer Portal path, the 50-redirect-URI limit, the granular-scopes migration dated 2 March 2026 and the absence of any review step for app creation are all supported by the cited pages. The guide's open questions correctly record that no official review SLA could be found rather than inventing one. No corrections needed."
+  },
+  "shopify": {
+    "checkedOn": "2026-11-03",
+    "note": "Corrected after review, and still imperfect in one place. An earlier generation reported a 0-30 business day review, citing a real sentence \u2014 'you have 30 days to make those changes' \u2014 which is the developer's deadline to respond to a quality check, not Shopify's review time. It had also absorbed Built for Shopify badge requirements (50 net installs, five reviews, a minimum rating), which belong to a recognition programme and not to registering an OAuth app. Both errors shared one cause: conflating getting credentials with getting listed. Shopify's docs state the client ID and secret are available immediately, and that distribution is a separate later choice where custom distribution needs no review at all. After the fix the guide reports the review wait as unknown with the right reasoning, and the summary correctly says credentials are issued instantly. Two things remain wrong: the tier is pushed to Days by a quality-check response step that only applies if you pursue public distribution, and the guide says 'Partner Dashboard' where Shopify's current docs say 'Dev Dashboard' at dev.shopify.com/dashboard. Verified against shopify.dev/docs/apps/build/authentication-authorization/client-credentials-grant and shopify.dev/docs/apps/launch/distribution."
+  },
+  "docusign": {
+    "checkedOn": "2026-11-03",
+    "note": "Kept in the library as an honest failure case. DocuSign's developer documentation is rendered client-side: the server returns roughly 40 characters of text per page, so although 31 relevant pages were located, none could be read. The pipeline correctly refused to guess and marked every dimension unknown. Reading this provider would need a JavaScript-rendering fetch, which this project does not do."
+  },
+  "workday": {
+    "checkedOn": "2026-11-03",
+    "note": "An honest failure, kept in the library as a record of one. Fourteen relevant-looking pages were located across developer.workday.com and community.workday.com and not one served readable text \u2014 Workday's developer documentation renders client-side. The pipeline reported every dimension as unestablished rather than guessing, and the UI shows 'Not established' instead of a tier. Separately, Workday integrations are generally tenant-gated: a developer cannot self-register an OAuth client without an organisation's Workday tenant, so a public guide may be the wrong shape for this provider regardless of whether the docs could be read."
+  },
+  "snowflake": {
+    "checkedOn": "2026-11-03",
+    "note": "Nothing established. Candidate pages were found on docs.snowflake.com but no claim about registering a security integration survived extraction. Snowflake's OAuth setup is also a SQL operation (CREATE SECURITY INTEGRATION) run by an ACCOUNTADMIN rather than a form in a developer console, which does not fit the console-registration shape this pipeline looks for. Recorded as a scope limitation rather than a transient failure."
+  },
+  "salesforce-service-cloud": {
+    "checkedOn": "2026-11-03",
+    "note": "Nothing established, for two compounding reasons. developer.salesforce.com returns 403 to this project's requests for robots.txt and sitemap.xml, so discovery fell back to trailhead.salesforce.com and help.salesforce.com, and of the five candidate pages reached, four served no readable text. This is the guide I most wanted to produce \u2014 Salesforce's security review is the canonical slow approval \u2014 and it is the one the approach handled worst. Reading it would need either a JavaScript-rendering fetch or a documented crawl agreement with Salesforce."
+  },
+  "github": {
+    "checkedOn": "2026-11-03",
+    "note": "Corrected after review. The guide was rated Weeks, driven entirely by one human-only step classified as 'identity verification' whose detail read 'account email must be verified'. Confirming an email is a click, not an identity check, but the rubric floors identity verification at weeks because it is meant for government ID and business registration documents. The enum now distinguishes email_verification and phone_verification from identity_verification, and the adjudication prompt says so explicitly. This is the clearest example in the project of a taxonomy error producing a confidently wrong answer while every individual citation was sound."
+  }
+}

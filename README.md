@@ -4,7 +4,7 @@
 
 A developer wiring an AI agent to third-party apps has to register their own OAuth app with each provider. That takes two minutes with one provider and two months with another, and the documentation almost never says which. Preflight investigates a provider's own docs and reports the timeline, the cost, the blockers, and which steps an agent can take off your hands — with every claim labelled by how it is known.
 
-- **Live:** _(deployment URL)_
+- **Live:** https://preflight-rust-psi.vercel.app
 - **Generate any app live:** `/generate` — works for apps inside and outside Composio's catalog
 - **Machine-readable:** `/api/guides` and `/api/guides/<slug>`
 
@@ -102,31 +102,51 @@ Nobody integrates one app. `/plan` takes the apps your agent needs and works out
 
 ## What I checked by hand, and what it found
 
-Two guides were verified against primary sources after generation. Both found real errors, and both errors were the *same class*: the citation was genuine and the inference from it was wrong.
+Every seeded guide was reviewed against primary sources. Reviews live in `data/review-notes.json`, deliberately separate from the generated files, so a regenerated guide never silently inherits an old review and the difference between what the machine said and what a person corrected stays legible in git. Each one is rendered on its guide page as a "reviewed by hand" panel.
+
+Three findings are worth stating plainly.
 
 ### Shopify — the guide was measuring the wrong event
 
-The generated guide reported a **0–30 business day review**, citing:
+It reported a **0–30 business day review**, citing:
 
 > "If your quality check has a list of changes that you need to make to your app, then you have 30 days to make those changes."
 
-The quote is real and verification passed. But that is **the developer's deadline to respond**, not Shopify's review time. It also pulled in Built for Shopify badge requirements — 50 net installs, five reviews, a minimum rating — which are a recognition programme and have nothing to do with registering an OAuth app.
+The quote is real and verification passed. But that is **the developer's deadline to respond**, not Shopify's review time. The guide had also absorbed Built for Shopify badge requirements — 50 net installs, five reviews, a minimum rating — which belong to a recognition programme, not to registering an OAuth app.
 
-Underneath both mistakes sat one conceptual error: **getting OAuth credentials and getting listed in a marketplace are different events with different timelines.** Shopify's own docs are explicit that client ID and secret are available immediately in the Dev Dashboard, and that [distribution](https://shopify.dev/docs/apps/launch/distribution) is a separate later choice — custom distribution lets a named merchant install with no review at all.
+One cause sat under both: **getting credentials and getting listed are different events with different timelines.** Shopify's docs are explicit that the client ID and secret are issued immediately, and that [distribution](https://shopify.dev/docs/apps/launch/distribution) is a separate later choice where custom distribution needs no review at all.
 
-**Fixed** by teaching the adjudication step that the rubric measures the path to *working credentials*, that marketplace listing is an optional separate path belonging in `nuances`, and that a deadline imposed on the developer is not a review duration.
+**Fixed** by teaching adjudication that the rubric measures the path to *working credentials*, that marketplace listing is an optional separate path belonging in `nuances`, and that a deadline imposed on the developer is not a review duration. The regenerated guide now reports the review wait as `unknown` with the right reasoning: *"docs describe a 30-day window to fix issues … but they do not state how long the initial review itself takes."*
 
-### Xero — spot-checked and held up
+### GitHub — a taxonomy error produced a confidently wrong answer
 
-Checked the developer-portal path, the 50-redirect-URI limit, the granular-scopes migration date and the "no review for app creation" claim against Xero's documentation. All supported. The guide's own open questions correctly flag that no official review SLA could be found rather than inventing one.
+GitHub came out as **Weeks**. Creating a GitHub OAuth app takes about two minutes and nobody reviews it.
+
+Every citation was sound. The error was in my enum: one human-only step was tagged `identity_verification`, with the detail "account email must be verified". `identity_verification` is floored at *weeks* because it means government ID and business registration documents — and confirming an email is a click.
+
+**Fixed** by splitting `email_verification` and `phone_verification` out of `identity_verification`, flooring them at *instant*, and saying so explicitly in the prompt. This is the sharpest lesson in the project: **verification catches invented evidence, not bad reasoning over good evidence.** Both of the errors above passed citation checking.
+
+### Four providers could not be read at all
+
+DocuSign, Workday, Snowflake and Salesforce Service Cloud produced no usable claims. The cause is mostly the same: **their documentation renders client-side.** DocuSign serves roughly 40 characters of text per page; Workday located 14 relevant pages and none were readable; Salesforce additionally returns `403` to this project's requests for `robots.txt` and `sitemap.xml`.
+
+They are kept in the library rather than quietly dropped, and the UI treats them properly — see below. Snowflake is a different kind of miss: its OAuth setup is a SQL statement (`CREATE SECURITY INTEGRATION`) run by an `ACCOUNTADMIN`, not a form in a console, so the shape this pipeline looks for does not exist there.
+
+Salesforce is the one that stings. Its security review is the canonical slow approval and the single most valuable guide in the set, and it is the one the approach handled worst.
+
+### A guide with no evidence must not look like an easy one
+
+This was the most important fix of the review, and it came out of looking at the library rather than at any single guide.
+
+`deriveTier` returns `instant` when nothing demands a higher floor — correct, and catastrophic for a guide where nothing was established at all, because it rendered as a confident green **Instant** badge. "Setup is trivial" and "we found nothing" looked identical.
+
+Guides where all five dimensions are null are now detected by `isUngrounded()` and shown as **"Not established"** everywhere: a distinct badge, a banner on the guide page explaining why, last position in the library, and excluded from the launch planner, where they would otherwise contribute a silent zero and make the date look better than the evidence supports.
 
 ### What I could not verify
 
-- **No OAuth app in this project was ever submitted for approval.** Every review-stage claim comes from documentation, not experience. Real approval times are set by reviewer queues, and no provider publishes a reliable SLA.
-- **No paid or enterprise-gated provider was tested end to end.** Workday and Snowflake guides describe paths that require a tenant or an account I do not have.
-- **Cross-product contamination is still possible.** A provider documenting several app surfaces can have a requirement from one attributed to another; with six pages read, there isn't always enough context to tell. Seeded guides are reviewed for this. Live ones are not, and are labelled `unreviewed` in the UI.
-
----
+- **No OAuth app in this project was ever submitted for approval.** Every review-stage claim comes from documentation, not experience. Real approval times are set by reviewer queues and almost no provider publishes an SLA.
+- **No paid or enterprise-gated provider was tested end to end.** Workday and Snowflake need a tenant or an account I do not have.
+- **Cross-product contamination remains possible.** A provider documenting several app surfaces can have a requirement from one attributed to another; six pages is not always enough context to tell. Seeded guides are reviewed for this. Live ones are not, and carry an `unreviewed` label in the UI.
 
 ## Limitations
 
@@ -134,6 +154,7 @@ Checked the developer-portal path, the 50-redirect-URI limit, the granular-scope
 - **Quote checking catches invention, not misreading.** It proves a sentence exists on the page. It cannot prove the model drew the right conclusion — which is exactly how the Shopify error survived to the hand-check.
 - **Staleness.** Every citation carries a fetch date; there is no re-verification job, so an old guide can be confidently wrong.
 - **Six pages is a thin read.** It is what a free tier's 8,000 tokens/minute affords. More pages would measurably improve accuracy.
+- **Client-rendered documentation is invisible to this pipeline.** Four of eleven seeded providers failed on exactly this. A JavaScript-rendering fetch would fix it and is the single highest-value change available.
 - **Hosted generation can hit a platform function timeout.** A run takes two to three minutes. The CLI has no such limit; the UI reports honestly if the connection closes early.
 - **The planner assumes one developer working serially and reviews running in parallel.** Both assumptions are stated on the page.
 

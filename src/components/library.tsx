@@ -3,8 +3,14 @@
 import Link from "next/link";
 import { useMemo, useState } from "react";
 import type { Guide, Tier } from "@/lib/schema";
-import { TIER_META } from "@/lib/rubric";
-import { ConfidenceBadge, ManagedAuthBadge, TierBadge, TierLadder } from "./badges";
+import { TIER_META, isUngrounded } from "@/lib/rubric";
+import {
+  ConfidenceBadge,
+  ManagedAuthBadge,
+  TierBadge,
+  TierLadder,
+  UngroundedBadge,
+} from "./badges";
 
 /**
  * The library view.
@@ -32,6 +38,7 @@ function setupLabel(g: Guide): string {
 }
 
 export function GuideCard({ guide }: { guide: Guide }) {
+  const ungrounded = isUngrounded(guide.rubric);
   const humanSteps = guide.steps.filter((s) => s.actor === "human").length;
   const agentSteps = guide.steps.filter((s) => s.actor !== "human").length;
   const cost = guide.rubric.costUsd.value;
@@ -51,11 +58,14 @@ export function GuideCard({ guide }: { guide: Guide }) {
             {guide.composioToolkitSlug ?? guide.slug}
           </p>
         </div>
-        <TierBadge tier={guide.tier} size="sm" />
+        {ungrounded ? <UngroundedBadge size="sm" /> : <TierBadge tier={guide.tier} size="sm" />}
       </div>
 
       <p className="line-clamp-2 text-[13px] leading-relaxed text-muted">
-        {guide.summary || TIER_META[guide.tier].blurb}
+        {guide.summary ||
+          (ungrounded
+            ? "This provider's documentation could not be read, so nothing about its setup was established."
+            : TIER_META[guide.tier].blurb)}
       </p>
 
       <div className="mono flex flex-wrap items-center gap-x-3 gap-y-1.5 text-[11px] text-muted">
@@ -95,14 +105,22 @@ export function Library({
 
   const counts = useMemo(() => {
     const c = new Map<Tier, number>();
-    for (const g of guides) c.set(g.tier, (c.get(g.tier) ?? 0) + 1);
+    for (const g of guides) {
+      if (isUngrounded(g.rubric)) continue;
+      c.set(g.tier, (c.get(g.tier) ?? 0) + 1);
+    }
     return c;
   }, [guides]);
 
   const filtered = useMemo(() => {
     const needle = q.trim().toLowerCase();
-    return guides.filter((g) => {
-      if (tier !== "all" && g.tier !== tier) return false;
+    return guides
+      .slice()
+      // Guides with no evidence sink to the bottom: they are a record of a
+      // failed investigation, not a recommendation.
+      .sort((a, b) => Number(isUngrounded(a.rubric)) - Number(isUngrounded(b.rubric)))
+      .filter((g) => {
+      if (tier !== "all" && (g.tier !== tier || isUngrounded(g.rubric))) return false;
       if (byoOnly && g.composioManagedOAuth !== false) return false;
       if (!needle) return true;
       return (
@@ -174,8 +192,7 @@ export function Library({
           </p>
           <Link
             href={`/generate${q.trim() ? `?app=${encodeURIComponent(q.trim())}` : ""}`}
-            className="mono mt-4 inline-block rounded-md px-3 py-2 text-[12px] font-medium text-white"
-            style={{ background: "var(--brand)" }}
+            className="btn btn-primary mt-4"
           >
             {q.trim() ? `Investigate “${q.trim()}”` : "Generate a guide"}
           </Link>
@@ -198,7 +215,13 @@ export function Library({
           <ul className="mt-3 space-y-2">
             {filtered.map((g) => (
               <li key={g.slug} className="flex items-center gap-3 text-[12.5px]">
-                <TierLadder tier={g.tier} />
+                {isUngrounded(g.rubric) ? (
+                  <span className="mono w-[115px] shrink-0 text-[10.5px]" style={{ color: "var(--ev-unknown)" }}>
+                    not established
+                  </span>
+                ) : (
+                  <TierLadder tier={g.tier} />
+                )}
                 <Link href={`/guide/${g.slug}`} className="brand-link truncate">
                   {g.appName}
                 </Link>

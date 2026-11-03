@@ -265,7 +265,7 @@ const EVIDENCE_RULES = [
 const C_SHAPE = 'C = { "url": string, "quote": string, "title": string?, "fetchedAt": string }';
 const E_SHAPE = 'E = "cited" | "inferred" | "unknown"';
 const R_SHAPE =
-  "R = payment | identity_verification | legal_signature | captcha | phone_verification | mfa | account_ownership | human_review_response | video_recording | domain_control";
+  "R = payment | identity_verification | legal_signature | captcha | email_verification | phone_verification | mfa | account_ownership | human_review_response | video_recording | domain_control";
 const P_SHAPE =
   "P = privacy_policy_url | terms_url | verified_domain | business_entity | paid_plan | public_app_listing | demo_video | security_questionnaire | support_contact | logo_assets";
 
@@ -381,6 +381,10 @@ async function adjudicateAssessment(ctx: AdjudicateCtx) {
       "- humanOnlyBlockers: a step is human-only when an agent genuinely cannot do it. Filling a",
       "  web form is agent work. Entering a card, passing an ID check, signing an agreement,",
       "  recording a demo video or changing DNS is not.",
+      '- Use "identity_verification" ONLY for government ID, a selfie, or business registration',
+      "  documents. Confirming an email address is \"email_verification\" and a texted code is",
+      '  "phone_verification". These are minutes; an identity check is weeks, and the tier',
+      "  treats them very differently.",
       "- summary: one paragraph, plain, specific to this provider, no marketing tone.",
       "- Do not pad. A short accurate assessment beats a long speculative one.",
     ].join("\n"),
@@ -591,8 +595,8 @@ function normalizeDraft(raw: unknown): GuideDraft {
 
   const REASONS = new Set([
     "payment", "identity_verification", "legal_signature", "captcha",
-    "phone_verification", "mfa", "account_ownership", "human_review_response",
-    "video_recording", "domain_control",
+    "email_verification", "phone_verification", "mfa", "account_ownership",
+    "human_review_response", "video_recording", "domain_control",
   ]);
   const ARTIFACTS = new Set([
     "privacy_policy_url", "terms_url", "verified_domain", "business_entity",

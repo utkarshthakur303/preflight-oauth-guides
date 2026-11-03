@@ -223,12 +223,17 @@ async function sitemapsFromRobots(origin: string): Promise<string[]> {
 async function expandSitemaps(
   sitemapUrls: string[],
   budget = 12_000,
+  deadlineMs = 45_000,
 ): Promise<string[]> {
   const pages = new Set<string>();
   const queue = [...sitemapUrls];
   let indexesFollowed = 0;
+  // Some providers shard a sitemap across dozens of large gzipped files behind
+  // slow responses. Enumeration is not worth an unbounded wait: whatever has
+  // been collected by the deadline is plenty for the relevance prefilter.
+  const stopAt = Date.now() + deadlineMs;
 
-  while (queue.length && pages.size < budget) {
+  while (queue.length && pages.size < budget && Date.now() < stopAt) {
     const next = queue.shift()!;
     const xml = await fetchSitemapText(next);
     if (!xml) continue;
@@ -272,8 +277,13 @@ export async function discoverDocUrls(
   docsRoots: string[],
 ): Promise<DiscoveredSource | null> {
   const found: RootDiscovery[] = [];
+  // A whole-stage ceiling on top of the per-sitemap one, so a provider that
+  // blocks our requests or serves very slowly degrades to a thinner candidate
+  // list rather than hanging the run.
+  const stopAt = Date.now() + 100_000;
 
   for (const root of docsRoots.slice(0, 4)) {
+    if (Date.now() > stopAt && found.length) break;
     const r = await discoverFromRoot(root);
     if (r) found.push(r);
   }

@@ -41,6 +41,10 @@ export function Generator({
   initialApp?: string;
 }) {
   const [app, setApp] = useState(initialApp);
+  // How many pages to read. Fewer is faster, and hosted platforms cap how long
+  // a request may run — a thorough pass is better driven from the CLI, which
+  // has no such ceiling.
+  const [pages, setPages] = useState(5);
   const [running, setRunning] = useState(false);
   const [stages, setStages] = useState<Record<string, StageState>>({});
   const [logs, setLogs] = useState<string[]>([]);
@@ -92,7 +96,9 @@ export function Generator({
       setElapsed(0);
       startedAt.current = Date.now();
 
-      const es = new EventSource(`/api/generate?app=${encodeURIComponent(q)}`);
+      const es = new EventSource(
+        `/api/generate?app=${encodeURIComponent(q)}&pages=${pages}`,
+      );
       esRef.current = es;
 
       es.onmessage = (ev) => {
@@ -162,7 +168,7 @@ export function Generator({
         stop();
       };
     },
-    [running, stop],
+    [running, stop, pages],
   );
 
   // Deep link: /generate?app=Xero starts immediately.
@@ -206,21 +212,43 @@ export function Generator({
           <button
             type="submit"
             disabled={running || !app.trim()}
-            className="mono rounded-md px-4 py-2.5 text-[13px] font-medium text-white disabled:opacity-50"
-            style={{ background: "var(--brand)" }}
+            className="btn btn-primary disabled:opacity-50"
           >
-            {running ? "investigating…" : "Investigate"}
+            {running ? "Investigating…" : "Investigate"}
+            {!running && <span aria-hidden>→</span>}
           </button>
           {running && (
             <button
               type="button"
               onClick={stop}
-              className="mono rounded-md border px-3 py-2.5 text-[13px] text-muted"
-              style={{ borderColor: "var(--border)" }}
+              className="btn"
             >
-              stop
+              Stop
             </button>
           )}
+        </div>
+
+        <div className="mono mt-2 flex flex-wrap items-center gap-2 text-[11.5px] text-muted">
+          <span>read</span>
+          {[4, 5, 7].map((n) => (
+            <button
+              key={n}
+              type="button"
+              disabled={running}
+              onClick={() => setPages(n)}
+              className="rounded border px-2 py-0.5 transition-colors disabled:opacity-50"
+              style={{
+                borderColor: pages === n ? "var(--brand)" : "var(--border)",
+                background: pages === n ? "var(--brand-wash)" : "transparent",
+                color: pages === n ? "var(--foreground)" : "var(--muted)",
+              }}
+            >
+              {n} pages
+            </button>
+          ))}
+          <span>
+            · roughly {Math.round(pages * 0.45 + 0.7)}&ndash;{Math.round(pages * 0.6 + 1)} minutes
+          </span>
         </div>
 
         {matches.length > 0 && (

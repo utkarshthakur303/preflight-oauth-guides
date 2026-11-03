@@ -3,8 +3,8 @@
 import Link from "next/link";
 import { useMemo, useState } from "react";
 import type { Guide } from "@/lib/schema";
-import { TIER_META, planStack } from "@/lib/rubric";
-import { ConfidenceBadge, TierBadge } from "./badges";
+import { TIER_META, isUngrounded, planStack } from "@/lib/rubric";
+import { ConfidenceBadge, TierBadge, UngroundedBadge } from "./badges";
 
 /**
  * The launch planner.
@@ -36,9 +36,25 @@ function businessDaysToDate(days: number): string {
   });
 }
 
-export function Planner({ guides }: { guides: Guide[] }) {
+export function Planner({ guides: allGuides }: { guides: Guide[] }) {
+  // A guide with nothing established cannot contribute to a date. Including it
+  // would silently add a zero to every total and make the plan look better than
+  // the evidence supports, so it is listed as unavailable instead.
+  const guides = allGuides.filter((g) => !isUngrounded(g.rubric));
+  const unplannable = allGuides.filter((g) => isUngrounded(g.rubric));
+  // Default to the best-evidenced guides, hardest first. Taking whatever came
+  // first put three guides with no sources on screen and produced a confident
+  // "0 business days" — technically what the data said, and a terrible opening
+  // view. The point of the page is the long pole, so show a stack that has one.
   const [selected, setSelected] = useState<string[]>(() =>
-    guides.slice(0, Math.min(3, guides.length)).map((g) => g.slug),
+    [...guides]
+      .sort(
+        (a, b) =>
+          b.sources.length - a.sources.length ||
+          TIER_META[b.tier].order - TIER_META[a.tier].order,
+      )
+      .slice(0, Math.min(3, guides.length))
+      .map((g) => g.slug),
   );
 
   const chosen = useMemo(
@@ -101,6 +117,31 @@ export function Planner({ guides }: { guides: Guide[] }) {
             );
           })}
         </ul>
+
+        {unplannable.length > 0 && (
+          <div className="mt-4 rounded-lg border p-3" style={{ borderColor: "var(--border)" }}>
+            <p className="mono text-[11px] uppercase tracking-wide text-muted">
+              cannot be planned ({unplannable.length})
+            </p>
+            <p className="mt-1 text-[12px] leading-relaxed text-muted">
+              Nothing was established for these, so they would contribute a
+              misleading zero to the date rather than a number.
+            </p>
+            <ul className="mt-2 flex flex-wrap gap-1.5">
+              {unplannable.map((g) => (
+                <li key={g.slug}>
+                  <Link
+                    href={`/guide/${g.slug}`}
+                    className="mono rounded border px-2 py-0.5 text-[11px] text-muted"
+                    style={{ borderColor: "var(--border)" }}
+                  >
+                    {g.appName}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
 
         {/* Gantt-ish view: approvals in parallel, so the longest bar is the date. */}
         {plan.apps.length > 0 && (

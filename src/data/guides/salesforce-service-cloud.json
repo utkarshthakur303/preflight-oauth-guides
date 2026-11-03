@@ -1,0 +1,147 @@
+{
+  "schemaVersion": 1,
+  "slug": "salesforce-service-cloud",
+  "appName": "Salesforce Service Cloud",
+  "composioToolkitSlug": "SALESFORCE_SERVICE_CLOUD",
+  "composioManagedOAuth": false,
+  "providerName": "Salesforce",
+  "developerConsoleUrl": {
+    "value": null,
+    "evidence": "unknown",
+    "citations": [],
+    "reasoning": "No documentation page located that shows the URL for creating a Connected App."
+  },
+  "docsRootUrl": "https://developer.salesforce.com",
+  "summary": "The guide could not locate any Salesforce documentation describing how a developer registers a Connected App for OAuth, so no concrete information about the process, timing, costs, or requirements could be extracted.",
+  "rubric": {
+    "selfServeMinutes": {
+      "value": null,
+      "evidence": "unknown",
+      "citations": [],
+      "reasoning": "No source indicating how long the self‑service registration takes."
+    },
+    "reviewWaitBusinessDays": {
+      "value": null,
+      "evidence": "unknown",
+      "citations": [],
+      "reasoning": "No source describing any review period for obtaining working credentials."
+    },
+    "humanOnlyBlockers": {
+      "value": null,
+      "evidence": "unknown",
+      "citations": [],
+      "reasoning": "No source identifying any human‑only steps that cannot be automated."
+    },
+    "costUsd": {
+      "value": null,
+      "evidence": "unknown",
+      "citations": [],
+      "reasoning": "No source mentioning any fees for creating a Connected App."
+    },
+    "prerequisiteArtifacts": {
+      "value": null,
+      "evidence": "unknown",
+      "citations": [],
+      "reasoning": "No source listing required artifacts such as privacy policy or terms."
+    }
+  },
+  "tier": "instant",
+  "confidence": "low",
+  "tierRationale": [
+    "nothing could be established — treat this tier as meaningless",
+    "tier is blind to 5 unestablished dimensions: setup time, review wait, human-only steps, cost, prerequisites"
+  ],
+  "steps": [
+    {
+      "title": "Log into Salesforce Setup and open Connected Apps",
+      "detail": "Sign in to the Salesforce org, go to Setup (https://login.salesforce.com/setup/), then navigate to App Manager → Connected Apps and click “New Connected App”.",
+      "actor": "either",
+      "where": "https://login.salesforce.com/setup/connectedapps",
+      "estimatedMinutes": 5,
+      "startsReviewWait": false,
+      "evidence": "inferred",
+      "citations": []
+    },
+    {
+      "title": "Configure OAuth settings for the app",
+      "detail": "In the Connected App form, give the app a name, enable “Enable OAuth Settings”, enter the required Callback URL (redirect URI), and select the OAuth scopes your Service Cloud integration needs (e.g., Access and manage your data (api), Perform requests on your behalf at any time (refresh_token)).",
+      "actor": "either",
+      "where": "https://login.salesforce.com/setup/connectedapps",
+      "estimatedMinutes": 7,
+      "startsReviewWait": false,
+      "evidence": "inferred",
+      "citations": []
+    },
+    {
+      "title": "Save the app and record credentials",
+      "detail": "Save the Connected App. After the save completes, Salesforce displays the Consumer Key and Consumer Secret – copy these values for use in your OAuth flow. No additional review is required for internal apps.",
+      "actor": "either",
+      "where": "https://login.salesforce.com/setup/connectedapps",
+      "estimatedMinutes": 3,
+      "startsReviewWait": false,
+      "evidence": "inferred",
+      "citations": []
+    }
+  ],
+  "nuances": [],
+  "whenBlocked": [],
+  "conflicts": [],
+  "openQuestions": [
+    {
+      "question": "What is the exact URL or navigation path in Salesforce Setup to create a new Connected App for OAuth?",
+      "whyItMatters": "Developers need the correct location to start the registration process.",
+      "howToResolve": "Manually log into a Salesforce org, go to Setup → App Manager → Connected Apps → New Connected App and record the URL."
+    },
+    {
+      "question": "Which OAuth scopes are required or recommended for a Service Cloud integration?",
+      "whyItMatters": "Scope selection determines what API resources the agent can access on behalf of users.",
+      "howToResolve": "Review Salesforce’s Connected App documentation or UI options for available scopes and select those needed."
+    },
+    {
+      "question": "Does Salesforce perform any manual review or verification of a Connected App before it can be used in production?",
+      "whyItMatters": "A review could add delay before the app can make API calls for end‑users.",
+      "howToResolve": "Create a test Connected App and observe whether Salesforce requests additional approval or provides a timeline."
+    },
+    {
+      "question": "Are there any fees or subscription tiers required to register a Connected App for external developers?",
+      "whyItMatters": "Cost impacts the feasibility of building an integration.",
+      "howToResolve": "Check Salesforce pricing pages or contact Salesforce sales/support for clarification."
+    },
+    {
+      "question": "What legal or policy artifacts (privacy policy URL, terms of service, etc.) must be supplied when registering a Connected App?",
+      "whyItMatters": "Missing required artifacts could block registration or cause later compliance issues.",
+      "howToResolve": "Inspect the Connected App creation form for required fields or consult Salesforce’s developer agreement."
+    }
+  ],
+  "sources": [],
+  "generation": {
+    "generatedAt": "2026-11-03T15:11:50.991Z",
+    "origin": "seeded",
+    "models": [
+      {
+        "model": "openai/gpt-oss-120b",
+        "role": "adjudicate",
+        "calls": 3,
+        "inputTokens": 2490,
+        "outputTokens": 1569
+      },
+      {
+        "model": "openai/gpt-oss-20b",
+        "role": "triage",
+        "calls": 5,
+        "inputTokens": 7038,
+        "outputTokens": 388
+      },
+      {
+        "model": "openai/gpt-oss-20b",
+        "role": "extract",
+        "calls": 1,
+        "inputTokens": 1660,
+        "outputTokens": 42
+      }
+    ],
+    "docPagesDiscovered": 31469,
+    "docPagesRead": 1,
+    "durationMs": 114641
+  }
+}

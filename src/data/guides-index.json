@@ -129,7 +129,8 @@
       ],
       "docPagesDiscovered": 39544,
       "docPagesRead": 0,
-      "durationMs": 117211
+      "durationMs": 117211,
+      "reviewNote": "Kept in the library as an honest failure case. DocuSign's developer documentation is rendered client-side: the server returns roughly 40 characters of text per page, so although 31 relevant pages were located, none could be read. The pipeline correctly refused to guess and marked every dimension unknown. Reading this provider would need a JavaScript-rendering fetch, which this project does not do."
     }
   },
   {
@@ -369,7 +370,156 @@
       ],
       "docPagesDiscovered": 215,
       "docPagesRead": 1,
-      "durationMs": 65208
+      "durationMs": 65208,
+      "reviewNote": "Corrected after review. The guide was rated Weeks, driven entirely by one human-only step classified as 'identity verification' whose detail read 'account email must be verified'. Confirming an email is a click, not an identity check, but the rubric floors identity verification at weeks because it is meant for government ID and business registration documents. The enum now distinguishes email_verification and phone_verification from identity_verification, and the adjudication prompt says so explicitly. This is the clearest example in the project of a taxonomy error producing a confidently wrong answer while every individual citation was sound."
+    }
+  },
+  {
+    "schemaVersion": 1,
+    "slug": "salesforce-service-cloud",
+    "appName": "Salesforce Service Cloud",
+    "composioToolkitSlug": "SALESFORCE_SERVICE_CLOUD",
+    "composioManagedOAuth": false,
+    "providerName": "Salesforce",
+    "developerConsoleUrl": {
+      "value": null,
+      "evidence": "unknown",
+      "citations": [],
+      "reasoning": "No documentation page located that shows the URL for creating a Connected App."
+    },
+    "docsRootUrl": "https://developer.salesforce.com",
+    "summary": "The guide could not locate any Salesforce documentation describing how a developer registers a Connected App for OAuth, so no concrete information about the process, timing, costs, or requirements could be extracted.",
+    "rubric": {
+      "selfServeMinutes": {
+        "value": null,
+        "evidence": "unknown",
+        "citations": [],
+        "reasoning": "No source indicating how long the self‑service registration takes."
+      },
+      "reviewWaitBusinessDays": {
+        "value": null,
+        "evidence": "unknown",
+        "citations": [],
+        "reasoning": "No source describing any review period for obtaining working credentials."
+      },
+      "humanOnlyBlockers": {
+        "value": null,
+        "evidence": "unknown",
+        "citations": [],
+        "reasoning": "No source identifying any human‑only steps that cannot be automated."
+      },
+      "costUsd": {
+        "value": null,
+        "evidence": "unknown",
+        "citations": [],
+        "reasoning": "No source mentioning any fees for creating a Connected App."
+      },
+      "prerequisiteArtifacts": {
+        "value": null,
+        "evidence": "unknown",
+        "citations": [],
+        "reasoning": "No source listing required artifacts such as privacy policy or terms."
+      }
+    },
+    "tier": "instant",
+    "confidence": "low",
+    "tierRationale": [
+      "nothing could be established — treat this tier as meaningless",
+      "tier is blind to 5 unestablished dimensions: setup time, review wait, human-only steps, cost, prerequisites"
+    ],
+    "steps": [
+      {
+        "title": "Log into Salesforce Setup and open Connected Apps",
+        "detail": "Sign in to the Salesforce org, go to Setup (https://login.salesforce.com/setup/), then navigate to App Manager → Connected Apps and click “New Connected App”.",
+        "actor": "either",
+        "where": "https://login.salesforce.com/setup/connectedapps",
+        "estimatedMinutes": 5,
+        "startsReviewWait": false,
+        "evidence": "inferred",
+        "citations": []
+      },
+      {
+        "title": "Configure OAuth settings for the app",
+        "detail": "In the Connected App form, give the app a name, enable “Enable OAuth Settings”, enter the required Callback URL (redirect URI), and select the OAuth scopes your Service Cloud integration needs (e.g., Access and manage your data (api), Perform requests on your behalf at any time (refresh_token)).",
+        "actor": "either",
+        "where": "https://login.salesforce.com/setup/connectedapps",
+        "estimatedMinutes": 7,
+        "startsReviewWait": false,
+        "evidence": "inferred",
+        "citations": []
+      },
+      {
+        "title": "Save the app and record credentials",
+        "detail": "Save the Connected App. After the save completes, Salesforce displays the Consumer Key and Consumer Secret – copy these values for use in your OAuth flow. No additional review is required for internal apps.",
+        "actor": "either",
+        "where": "https://login.salesforce.com/setup/connectedapps",
+        "estimatedMinutes": 3,
+        "startsReviewWait": false,
+        "evidence": "inferred",
+        "citations": []
+      }
+    ],
+    "nuances": [],
+    "whenBlocked": [],
+    "conflicts": [],
+    "openQuestions": [
+      {
+        "question": "What is the exact URL or navigation path in Salesforce Setup to create a new Connected App for OAuth?",
+        "whyItMatters": "Developers need the correct location to start the registration process.",
+        "howToResolve": "Manually log into a Salesforce org, go to Setup → App Manager → Connected Apps → New Connected App and record the URL."
+      },
+      {
+        "question": "Which OAuth scopes are required or recommended for a Service Cloud integration?",
+        "whyItMatters": "Scope selection determines what API resources the agent can access on behalf of users.",
+        "howToResolve": "Review Salesforce’s Connected App documentation or UI options for available scopes and select those needed."
+      },
+      {
+        "question": "Does Salesforce perform any manual review or verification of a Connected App before it can be used in production?",
+        "whyItMatters": "A review could add delay before the app can make API calls for end‑users.",
+        "howToResolve": "Create a test Connected App and observe whether Salesforce requests additional approval or provides a timeline."
+      },
+      {
+        "question": "Are there any fees or subscription tiers required to register a Connected App for external developers?",
+        "whyItMatters": "Cost impacts the feasibility of building an integration.",
+        "howToResolve": "Check Salesforce pricing pages or contact Salesforce sales/support for clarification."
+      },
+      {
+        "question": "What legal or policy artifacts (privacy policy URL, terms of service, etc.) must be supplied when registering a Connected App?",
+        "whyItMatters": "Missing required artifacts could block registration or cause later compliance issues.",
+        "howToResolve": "Inspect the Connected App creation form for required fields or consult Salesforce’s developer agreement."
+      }
+    ],
+    "sources": [],
+    "generation": {
+      "generatedAt": "2026-11-03T15:11:50.991Z",
+      "origin": "seeded",
+      "models": [
+        {
+          "model": "openai/gpt-oss-120b",
+          "role": "adjudicate",
+          "calls": 3,
+          "inputTokens": 2490,
+          "outputTokens": 1569
+        },
+        {
+          "model": "openai/gpt-oss-20b",
+          "role": "triage",
+          "calls": 5,
+          "inputTokens": 7038,
+          "outputTokens": 388
+        },
+        {
+          "model": "openai/gpt-oss-20b",
+          "role": "extract",
+          "calls": 1,
+          "inputTokens": 1660,
+          "outputTokens": 42
+        }
+      ],
+      "docPagesDiscovered": 31469,
+      "docPagesRead": 1,
+      "durationMs": 114641,
+      "reviewNote": "Nothing established, for two compounding reasons. developer.salesforce.com returns 403 to this project's requests for robots.txt and sitemap.xml, so discovery fell back to trailhead.salesforce.com and help.salesforce.com, and of the five candidate pages reached, four served no readable text. This is the guide I most wanted to produce — Salesforce's security review is the canonical slow approval — and it is the one the approach handled worst. Reading it would need either a JavaScript-rendering fetch or a documented crawl agreement with Salesforce."
     }
   },
   {
@@ -380,45 +530,31 @@
     "composioManagedOAuth": false,
     "providerName": "Shopify",
     "developerConsoleUrl": {
-      "value": "https://partners.shopify.com",
+      "value": "https://partners.shopify.com/current/apps",
       "evidence": "inferred",
       "citations": [],
-      "reasoning": "The partner dashboard is the known place for developers to create and manage apps; the hint URL points to it."
+      "reasoning": "The hint points to the Shopify Partners dashboard where apps are created and managed, which is the de‑facto developer console."
     },
     "docsRootUrl": "https://shopify.dev",
-    "summary": "Shopify requires developers to register apps via the Partner Dashboard, meet install, review, rating, and performance thresholds, and respond to quality checks within 7 days and make required changes within 30 days, all managed through the dashboard.",
+    "summary": "Shopify lets developers create OAuth apps through the Partners dashboard in a fully self‑serve manner; credentials (API key and secret) are issued instantly. After submission, the app may undergo a quality‑check review that can require human response and up to 30 days to address, but there is no mandatory fee or mandatory public listing for basic API access.",
     "rubric": {
       "selfServeMinutes": {
         "value": 15,
         "evidence": "inferred",
         "citations": [],
-        "reasoning": "Creating an app in the Partner Dashboard is a straightforward web form; typical developers can complete it in about a quarter hour."
+        "reasoning": "Creating an app in the dashboard and copying the generated client ID/secret typically takes under a quarter of an hour for a developer familiar with the UI."
       },
       "reviewWaitBusinessDays": {
-        "value": {
-          "min": 0,
-          "max": 30
-        },
-        "evidence": "cited",
-        "citations": [
-          {
-            "url": "https://shopify.dev/docs/apps/launch/app-store-review/app-quality-checks",
-            "quote": "If your quality check has a list of changes that you need to make to your app, then you have 30 days to make those changes.",
-            "fetchedAt": "2026-11-03T14:48:27.848Z"
-          },
-          {
-            "url": "https://shopify.dev/docs/apps/launch/app-store-review/app-quality-checks",
-            "quote": "If you don't respond to the initial quality check within 7 days, then your app will be demoted.",
-            "fetchedAt": "2026-11-03T14:48:27.848Z"
-          }
-        ],
-        "reasoning": "The 7‑day response deadline and the subsequent 30‑day change window define the maximum wait time for review."
+        "value": null,
+        "evidence": "unknown",
+        "citations": [],
+        "reasoning": "Docs describe a 30‑day window to fix issues after a quality check and a 7‑day response deadline, but they do not state how long the initial review itself takes before a quality check is issued."
       },
       "humanOnlyBlockers": {
         "value": [
           {
             "reason": "human_review_response",
-            "detail": "Submitting evidence of changes and managing feedback must be done in the Partner Dashboard, which requires a human to gather and upload proof."
+            "detail": "A quality‑check review must be responded to in the Partner Dashboard with evidence of changes, which requires a human to assess and submit."
           }
         ],
         "evidence": "cited",
@@ -426,270 +562,281 @@
           {
             "url": "https://shopify.dev/docs/apps/launch/app-store-review/app-quality-checks",
             "quote": "After you make the changes, submit your response in the Partner Dashboard and provide evidence of the changes that you've made.",
-            "fetchedAt": "2026-11-03T14:48:27.848Z"
-          },
-          {
-            "url": "https://shopify.dev/docs/apps/launch/app-store-review/app-quality-checks",
-            "quote": "All feedback and your responses are managed in the Partner Dashboard until the quality check process is complete.",
-            "fetchedAt": "2026-11-03T14:48:27.848Z"
+            "title": "",
+            "fetchedAt": "2026-11-03T15:06:00.848Z"
           }
         ],
-        "reasoning": "An autonomous agent cannot generate the required evidence or interact with the dashboard UI without human involvement."
+        "reasoning": "The step of reviewing and responding to a quality check cannot be automated."
       },
       "costUsd": {
         "value": null,
         "evidence": "unknown",
         "citations": [],
-        "reasoning": "The fetched pages do not mention any fees for registering an OAuth app; Shopify’s public docs focus on technical and review requirements."
+        "reasoning": "The fetched documentation does not mention any registration fee for creating an OAuth app."
       },
       "prerequisiteArtifacts": {
         "value": null,
         "evidence": "unknown",
-        "citations": [
-          {
-            "url": "https://shopify.dev/docs/apps/launch/built-for-shopify/requirements",
-            "quote": "Your app must have a minimum of 50 net installs from active shops on paid plans.",
-            "fetchedAt": "2026-11-03T14:48:32.459Z"
-          },
-          {
-            "url": "https://shopify.dev/docs/apps/launch/built-for-shopify/requirements",
-            "quote": "Your app must have a minimum of five reviews.",
-            "fetchedAt": "2026-11-03T14:48:32.459Z"
-          },
-          {
-            "url": "https://shopify.dev/docs/apps/launch/built-for-shopify/requirements",
-            "quote": "Your app must meet a minimum recent app rating threshold in the Shopify App Store.",
-            "fetchedAt": "2026-11-03T14:48:32.459Z"
-          }
-        ],
-        "reasoning": "These are the explicit quantitative prerequisites a developer must satisfy before the app can be reviewed."
+        "citations": [],
+        "reasoning": "The listed prerequisites are quantitative thresholds (installs, reviews, rating) rather than required artifacts such as privacy‑policy URLs."
       }
     },
-    "tier": "enterprise",
+    "tier": "days",
     "confidence": "low",
     "tierRationale": [
-      "provider review of 0–30 business days",
-      "tier is blind to 2 unestablished dimensions: cost, prerequisites"
+      "human-only step (human review response): A quality‑check review must be responded to in the Partner Dashboard with evidence of changes, which requires a human to assess and submit.",
+      "tier is blind to 3 unestablished dimensions: review wait, cost, prerequisites"
     ],
     "steps": [
       {
-        "title": "Log into Shopify Partners dashboard",
-        "detail": "Open https://partners.shopify.com and sign in with your Partner account credentials.",
+        "title": "Log into the Shopify Partner Dashboard",
+        "detail": "Open https://partners.shopify.com/current/apps and sign in with your Partner account.",
         "actor": "agent",
-        "where": "Partner Dashboard",
-        "estimatedMinutes": 2,
-        "startsReviewWait": false,
-        "evidence": "inferred",
-        "citations": []
-      },
-      {
-        "title": "Create a new app",
-        "detail": "In the dashboard sidebar select **Apps**, then click **Create app** and choose **Public app** (or the appropriate type).",
-        "actor": "agent",
-        "where": "Partner Dashboard > Apps",
-        "estimatedMinutes": 3,
-        "startsReviewWait": false,
-        "evidence": "inferred",
-        "citations": []
-      },
-      {
-        "title": "Enter basic app information",
-        "detail": "Provide an app name, App URL, and one or more Redirect URI(s). All Redirect URIs must be HTTPS and match exactly what your OAuth flow will use.",
-        "actor": "agent",
-        "where": "App creation form",
-        "estimatedMinutes": 4,
-        "startsReviewWait": false,
-        "evidence": "inferred",
-        "citations": []
-      },
-      {
-        "title": "Save to generate API credentials",
-        "detail": "Click **Save**. Shopify will display the **API key (Client ID)** and **API secret key** – copy these for your server configuration.",
-        "actor": "agent",
-        "where": "App details page",
-        "estimatedMinutes": 2,
-        "startsReviewWait": false,
-        "evidence": "inferred",
-        "citations": []
-      },
-      {
-        "title": "Configure OAuth scopes",
-        "detail": "Under **Configuration → OAuth scopes**, select the permissions your app requires (e.g., read_products, write_orders). Save the changes.",
-        "actor": "agent",
-        "where": "App configuration",
-        "estimatedMinutes": 3,
-        "startsReviewWait": false,
-        "evidence": "inferred",
-        "citations": []
-      },
-      {
-        "title": "Submit the app for review",
-        "detail": "From the app’s overview page click **Submit for review** and follow the prompts to provide any required assets (screenshots, description, privacy policy).",
-        "actor": "agent",
-        "where": "Partner Dashboard > App overview",
+        "where": "https://partners.shopify.com/current/apps",
         "estimatedMinutes": 5,
+        "startsReviewWait": false,
+        "evidence": "inferred",
+        "citations": []
+      },
+      {
+        "title": "Create a new app entry",
+        "detail": "In the dashboard click **Create app** → choose **Public app** (or **Custom app** for private use) and give the app a name.",
+        "actor": "agent",
+        "where": "Partner Dashboard > Apps > Create app",
+        "estimatedMinutes": 5,
+        "startsReviewWait": false,
+        "evidence": "inferred",
+        "citations": []
+      },
+      {
+        "title": "Configure OAuth redirect URIs",
+        "detail": "In the **App setup** section add each redirect endpoint (e.g. https://myapp.example.com/auth/callback) to the **Redirect URLs** field and save.",
+        "actor": "agent",
+        "where": "Partner Dashboard > App > App setup > Redirect URLs",
+        "estimatedMinutes": 5,
+        "startsReviewWait": false,
+        "evidence": "inferred",
+        "citations": []
+      },
+      {
+        "title": "Select required OAuth scopes",
+        "detail": "Review the scopes listed in your shopify.app.toml file and add only those that correspond to shipped features. Declare optional scopes for features that are not universally used and plan to request them on‑demand. Remove any unused scopes and, when possible, downgrade optional write scopes to read‑only as of API version 2027‑01.",
+        "actor": "agent",
+        "where": "Partner Dashboard > App > App setup > OAuth scopes",
+        "estimatedMinutes": 10,
+        "startsReviewWait": false,
+        "evidence": "cited",
+        "citations": [
+          {
+            "url": "https://shopify.dev/docs/apps/build/security/credentials-and-data/request-only-the-scopes-you-use",
+            "quote": "Review your `shopify.app.toml` file and remove scopes that no shipped feature uses.",
+            "title": "Request only the scopes you use",
+            "fetchedAt": "2026-11-03T15:06:14.188Z"
+          },
+          {
+            "url": "https://shopify.dev/docs/apps/build/security/credentials-and-data/request-only-the-scopes-you-use",
+            "quote": "If only some stores use a feature, then declare the scopes that it needs as optional scopes, and request them when an app user turns the feature on.",
+            "title": "Request only the scopes you use",
+            "fetchedAt": "2026-11-03T15:06:14.188Z"
+          },
+          {
+            "url": "https://shopify.dev/docs/apps/build/security/credentials-and-data/request-only-the-scopes-you-use",
+            "quote": "When your app no longer needs an optional scope, revoke it.",
+            "title": "Request only the scopes you use",
+            "fetchedAt": "2026-11-03T15:06:14.188Z"
+          },
+          {
+            "url": "https://shopify.dev/docs/apps/build/security/credentials-and-data/request-only-the-scopes-you-use",
+            "quote": "Starting with GraphQL Admin API version `2027-01`, your app can also downgrade an optional write scope to read.",
+            "title": "Request only the scopes you use",
+            "fetchedAt": "2026-11-03T15:06:14.188Z"
+          }
+        ]
+      },
+      {
+        "title": "Save the app to generate credentials",
+        "detail": "Click **Save**; the dashboard will display the **API key (Client ID)** and **API secret key** which you will use in your OAuth flow.",
+        "actor": "agent",
+        "where": "Partner Dashboard > App > API credentials",
+        "estimatedMinutes": 3,
+        "startsReviewWait": false,
+        "evidence": "inferred",
+        "citations": []
+      },
+      {
+        "title": "Submit the app for review (public apps)",
+        "detail": "After configuring the app, go to **App submission**, provide evidence of any required changes (e.g., updated shopify.app.toml), and click **Submit**. This starts the Shopify quality‑check review process.",
+        "actor": "agent",
+        "where": "Partner Dashboard > App > App submission",
+        "estimatedMinutes": 10,
         "startsReviewWait": true,
         "evidence": "cited",
         "citations": [
           {
             "url": "https://shopify.dev/docs/apps/launch/app-store-review/app-quality-checks",
             "quote": "After you make the changes, submit your response in the Partner Dashboard and provide evidence of the changes that you've made.",
-            "title": "App quality checks – Shopify Dev",
-            "fetchedAt": "2026-11-03T14:48:27.848Z"
-          }
-        ]
-      },
-      {
-        "title": "Monitor review status",
-        "detail": "All feedback and your responses are managed in the Partner Dashboard until the quality check process is complete.",
-        "actor": "agent",
-        "where": "Partner Dashboard > Review inbox",
-        "estimatedMinutes": 2,
-        "startsReviewWait": false,
-        "evidence": "cited",
-        "citations": [
-          {
-            "url": "https://shopify.dev/docs/apps/launch/app-store-review/app-quality-checks",
-            "quote": "All feedback and your responses are managed in the Partner Dashboard until the quality check process is complete.",
-            "title": "App quality checks – Shopify Dev",
-            "fetchedAt": "2026-11-03T14:48:27.848Z"
+            "title": "App quality checks",
+            "fetchedAt": "2026-11-03T15:06:00.848Z"
           }
         ]
       }
     ],
     "nuances": [
       {
-        "title": "Prerequisite install and review thresholds",
-        "detail": "Shopify will not allow a public app to be listed unless it already has at least 50 net installs on paid‑plan shops, a minimum of five reviews, and meets the recent rating threshold.",
+        "title": "App eligibility prerequisites",
+        "detail": "Your app must already have at least 50 net installs on paid‑plan shops, a minimum of five reviews, and meet Shopify’s recent rating threshold before you can submit it for public review.",
         "severity": "blocker",
         "evidence": "cited",
         "citations": [
           {
             "url": "https://shopify.dev/docs/apps/launch/built-for-shopify/requirements",
             "quote": "Your app must have a minimum of 50 net installs from active shops on paid plans.",
-            "title": "App launch requirements – Shopify Dev",
-            "fetchedAt": "2026-11-03T14:48:32.459Z"
+            "title": "App launch requirements",
+            "fetchedAt": "2026-11-03T15:06:11.309Z"
           },
           {
             "url": "https://shopify.dev/docs/apps/launch/built-for-shopify/requirements",
             "quote": "Your app must have a minimum of five reviews.",
-            "title": "App launch requirements – Shopify Dev",
-            "fetchedAt": "2026-11-03T14:48:32.459Z"
+            "title": "App launch requirements",
+            "fetchedAt": "2026-11-03T15:06:11.309Z"
           },
           {
             "url": "https://shopify.dev/docs/apps/launch/built-for-shopify/requirements",
             "quote": "Your app must meet a minimum recent app rating threshold in the Shopify App Store.",
-            "title": "App launch requirements – Shopify Dev",
-            "fetchedAt": "2026-11-03T14:48:32.459Z"
+            "title": "App launch requirements",
+            "fetchedAt": "2026-11-03T15:06:11.309Z"
           }
         ]
       },
       {
-        "title": "Redirect URI must be exact and HTTPS",
-        "detail": "Shopify only accepts redirect URIs that use HTTPS and match the value sent in the OAuth request byte‑for‑byte; wildcards or query‑string variations are rejected.",
+        "title": "Scope management gotchas",
+        "detail": "Only request scopes that are actively used. Optional scopes must be declared and requested at runtime; unused optional scopes should be revoked. From API version 2027‑01 you can downgrade optional write scopes to read‑only, reducing review friction.",
         "severity": "gotcha",
-        "evidence": "inferred",
-        "citations": []
+        "evidence": "cited",
+        "citations": [
+          {
+            "url": "https://shopify.dev/docs/apps/build/security/credentials-and-data/request-only-the-scopes-you-use",
+            "quote": "Review your `shopify.app.toml` file and remove scopes that no shipped feature uses.",
+            "title": "Request only the scopes you use",
+            "fetchedAt": "2026-11-03T15:06:14.188Z"
+          },
+          {
+            "url": "https://shopify.dev/docs/apps/build/security/credentials-and-data/request-only-the-scopes-you-use",
+            "quote": "If only some stores use a feature, then declare the scopes that it needs as optional scopes, and request them when an app user turns the feature on.",
+            "title": "Request only the scopes you use",
+            "fetchedAt": "2026-11-03T15:06:14.188Z"
+          },
+          {
+            "url": "https://shopify.dev/docs/apps/build/security/credentials-and-data/request-only-the-scopes-you-use",
+            "quote": "When your app no longer needs an optional scope, revoke it.",
+            "title": "Request only the scopes you use",
+            "fetchedAt": "2026-11-03T15:06:14.188Z"
+          }
+        ]
       },
       {
-        "title": "Scope approval may be limited for new apps",
-        "detail": "If your app requests sensitive scopes (e.g., write_orders), Shopify reviewers may ask for additional justification or limit the scopes until the app proves compliance.",
-        "severity": "note",
-        "evidence": "inferred",
-        "citations": []
+        "title": "30‑day remediation window",
+        "detail": "If required changes are not made within 30 days after a quality‑check request, Shopify may unpublish the app.",
+        "severity": "gotcha",
+        "evidence": "cited",
+        "citations": [
+          {
+            "url": "https://shopify.dev/docs/apps/launch/app-store-review/app-quality-checks",
+            "quote": "If you fail to make required changes to your app within 30 days, then your app might be unpublished.",
+            "title": "App quality checks",
+            "fetchedAt": "2026-11-03T15:06:00.848Z"
+          }
+        ]
       }
     ],
     "whenBlocked": [
       {
-        "situation": "App does not meet the 50‑install, 5‑review, or rating prerequisites",
-        "action": "You cannot submit the app for public listing. Focus on acquiring installs and reviews on a development store or private distribution, then re‑attempt submission.",
-        "contact": "Shopify Partner Support via https://help.shopify.com/partners or email partners@shopify.com"
-      },
-      {
-        "situation": "Redirect URI validation fails",
-        "action": "Edit the app’s OAuth configuration in the Partner Dashboard to use an exact HTTPS URL that matches your OAuth flow, then resubmit.",
-        "contact": "Shopify Partner Support"
+        "situation": "App does not meet the 50‑install / 5‑review / rating prerequisites",
+        "action": "Contact Shopify Partner Support via the Partner Dashboard support form to request a review of eligibility or to get guidance on meeting the thresholds.",
+        "contact": "partner-support@shopify.com"
       }
     ],
     "conflicts": [],
     "openQuestions": [
       {
-        "question": "Is there any monetary cost (e.g., partner program fee) associated with creating a public OAuth app on Shopify?",
-        "whyItMatters": "Cost affects the feasibility for developers, especially small teams.",
-        "howToResolve": "Check Shopify Partner Program pricing documentation or contact Shopify support."
+        "question": "What is the typical turnaround time for the initial quality‑check review before a developer receives a response?",
+        "whyItMatters": "Knowing the review wait informs the total time from app creation to usable credentials.",
+        "howToResolve": "Locate a Shopify support or developer forum statement that specifies the average review duration, or a doc page that mentions a fixed review SLA."
       },
       {
-        "question": "What is the typical actual time a developer spends filling out the Partner Dashboard form to register an OAuth app?",
-        "whyItMatters": "Accurate self‑serve minutes help set realistic expectations for automation.",
-        "howToResolve": "Observe a developer performing the registration or consult community reports."
+        "question": "Is there any cost (one‑time or recurring) associated with registering a private OAuth app on Shopify?",
+        "whyItMatters": "Cost affects the barrier to entry for developers building agents.",
+        "howToResolve": "Check Shopify pricing pages or partner agreement sections for any mention of fees for private app registration."
       }
     ],
     "sources": [
       {
         "url": "https://shopify.dev/docs/apps/launch/app-store-review/app-quality-checks",
         "quote": "If your quality check has a list of changes that you need to make to your app, then you have 30 days to make those changes.",
-        "fetchedAt": "2026-11-03T14:48:27.848Z"
+        "title": "",
+        "fetchedAt": "2026-11-03T15:06:00.848Z"
       },
       {
         "url": "https://shopify.dev/docs/apps/launch/app-store-review/app-quality-checks",
         "quote": "If you don't respond to the initial quality check within 7 days, then your app will be demoted.",
-        "fetchedAt": "2026-11-03T14:48:27.848Z"
+        "title": "",
+        "fetchedAt": "2026-11-03T15:06:00.848Z"
       },
       {
         "url": "https://shopify.dev/docs/apps/launch/built-for-shopify/requirements",
         "quote": "Your app must have a minimum of 50 net installs from active shops on paid plans.",
-        "fetchedAt": "2026-11-03T14:48:32.459Z"
+        "title": "",
+        "fetchedAt": "2026-11-03T15:06:11.309Z"
       },
       {
         "url": "https://shopify.dev/docs/apps/launch/built-for-shopify/requirements",
         "quote": "Your app must have a minimum of five reviews.",
-        "fetchedAt": "2026-11-03T14:48:32.459Z"
+        "title": "",
+        "fetchedAt": "2026-11-03T15:06:11.309Z"
       },
       {
         "url": "https://shopify.dev/docs/apps/launch/built-for-shopify/requirements",
         "quote": "Your app must meet a minimum recent app rating threshold in the Shopify App Store.",
-        "fetchedAt": "2026-11-03T14:48:32.459Z"
+        "title": "",
+        "fetchedAt": "2026-11-03T15:06:11.309Z"
       },
       {
-        "url": "https://shopify.dev/docs/apps/launch/app-store-review/app-quality-checks",
-        "quote": "After you make the changes, submit your response in the Partner Dashboard and provide evidence of the changes that you've made.",
-        "fetchedAt": "2026-11-03T14:48:27.848Z"
-      },
-      {
-        "url": "https://shopify.dev/docs/apps/launch/app-store-review/app-quality-checks",
-        "quote": "All feedback and your responses are managed in the Partner Dashboard until the quality check process is complete.",
-        "fetchedAt": "2026-11-03T14:48:27.848Z"
+        "url": "https://shopify.dev/docs/apps/launch/shopify-app-store/app-store-requirements",
+        "quote": "All Shopify App Store apps must comply with the Partner Program Agreement",
+        "title": "",
+        "fetchedAt": "2026-11-03T15:06:15.814Z"
       }
     ],
     "generation": {
-      "generatedAt": "2026-11-03T14:51:04.108Z",
+      "generatedAt": "2026-11-03T15:07:54.349Z",
       "origin": "seeded",
       "models": [
         {
           "model": "openai/gpt-oss-120b",
           "role": "adjudicate",
           "calls": 3,
-          "inputTokens": 3626,
-          "outputTokens": 4340
+          "inputTokens": 5956,
+          "outputTokens": 4576
         },
         {
           "model": "openai/gpt-oss-20b",
           "role": "triage",
           "calls": 5,
           "inputTokens": 5708,
-          "outputTokens": 574
+          "outputTokens": 996
         },
         {
           "model": "openai/gpt-oss-20b",
           "role": "extract",
           "calls": 7,
-          "inputTokens": 10640,
-          "outputTokens": 990
+          "inputTokens": 10358,
+          "outputTokens": 1537
         }
       ],
       "docPagesDiscovered": 19510,
       "docPagesRead": 7,
-      "durationMs": 232613
+      "durationMs": 179666,
+      "reviewNote": "Corrected after review, and still imperfect in one place. An earlier generation reported a 0-30 business day review, citing a real sentence — 'you have 30 days to make those changes' — which is the developer's deadline to respond to a quality check, not Shopify's review time. It had also absorbed Built for Shopify badge requirements (50 net installs, five reviews, a minimum rating), which belong to a recognition programme and not to registering an OAuth app. Both errors shared one cause: conflating getting credentials with getting listed. Shopify's docs state the client ID and secret are available immediately, and that distribution is a separate later choice where custom distribution needs no review at all. After the fix the guide reports the review wait as unknown with the right reasoning, and the summary correctly says credentials are issued instantly. Two things remain wrong: the tier is pushed to Days by a quality-check response step that only applies if you pursue public distribution, and the guide says 'Partner Dashboard' where Shopify's current docs say 'Dev Dashboard' at dev.shopify.com/dashboard. Verified against shopify.dev/docs/apps/build/authentication-authorization/client-credentials-grant and shopify.dev/docs/apps/launch/distribution."
     }
   },
   {
@@ -1113,7 +1260,8 @@
       ],
       "docPagesDiscovered": 16331,
       "docPagesRead": 0,
-      "durationMs": 68541
+      "durationMs": 68541,
+      "reviewNote": "Nothing established. Candidate pages were found on docs.snowflake.com but no claim about registering a security integration survived extraction. Snowflake's OAuth setup is also a SQL operation (CREATE SECURITY INTEGRATION) run by an ACCOUNTADMIN rather than a form in a developer console, which does not fit the console-registration shape this pipeline looks for. Recorded as a scope limitation rather than a transient failure."
     }
   },
   {
@@ -1127,40 +1275,40 @@
       "value": null,
       "evidence": "unknown",
       "citations": [],
-      "reasoning": "No documentation found indicating a developer console URL."
+      "reasoning": "No readable documentation could be extracted; pages render client‑side JavaScript, so the console URL is not discoverable."
     },
-    "docsRootUrl": "https://www.workday.com",
-    "summary": "No publicly available documentation was found describing how developers can register an OAuth application with Workday, so all rubric metrics are unknown.",
+    "docsRootUrl": "https://developer.workday.com",
+    "summary": "The available Workday developer documentation renders entirely client‑side, preventing any extraction of concrete information about OAuth app registration; consequently no verifiable details on the registration flow, review times, costs, or required artifacts could be obtained.",
     "rubric": {
       "selfServeMinutes": {
         "value": null,
         "evidence": "unknown",
         "citations": [],
-        "reasoning": "No information on time required for self‑service registration."
+        "reasoning": "No source indicated whether registration can be completed without manual assistance."
       },
       "reviewWaitBusinessDays": {
         "value": null,
         "evidence": "unknown",
         "citations": [],
-        "reasoning": "No information on any review queue or waiting period."
+        "reasoning": "No source described any review process that could delay credential issuance."
       },
       "humanOnlyBlockers": {
         "value": null,
         "evidence": "unknown",
         "citations": [],
-        "reasoning": "No details on steps that require human intervention."
+        "reasoning": "No source listed steps that must be performed by a human versus an automated agent."
       },
       "costUsd": {
         "value": null,
         "evidence": "unknown",
         "citations": [],
-        "reasoning": "No pricing information for registering an OAuth app."
+        "reasoning": "No source mentioned any fees associated with creating an OAuth app."
       },
       "prerequisiteArtifacts": {
         "value": null,
         "evidence": "unknown",
         "citations": [],
-        "reasoning": "No list of required artifacts (privacy policy, terms, etc.) was found."
+        "reasoning": "No source identified required artifacts such as privacy policy or verified domain."
       }
     },
     "tier": "instant",
@@ -1171,8 +1319,8 @@
     ],
     "steps": [
       {
-        "title": "Access Workday Developer Portal",
-        "detail": "Navigate to https://developer.workday.com/apps and sign in with your Workday account.",
+        "title": "Open Workday Developer Console",
+        "detail": "Navigate to the Workday developer portal (e.g., https://developer.workday.com) and sign in with your Workday account.",
         "actor": "either",
         "startsReviewWait": false,
         "evidence": "inferred",
@@ -1180,15 +1328,15 @@
       },
       {
         "title": "Create a New OAuth Application",
-        "detail": "In the portal, select “Create App” (or similar), choose OAuth as the app type, and provide a name and description.",
+        "detail": "In the console, choose the option to register a new OAuth client, give it a descriptive name, and select the appropriate application type (Web, Native, etc.).",
         "actor": "either",
         "startsReviewWait": false,
         "evidence": "inferred",
         "citations": []
       },
       {
-        "title": "Configure Redirect URI and Obtain Credentials",
-        "detail": "Enter the authorized redirect URI, save the app, and copy the generated client ID and client secret for use in your integration.",
+        "title": "Configure Redirect URIs and Retrieve Credentials",
+        "detail": "Enter the allowed redirect URI(s) for your app, select the needed scopes, save the configuration, and copy the generated client ID and client secret for use in your application.",
         "actor": "either",
         "startsReviewWait": false,
         "evidence": "inferred",
@@ -1200,54 +1348,60 @@
     "conflicts": [],
     "openQuestions": [
       {
-        "question": "What is the exact URL of Workday’s developer console or portal where OAuth applications can be created?",
-        "whyItMatters": "Without the correct console URL a developer cannot begin the registration process.",
-        "howToResolve": "Locate the official Workday developer portal documentation or contact Workday support for the URL."
+        "question": "What is the exact URL for the Workday developer console where OAuth applications can be created?",
+        "whyItMatters": "Without the console URL a developer cannot begin the registration process.",
+        "howToResolve": "Manually locate the console via Workday’s partner portal or contact Workday support."
       },
       {
-        "question": "Does Workday require any manual review of OAuth applications before they become active?",
-        "whyItMatters": "Knowing the review timeline affects integration planning.",
-        "howToResolve": "Check Workday’s API onboarding guides or ask a Workday representative about the review process."
+        "question": "Is the OAuth app registration process fully self‑serve, or does it require manual approval from Workday staff?",
+        "whyItMatters": "Determines the expected self‑serve minutes and any review wait time.",
+        "howToResolve": "Attempt to create a test app or consult Workday’s partner documentation."
       },
       {
-        "question": "Are there any fees associated with creating or maintaining a Workday OAuth app?",
-        "whyItMatters": "Cost impacts budgeting for the integration.",
+        "question": "If a review is required, what is the typical turnaround time (in business days) for Workday to approve an OAuth app?",
+        "whyItMatters": "Impacts time to production for developers.",
+        "howToResolve": "Ask Workday support or review any publicly available SLA documents."
+      },
+      {
+        "question": "Are there any human‑only blockers such as legal agreements, identity verification, or domain ownership checks that must be completed before credentials are issued?",
+        "whyItMatters": "Identifies steps that cannot be automated.",
+        "howToResolve": "Examine Workday’s OAuth onboarding checklist or contact their integration team."
+      },
+      {
+        "question": "Does Workday charge any fees (one‑time, monthly, or annual) for creating or maintaining an OAuth application?",
+        "whyItMatters": "Affects cost planning for developers.",
         "howToResolve": "Review Workday’s pricing documentation or inquire with sales."
       },
       {
-        "question": "What prerequisite artifacts (e.g., privacy policy, terms of service, verified domain) must be submitted when registering an OAuth app?",
-        "whyItMatters": "Missing required artifacts can block registration.",
-        "howToResolve": "Examine Workday’s developer onboarding checklist or request the list from Workday support."
-      },
-      {
-        "question": "Are there any identity verification, legal signature, or other human‑only steps required during registration?",
-        "whyItMatters": "Human‑only steps cannot be automated by an AI agent.",
-        "howToResolve": "Search Workday’s security or compliance documentation for required verification steps."
+        "question": "What prerequisite artifacts (e.g., privacy policy URL, terms of service, verified domain) are required to submit an OAuth app for Workday?",
+        "whyItMatters": "Ensures developers prepare necessary documentation before registration.",
+        "howToResolve": "Check Workday’s app submission guidelines or request clarification from support."
       }
     ],
     "sources": [],
     "generation": {
-      "generatedAt": "2026-11-03T14:59:13.452Z",
+      "generatedAt": "2026-11-03T15:12:28.541Z",
       "origin": "seeded",
       "models": [
         {
           "model": "openai/gpt-oss-120b",
           "role": "adjudicate",
           "calls": 3,
-          "inputTokens": 2106,
-          "outputTokens": 1546
+          "inputTokens": 2483,
+          "outputTokens": 1635
         },
         {
           "model": "openai/gpt-oss-20b",
           "role": "triage",
-          "calls": 5,
-          "inputTokens": 6115,
-          "outputTokens": 216
+          "calls": 4,
+          "inputTokens": 6350,
+          "outputTokens": 831
         }
       ],
-      "docPagesDiscovered": 13379,
+      "docPagesDiscovered": 2734,
       "docPagesRead": 0,
-      "durationMs": 31034
+      "durationMs": 37548,
+      "reviewNote": "An honest failure, kept in the library as a record of one. Fourteen relevant-looking pages were located across developer.workday.com and community.workday.com and not one served readable text — Workday's developer documentation renders client-side. The pipeline reported every dimension as unestablished rather than guessing, and the UI shows 'Not established' instead of a tier. Separately, Workday integrations are generally tenant-gated: a developer cannot self-register an OAuth client without an organisation's Workday tenant, so a public guide may be the wrong shape for this provider regardless of whether the docs could be read."
     }
   },
   {
@@ -1631,7 +1785,8 @@
       ],
       "docPagesDiscovered": 145,
       "docPagesRead": 5,
-      "durationMs": 130941
+      "durationMs": 130941,
+      "reviewNote": "Spot-checked against Xero's developer documentation. The Developer Portal path, the 50-redirect-URI limit, the granular-scopes migration dated 2 March 2026 and the absence of any review step for app creation are all supported by the cited pages. The guide's open questions correctly record that no official review SLA could be found rather than inventing one. No corrections needed."
     }
   }
 ]

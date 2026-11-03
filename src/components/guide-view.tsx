@@ -1,5 +1,11 @@
 import Link from "next/link";
-import { CONFIDENCE_META, TIER_META, confidenceFor, deriveTier } from "@/lib/rubric";
+import {
+  CONFIDENCE_META,
+  TIER_META,
+  confidenceFor,
+  deriveTier,
+  isUngrounded,
+} from "@/lib/rubric";
 import type { Citation, Guide } from "@/lib/schema";
 import {
   ActorBadge,
@@ -7,6 +13,7 @@ import {
   EvidenceBadge,
   ManagedAuthBadge,
   TierBadge,
+  UngroundedBadge,
 } from "@/components/badges";
 
 /**
@@ -86,6 +93,7 @@ function Dimension({
 
 export function GuideView({ g, showBackLink = true }: { g: Guide; showBackLink?: boolean }) {
   const r = g.rubric;
+  const ungrounded = isUngrounded(r);
   const w = r.reviewWaitBusinessDays.value;
   const cost = r.costUsd.value;
   const prereqs = r.prerequisiteArtifacts.value;
@@ -123,7 +131,7 @@ export function GuideView({ g, showBackLink = true }: { g: Guide; showBackLink?:
 
       <header>
         <div className="flex flex-wrap items-center gap-2">
-          <TierBadge tier={g.tier} size="lg" />
+          {ungrounded ? <UngroundedBadge size="lg" /> : <TierBadge tier={g.tier} size="lg" />}
           <ConfidenceBadge confidence={g.confidence} />
           <ManagedAuthBadge managed={g.composioManagedOAuth} />
           {g.generation.origin === "live" && (
@@ -164,6 +172,31 @@ export function GuideView({ g, showBackLink = true }: { g: Guide; showBackLink?:
       </header>
 
       {/* Why this tier — the arithmetic, shown. */}
+      {ungrounded ? (
+        <section
+          className="mt-7 rounded-xl border p-4"
+          style={{
+            borderColor: "color-mix(in oklab, var(--ev-unknown) 40%, transparent)",
+            background: "color-mix(in oklab, var(--ev-unknown) 7%, transparent)",
+          }}
+        >
+          <h2 className="text-[13px] font-semibold" style={{ color: "var(--ev-unknown)" }}>
+            Nothing here was established
+          </h2>
+          <p className="mt-1.5 text-[13px] leading-relaxed">
+            None of the five dimensions could be read out of this
+            provider&rsquo;s documentation, so no difficulty is reported — a
+            tier would be a fabrication. The investigation is recorded below so
+            you can see what was attempted and pick up where it stopped.
+          </p>
+          <p className="mt-2 text-[12.5px] leading-relaxed text-muted">
+            The usual cause is documentation rendered in the browser: the pages
+            exist and were located, but the server returns a shell with no prose
+            in it. Reading those needs a JavaScript-rendering fetch, which this
+            project does not do.
+          </p>
+        </section>
+      ) : (
       <section className="card mt-7 p-4">
         <h2 className="text-[13px] font-semibold">
           Why this is {TIER_META[g.tier].label.toLowerCase()}
@@ -194,6 +227,7 @@ export function GuideView({ g, showBackLink = true }: { g: Guide; showBackLink?:
           {recomputedConfidence.why}
         </p>
       </section>
+      )}
 
       {/* The five dimensions. */}
       <section className="mt-5">

@@ -9,40 +9,40 @@
     "value": null,
     "evidence": "unknown",
     "citations": [],
-    "reasoning": "No documentation found indicating a developer console URL."
+    "reasoning": "No readable documentation could be extracted; pages render client‑side JavaScript, so the console URL is not discoverable."
   },
-  "docsRootUrl": "https://www.workday.com",
-  "summary": "No publicly available documentation was found describing how developers can register an OAuth application with Workday, so all rubric metrics are unknown.",
+  "docsRootUrl": "https://developer.workday.com",
+  "summary": "The available Workday developer documentation renders entirely client‑side, preventing any extraction of concrete information about OAuth app registration; consequently no verifiable details on the registration flow, review times, costs, or required artifacts could be obtained.",
   "rubric": {
     "selfServeMinutes": {
       "value": null,
       "evidence": "unknown",
       "citations": [],
-      "reasoning": "No information on time required for self‑service registration."
+      "reasoning": "No source indicated whether registration can be completed without manual assistance."
     },
     "reviewWaitBusinessDays": {
       "value": null,
       "evidence": "unknown",
       "citations": [],
-      "reasoning": "No information on any review queue or waiting period."
+      "reasoning": "No source described any review process that could delay credential issuance."
     },
     "humanOnlyBlockers": {
       "value": null,
       "evidence": "unknown",
       "citations": [],
-      "reasoning": "No details on steps that require human intervention."
+      "reasoning": "No source listed steps that must be performed by a human versus an automated agent."
     },
     "costUsd": {
       "value": null,
       "evidence": "unknown",
       "citations": [],
-      "reasoning": "No pricing information for registering an OAuth app."
+      "reasoning": "No source mentioned any fees associated with creating an OAuth app."
     },
     "prerequisiteArtifacts": {
       "value": null,
       "evidence": "unknown",
       "citations": [],
-      "reasoning": "No list of required artifacts (privacy policy, terms, etc.) was found."
+      "reasoning": "No source identified required artifacts such as privacy policy or verified domain."
     }
   },
   "tier": "instant",
@@ -53,8 +53,8 @@
   ],
   "steps": [
     {
-      "title": "Access Workday Developer Portal",
-      "detail": "Navigate to https://developer.workday.com/apps and sign in with your Workday account.",
+      "title": "Open Workday Developer Console",
+      "detail": "Navigate to the Workday developer portal (e.g., https://developer.workday.com) and sign in with your Workday account.",
       "actor": "either",
       "startsReviewWait": false,
       "evidence": "inferred",
@@ -62,15 +62,15 @@
     },
     {
       "title": "Create a New OAuth Application",
-      "detail": "In the portal, select “Create App” (or similar), choose OAuth as the app type, and provide a name and description.",
+      "detail": "In the console, choose the option to register a new OAuth client, give it a descriptive name, and select the appropriate application type (Web, Native, etc.).",
       "actor": "either",
       "startsReviewWait": false,
       "evidence": "inferred",
       "citations": []
     },
     {
-      "title": "Configure Redirect URI and Obtain Credentials",
-      "detail": "Enter the authorized redirect URI, save the app, and copy the generated client ID and client secret for use in your integration.",
+      "title": "Configure Redirect URIs and Retrieve Credentials",
+      "detail": "Enter the allowed redirect URI(s) for your app, select the needed scopes, save the configuration, and copy the generated client ID and client secret for use in your application.",
       "actor": "either",
       "startsReviewWait": false,
       "evidence": "inferred",
@@ -82,53 +82,58 @@
   "conflicts": [],
   "openQuestions": [
     {
-      "question": "What is the exact URL of Workday’s developer console or portal where OAuth applications can be created?",
-      "whyItMatters": "Without the correct console URL a developer cannot begin the registration process.",
-      "howToResolve": "Locate the official Workday developer portal documentation or contact Workday support for the URL."
+      "question": "What is the exact URL for the Workday developer console where OAuth applications can be created?",
+      "whyItMatters": "Without the console URL a developer cannot begin the registration process.",
+      "howToResolve": "Manually locate the console via Workday’s partner portal or contact Workday support."
     },
     {
-      "question": "Does Workday require any manual review of OAuth applications before they become active?",
-      "whyItMatters": "Knowing the review timeline affects integration planning.",
-      "howToResolve": "Check Workday’s API onboarding guides or ask a Workday representative about the review process."
+      "question": "Is the OAuth app registration process fully self‑serve, or does it require manual approval from Workday staff?",
+      "whyItMatters": "Determines the expected self‑serve minutes and any review wait time.",
+      "howToResolve": "Attempt to create a test app or consult Workday’s partner documentation."
     },
     {
-      "question": "Are there any fees associated with creating or maintaining a Workday OAuth app?",
-      "whyItMatters": "Cost impacts budgeting for the integration.",
+      "question": "If a review is required, what is the typical turnaround time (in business days) for Workday to approve an OAuth app?",
+      "whyItMatters": "Impacts time to production for developers.",
+      "howToResolve": "Ask Workday support or review any publicly available SLA documents."
+    },
+    {
+      "question": "Are there any human‑only blockers such as legal agreements, identity verification, or domain ownership checks that must be completed before credentials are issued?",
+      "whyItMatters": "Identifies steps that cannot be automated.",
+      "howToResolve": "Examine Workday’s OAuth onboarding checklist or contact their integration team."
+    },
+    {
+      "question": "Does Workday charge any fees (one‑time, monthly, or annual) for creating or maintaining an OAuth application?",
+      "whyItMatters": "Affects cost planning for developers.",
       "howToResolve": "Review Workday’s pricing documentation or inquire with sales."
     },
     {
-      "question": "What prerequisite artifacts (e.g., privacy policy, terms of service, verified domain) must be submitted when registering an OAuth app?",
-      "whyItMatters": "Missing required artifacts can block registration.",
-      "howToResolve": "Examine Workday’s developer onboarding checklist or request the list from Workday support."
-    },
-    {
-      "question": "Are there any identity verification, legal signature, or other human‑only steps required during registration?",
-      "whyItMatters": "Human‑only steps cannot be automated by an AI agent.",
-      "howToResolve": "Search Workday’s security or compliance documentation for required verification steps."
+      "question": "What prerequisite artifacts (e.g., privacy policy URL, terms of service, verified domain) are required to submit an OAuth app for Workday?",
+      "whyItMatters": "Ensures developers prepare necessary documentation before registration.",
+      "howToResolve": "Check Workday’s app submission guidelines or request clarification from support."
     }
   ],
   "sources": [],
   "generation": {
-    "generatedAt": "2026-11-03T14:59:13.452Z",
+    "generatedAt": "2026-11-03T15:12:28.541Z",
     "origin": "seeded",
     "models": [
       {
         "model": "openai/gpt-oss-120b",
         "role": "adjudicate",
         "calls": 3,
-        "inputTokens": 2106,
-        "outputTokens": 1546
+        "inputTokens": 2483,
+        "outputTokens": 1635
       },
       {
         "model": "openai/gpt-oss-20b",
         "role": "triage",
-        "calls": 5,
-        "inputTokens": 6115,
-        "outputTokens": 216
+        "calls": 4,
+        "inputTokens": 6350,
+        "outputTokens": 831
       }
     ],
-    "docPagesDiscovered": 13379,
+    "docPagesDiscovered": 2734,
     "docPagesRead": 0,
-    "durationMs": 31034
+    "durationMs": 37548
   }
 }

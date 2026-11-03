@@ -29,8 +29,7 @@ export default function PlanPage() {
           <p className="text-[14px] font-medium">No guides to plan with yet.</p>
           <Link
             href="/generate"
-            className="mono mt-3 inline-block rounded-md px-3 py-2 text-[12px] font-medium text-white"
-            style={{ background: "var(--brand)" }}
+            className="btn btn-primary mt-3"
           >
             Generate one
           </Link>

@@ -234,15 +234,14 @@ export default function MethodPage() {
       <div className="mt-10 flex flex-wrap gap-2">
         <Link
           href="/generate"
-          className="mono rounded-md px-3 py-2 text-[12.5px] font-medium text-white"
-          style={{ background: "var(--brand)" }}
+          className="btn btn-primary"
         >
           Watch it run
+          <span aria-hidden>→</span>
         </Link>
         <Link
           href="/"
-          className="mono rounded-md border px-3 py-2 text-[12.5px]"
-          style={{ borderColor: "var(--border)" }}
+          className="btn"
         >
           Back to the library
         </Link>

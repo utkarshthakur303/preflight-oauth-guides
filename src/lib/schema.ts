@@ -87,10 +87,15 @@ export const Evidenced = <T extends z.ZodTypeAny>(value: T) =>
  */
 export const HumanOnlyReason = z.enum([
   "payment",                // a card has to be entered
-  "identity_verification",  // government ID, selfie, business documents
+  // Government ID, a selfie, or business registration documents — the kind of
+  // check that takes a provider days to clear. NOT confirming an email address
+  // or a phone number, which are a click and a code. Getting that wrong once
+  // floored GitHub at "weeks" over a verification email.
+  "identity_verification",
   "legal_signature",        // someone must accept an agreement as a person
   "captcha",
-  "phone_verification",
+  "email_verification",     // click a link in a confirmation email
+  "phone_verification",     // enter a code sent by SMS
   "mfa",                    // a one-time code to a device we don't hold
   "account_ownership",      // must be done by an org owner / admin
   "human_review_response",  // answering a reviewer's questions mid-review
