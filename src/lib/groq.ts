@@ -273,7 +273,11 @@ export async function chat(opts: ChatOpts): Promise<string> {
         lastErr instanceof GroqError && lastErr.retryAfterMs
           ? lastErr.retryAfterMs
           : Math.min(1000 * 2 ** attempt, 8000);
-      await new Promise((r) => setTimeout(r, Math.min(suggested, 20_000)));
+      // Per-minute windows clear in well under a minute, and the cap only
+      // needs to stop us honouring a per-day 429's "try again in 4m29s" —
+      // which is caught separately as `dailyBudgetSpent`. 20s was too tight:
+      // an output-per-minute limit asking for 35s failed every retry.
+      await new Promise((r) => setTimeout(r, Math.min(suggested, 45_000)));
     }
 
     try {
