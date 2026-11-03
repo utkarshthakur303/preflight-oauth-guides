@@ -83,7 +83,12 @@ export class TokenLedger {
  * half-populated guide — into a slightly slower run that completes. Reacting to
  * real server state also means it keeps working if Groq changes the limits.
  */
-type RateState = { remaining: number; resetAtMs: number };
+type RateState = {
+  remaining: number;
+  limit: number;
+  resetAtMs: number;
+  seenAtMs: number;
+};
 const rateByModel = new Map<string, RateState>();
 
 /** Rough token estimate for a request, used only to decide whether to wait. */
@@ -93,37 +98,69 @@ function estimateTokens(system: string, user: string, maxTokens: number): number
   return input + Math.ceil(maxTokens * 0.33);
 }
 
+function parseDuration(raw: string | null): number {
+  if (!raw) return 0;
+  const m = raw.match(
+    /(?:(\d+(?:\.\d+)?)m(?!s))?(?:(\d+(?:\.\d+)?)s(?!\w))?(?:(\d+(?:\.\d+)?)ms)?/,
+  );
+  if (!m) return 0;
+  return (
+    (Number(m[1] ?? 0) * 60 + Number(m[2] ?? 0)) * 1000 + Number(m[3] ?? 0)
+  );
+}
+
 function readRateHeaders(model: string, headers: Headers) {
   const remaining = Number(headers.get("x-ratelimit-remaining-tokens"));
-  const resetRaw = headers.get("x-ratelimit-reset-tokens");
+  const limit = Number(headers.get("x-ratelimit-limit-tokens"));
   if (!Number.isFinite(remaining)) return;
 
-  // Groq formats the reset as a duration: "6.6525s", "1m30s", "250ms".
-  let resetMs = 0;
-  if (resetRaw) {
-    const m = resetRaw.match(/(?:(\d+(?:\.\d+)?)m(?!s))?(?:(\d+(?:\.\d+)?)s)?(?:(\d+)ms)?/);
-    if (m) {
-      resetMs =
-        (Number(m[1] ?? 0) * 60 + Number(m[2] ?? 0)) * 1000 + Number(m[3] ?? 0);
-    }
-  }
   rateByModel.set(model, {
     remaining,
-    resetAtMs: Date.now() + (resetMs || 60_000),
+    limit: Number.isFinite(limit) && limit > 0 ? limit : 8000,
+    resetAtMs: Date.now() + (parseDuration(headers.get("x-ratelimit-reset-tokens")) || 1000),
+    seenAtMs: Date.now(),
   });
 }
+
+/**
+ * Wait only as long as the bucket needs to refill the shortfall.
+ *
+ * The first version of this waited for the full reset window whenever the
+ * budget was short, capped at 65 seconds. That was wrong about how the limit
+ * works and it cost minutes: triage issues five calls, each one found the
+ * budget short, each one slept, and a guide spent ~350 seconds sitting in a
+ * stage that should take twenty.
+ *
+ * Groq's token allowance refills continuously at roughly limit/60 per second,
+ * so needing 2,500 tokens with 1,200 left is a ten-second wait, not a minute.
+ * We compute the shortfall against that rate, credit whatever has already
+ * refilled since the last response, and cap the result so a bad reading can
+ * never strand a run.
+ */
+const MAX_BUDGET_WAIT_MS = 20_000;
 
 async function waitForBudget(model: string, need: number) {
   const state = rateByModel.get(model);
   if (!state) return;
-  if (Date.now() >= state.resetAtMs) {
-    rateByModel.delete(model);
-    return;
-  }
-  if (state.remaining >= need) return;
 
-  const waitMs = Math.min(state.resetAtMs - Date.now() + 250, 65_000);
+  const perSecond = state.limit / 60;
+  const elapsedSec = (Date.now() - state.seenAtMs) / 1000;
+  // Credit the refill that has happened since we last heard from the server.
+  const available = Math.min(
+    state.limit,
+    state.remaining + elapsedSec * perSecond,
+  );
+
+  if (available >= need) return;
+
+  const shortfall = need - available;
+  const waitMs = Math.min(
+    Math.ceil((shortfall / perSecond) * 1000) + 250,
+    MAX_BUDGET_WAIT_MS,
+  );
+
   if (waitMs > 0) await new Promise((r) => setTimeout(r, waitMs));
+  // Force the next call to rely on a fresh reading rather than this stale one.
   rateByModel.delete(model);
 }
 
@@ -313,6 +350,19 @@ export function parseJson<T = unknown>(raw: string): T {
   );
 }
 
+/**
+ * Ask for JSON and parse it ourselves.
+ *
+ * Note what this does *not* do: set `response_format: {type: "json_object"}`.
+ * Groq's constrained decoding for these models is pathologically slow — a
+ * triage call emitting 207 tokens took 122 seconds with it on and under a
+ * second with it off. That one flag was the entire reason a guide took three
+ * minutes to generate.
+ *
+ * The prompts already specify the exact shape, `parseJson` tolerates fences
+ * and stray preamble, and every result is validated against a Zod schema
+ * afterwards, so strict mode was buying reliability we already had.
+ */
 export async function chatJson<T = unknown>(opts: ChatOpts): Promise<T> {
-  return parseJson<T>(await chat({ ...opts, json: true }));
+  return parseJson<T>(await chat({ ...opts, json: false }));
 }

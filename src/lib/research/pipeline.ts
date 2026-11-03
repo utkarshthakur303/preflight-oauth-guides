@@ -79,21 +79,48 @@ async function triage(
   appName: string,
   ledger: TokenLedger,
   emit: Emit,
+  needed: number,
   signal?: AbortSignal,
 ): Promise<TriageVerdict[]> {
-  const BATCH = 40;
+  const BATCH = 45;
+  // One batch, not five.
+  //
+  // On a free tier a single gpt-oss-20b call takes twenty to forty seconds,
+  // almost all of it queueing, so the number of triage calls — not their size —
+  // is what decides how long a run feels. Five batches spent two and a half
+  // minutes ranking candidates that were never going to be opened.
+  //
+  // The keyword prefilter has already ranked these, and `diversify` below
+  // guarantees the single batch spans registering, approval, requirements and
+  // scopes rather than forty variations on one topic. The model's job is to
+  // re-rank a balanced shortlist, which one call does well.
+  const MAX_BATCHES = 1;
+  const candidates = diversify(urls, (u) => u, BATCH * MAX_BATCHES);
+
   const out: TriageVerdict[] = [];
   let failures = 0;
+  const batches = Math.ceil(candidates.length / BATCH);
 
-  for (let i = 0; i < urls.length; i += BATCH) {
-    const batch = urls.slice(i, i + BATCH);
+  for (let i = 0; i < candidates.length; i += BATCH) {
+    if (signal?.aborted) break;
+
+    const n = i / BATCH + 1;
+    emit({
+      type: "stage",
+      key: "triage",
+      label: "Triaging pages with gpt-oss-20b",
+      status: "running",
+      detail: `batch ${n} of ${batches} · ${out.length} relevant so far`,
+    });
+
+    const batch = candidates.slice(i, i + BATCH);
     try {
       const res = await chatJson<{ picks: { i: number; relevance: number; topic: string }[] }>({
         model: MODELS.cheap,
         role: "triage",
         ledger,
         signal,
-        maxTokens: 1600,
+        maxTokens: 1300,
         system: [
           "You rank documentation URLs by how likely the page explains how a THIRD-PARTY DEVELOPER",
           "registers their own OAuth application with this provider and gets it approved.",
@@ -128,10 +155,22 @@ async function triage(
       failures++;
       emit({
         type: "log",
-        message: `triage batch ${i / BATCH + 1} of ${Math.ceil(urls.length / BATCH)} failed, continuing: ${
+        message: `triage batch ${n} of ${batches} failed, continuing: ${
           err instanceof Error ? err.message : String(err)
         }`,
       });
+    }
+
+    // Stop once there is comfortably more than we can read. Every further
+    // batch is a model call against a tight per-minute budget buying candidates
+    // that will never be opened.
+    const strong = out.filter((v) => v.relevance >= 7).length;
+    if (strong >= needed * 2 && out.length >= needed * 2) {
+      emit({
+        type: "log",
+        message: `stopping triage after batch ${n}: ${strong} strong candidates for ${needed} slots`,
+      });
+      break;
     }
   }
 
@@ -141,7 +180,7 @@ async function triage(
       message: `every triage batch failed (${failures}) — falling back to the free keyword ranking`,
     });
     // Better to read the top keyword-ranked pages than to give up entirely.
-    return urls.slice(0, 12).map((url) => ({ url, relevance: 5, topic: "keyword-ranked" }));
+    return candidates.slice(0, 12).map((url) => ({ url, relevance: 5, topic: "keyword-ranked" }));
   }
 
   return out.sort((a, b) => b.relevance - a.relevance);
@@ -870,7 +909,14 @@ export async function runPipeline(opts: RunOptions): Promise<Guide> {
   // --- triage -------------------------------------------------------------
   emit({ type: "stage", key: "triage", label: "Triaging pages with gpt-oss-20b", status: "running" });
   const verdicts = shortlisted.length
-    ? await triage(shortlisted, hypothesis.providerName, ledger, emit, signal)
+    ? await triage(
+        shortlisted,
+        hypothesis.providerName,
+        ledger,
+        emit,
+        maxPagesToRead,
+        signal,
+      )
     : [];
   pushUsage();
   emit({
