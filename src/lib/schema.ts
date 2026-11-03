@@ -263,7 +263,11 @@ export const Guide = z.object({
    *
    * null means undetermined, which is the failure case.
    */
-  oauthSupported: Evidenced(z.boolean().nullable()),
+  // Optional on purpose. Guides written before this field existed must keep
+  // validating: adding a field to the schema should never silently empty the
+  // library, which is exactly what making it required did. Absent reads the
+  // same as unknown.
+  oauthSupported: Evidenced(z.boolean().nullable()).optional(),
 
   /** Where you actually register the app. Null when we could not establish it. */
   developerConsoleUrl: Evidenced(z.string().nullable()),
